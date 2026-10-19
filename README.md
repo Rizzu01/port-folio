@@ -1,5 +1,12 @@
-# Mindly Landing Page
+# Mindly landing page
 
-Responsive Next.js landing page inspired by the provided reference, using the owner's supplied portrait.
+Responsive Next.js App Router recreation of the supplied landing-page reference, using the supplied portrait image at `public/portrait.jpg`.
 
-Run with `npm install` then `npm run dev`.
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:3000. Replace the placeholder `hello@mindly.app` CTA with your signup URL when ready.
