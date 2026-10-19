@@ -76,3 +76,28 @@
   .portfolio-hero .clarity-note{bottom:20px}
   .scroll-cue{bottom:2px}
 }
+
+
+/* Keep the portrait transparent-friendly and move UI cards away from the face */
+.portfolio-hero .portrait-stage{z-index:1}
+.portfolio-hero .portrait-mask{background:transparent;overflow:visible}
+.portfolio-hero .portrait-mask img{object-fit:contain;object-position:center bottom;mix-blend-mode:normal;filter:none}
+.portfolio-hero .floating-panel{z-index:4}
+.portfolio-hero .panel-focus{left:0;top:78px;transform:rotate(-9deg)}
+.portfolio-hero .panel-ideas{left:-8%;top:235px;transform:rotate(-4deg)}
+.portfolio-hero .panel-plan{right:-7%;top:185px;transform:rotate(10deg)}
+.portfolio-hero .panel-note{right:-5%;top:340px}
+@media(max-width:850px){
+ .portfolio-hero .portrait-stage{width:min(470px,72vw)}
+ .portfolio-hero .panel-focus{left:-4%;top:75px}
+ .portfolio-hero .panel-ideas{left:-7%;top:230px}
+ .portfolio-hero .panel-plan{right:-6%;top:185px}
+ .portfolio-hero .panel-note{right:-5%;top:330px}
+}
+@media(max-width:560px){
+ .portfolio-hero .portrait-stage{width:min(390px,88vw)}
+ .portfolio-hero .panel-focus{left:-8%;top:75px;transform:scale(.68) rotate(-9deg);transform-origin:left top}
+ .portfolio-hero .panel-ideas{left:-10%;top:220px;transform:scale(.68) rotate(-4deg);transform-origin:left top}
+ .portfolio-hero .panel-plan{right:-10%;top:180px;transform:scale(.68) rotate(10deg);transform-origin:right top}
+ .portfolio-hero .panel-note{display:none}
+}
