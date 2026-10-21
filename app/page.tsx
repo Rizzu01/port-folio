@@ -1,16 +1,9 @@
 "use client";
-import { ArrowDown, ArrowRight, ArrowUpRight, Dribbble, ExternalLink, Figma, Github, Linkedin, Mail, Palette, PanelsTopLeft, Printer, Sparkles } from "lucide-react";
-
-const experience = [
-  { period: "JUL 2024 — PRESENT", role: "User Experience Designer", company: "SunCrypto", detail: "Designing digital experiences for a crypto and fintech audience, balancing clarity, trust, and conversion." },
-  { period: "JUL 2023 — JUL 2024", role: "Frontend Developer", company: "Doomshell Software Pvt. Ltd.", detail: "Building responsive web interfaces and translating designs into usable, production-ready experiences." },
-  { period: "MAY 2022 — JUL 2023", role: "Graphic Designer", company: "TDI Online Services", detail: "Creating visual communication, branding assets, and digital marketing creatives with a focus on strong visual hierarchy." },
-];
-const skills = ["UI/UX Design", "Visual Design", "Branding", "Digital Marketing Creatives", "Typography", "Color Theory", "Visual Hierarchy", "Responsive Web Design", "Frontend Development", "Graphic Design", "Flutter", "Creative Problem Solving"];
+import { ArrowDown, ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkles } from "lucide-react";
 
 export default function Home() {
   return <main className="site-shell"><div className="page-frame portfolio-frame">
-    <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><nav className="nav-pill"><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav><a className="app-link" href="mailto:rizwankhan36200@gmail.com">Let’s talk <ArrowUpRight size={14}/></a></header>
+    <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><div className="nav-pill hero-nav-label">PORTFOLIO · 2026</div><a className="app-link" href="mailto:rizwankhan36200@gmail.com">Let’s talk <ArrowUpRight size={14}/></a></header>
     <section className="hero portfolio-hero" id="home">
       <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><a className="button button-light" href="mailto:rizwankhan36200@gmail.com"><Mail size={15}/> Get in touch</a></div></div>
       <div className="orbit-stamp"><span className="stamp-top">DESIGN WITH INTENT</span><span className="stamp-star">✳</span><span className="stamp-bottom">STAY CURIOUS</span></div>
@@ -20,13 +13,6 @@ export default function Home() {
       <div className="trust-note"><span className="tiny-rule"/><p>Design meets function.<br/>Details make the difference.</p><div className="trust-avatars"><span>V</span><span>U</span><span>G</span><span>D</span></div></div><div className="clarity-note"><span className="clarity-star">✳</span><span className="tiny-rule"/><p>Make it clear.<br/>Make it matter.</p></div><a className="scroll-cue" href="#about"><ArrowDown size={13}/> SCROLL TO EXPLORE</a>
     </section>
   </div>
-  <section className="below-fold" id="about"><div className="section-kicker">A LITTLE ABOUT ME</div><h2>Good design looks good.<br/><em>Great design means something.</em></h2><p className="about-copy">I’m Rizwan Khan, a multidisciplinary designer with experience across graphic design, branding, digital marketing creatives, UI/UX, and frontend development. I bring together typography, color theory, layout, and visual hierarchy to create work that feels considered and communicates clearly.</p>
-    <div className="section-heading" id="experience"><div><span className="section-kicker left-kicker">THE JOURNEY SO FAR</span><h2>Experience & <em>growth.</em></h2></div><span className="muted-note">Design · Development · Digital</span></div>
-    <div className="experience-list">{experience.map((item) => <article className="experience-row" key={item.company}><div className="experience-period">{item.period}</div><div className="experience-main"><h3>{item.role}</h3><span>{item.company}</span><p>{item.detail}</p></div><ArrowUpRight className="experience-arrow" size={18}/></article>)}</div>
-    <div className="skills-section" id="skills"><div><span className="section-kicker left-kicker">WHAT I BRING</span><h2>Tools for turning<br/><em>ideas into impact.</em></h2></div><div className="skill-cloud">{skills.map(skill=><span key={skill}>{skill}</span>)}</div></div>
-    <div className="education-strip"><div><span className="section-kicker left-kicker">EDUCATION</span><h3>Bachelor of Computer Applications (BCA)</h3><p>University of Rajasthan · 2020–2021</p></div><span className="education-mark">BCA</span></div>
-    <div className="bottom-cta" id="contact"><div><span>HAVE A PROJECT IN MIND?</span><h2>Let’s make something meaningful.</h2><p>Open to creative collaborations and interesting challenges.</p></div><a className="button button-dark" href="mailto:rizwankhan36200@gmail.com">Email me <ArrowRight size={16}/></a></div>
-    <footer className="site-footer"><a className="brand" href="#home">Rizwan<span>°</span></a><span>Designed with intention © {new Date().getFullYear()} Rizwan Khan</span><div className="social-links"><a href="https://www.linkedin.com/in/rizwan-khan-44771826b/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={16}/></a><a href="mailto:rizwankhan36200@gmail.com" aria-label="Email"><Mail size={16}/></a></div></footer>
-  </section></main>;
+</main>;
 }
 function CheckIcon(){return <Sparkles size={15}/>;}
