@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,6 +9,7 @@ const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
 
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -181,7 +182,7 @@ export default function Home() {
   }
 
   return <main ref={pageRef} className="site-shell"><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>
-    <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><nav className="nav-pill" aria-label="Main navigation"><a href="#home">Home</a><a href="#visual-design">Visual Design</a><a href="#ui-ux">UI/UX</a><a href="#branding">Branding</a></nav><a className="app-link" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={14}/></a></header>
+    <header className={`topbar${mobileNavOpen ? " mobile-nav-open" : ""}`}><a className="brand" href="#home" onClick={() => setMobileNavOpen(false)}>Rizwan<span>°</span></a><nav className="nav-pill desktop-nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#visual-design">Visual Design</a><a href="#ui-ux">UI/UX</a><a href="#branding">Branding</a></nav><a className="app-link desktop-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={14}/></a><button className="mobile-menu-toggle" type="button" aria-label={mobileNavOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}><span>{mobileNavOpen ? <X size={20}/> : <Menu size={20}/>}</span></button><div className="mobile-nav-drawer" aria-hidden={!mobileNavOpen}><nav aria-label="Mobile navigation"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home <ArrowUpRight size={15}/></a><a href="#visual-design" onClick={() => setMobileNavOpen(false)}>Visual Design <ArrowUpRight size={15}/></a><a href="#ui-ux" onClick={() => setMobileNavOpen(false)}>UI/UX <ArrowUpRight size={15}/></a><a href="#branding" onClick={() => setMobileNavOpen(false)}>Branding <ArrowUpRight size={15}/></a></nav><a className="mobile-drawer-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer" onClick={() => setMobileNavOpen(false)}>Let’s talk <ArrowUpRight size={16}/></a></div></header>
   <div className="page-frame portfolio-frame">
     <section className="hero portfolio-hero" id="home">
       <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}><Mail size={15}/> Get in touch</button></div></div>
