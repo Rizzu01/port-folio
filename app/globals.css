@@ -1048,3 +1048,10 @@ body{background:#f2f2f0;color:#171717}
 @media(min-width:1441px){
   body{background:#f2f2f0}
 }
+
+
+/* Match the page background to the portfolio container; no outer shadow */
+body{background:#fff!important}
+.site-shell{background:#fff!important;box-shadow:none!important}
+.reference-site{background:#fff!important;box-shadow:none!important}
+@media(min-width:1441px){body{background:#fff!important}}
