@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkl
 
 export default function Home() {
   return <main className="site-shell"><div className="page-frame portfolio-frame">
-    <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><div className="nav-pill hero-nav-label">PORTFOLIO · 2026</div><a className="app-link" href="mailto:rizwankhan36200@gmail.com">Let’s talk <ArrowUpRight size={14}/></a></header>
+    <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><nav className="nav-pill" aria-label="Main navigation"><a href="#home">Home</a><a href="#visual-design">Visual Design</a><a href="#ui-ux">UI/UX</a><a href="#branding">Branding</a></nav><a className="app-link" href="mailto:rizwankhan36200@gmail.com">Let’s talk <ArrowUpRight size={14}/></a></header>
     <section className="hero portfolio-hero" id="home">
       <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><a className="button button-light" href="mailto:rizwankhan36200@gmail.com"><Mail size={15}/> Get in touch</a></div></div>
       <div className="orbit-stamp"><span className="stamp-top">DESIGN WITH INTENT</span><span className="stamp-star">✳</span><span className="stamp-bottom">STAY CURIOUS</span></div>
