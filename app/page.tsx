@@ -14,7 +14,7 @@ export default function Home() {
       `Email: ${form.email}`,
       `Phone: ${form.phone}`,
       `Purpose: ${form.purpose}`,
-    ].join("\\n");
+    ].join("\n");
     window.open(`https://wa.me/919024043673?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
     setContactOpen(false);
   }
