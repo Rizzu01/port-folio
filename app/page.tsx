@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
@@ -8,9 +9,15 @@ const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
+  const [cursorReady, setCursorReady] = useState(false);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setCursorReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!cursorReady || !window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const cursor = cursorRef.current;
     if (!cursor) return;
     document.body.classList.add("custom-cursor-enabled");
@@ -24,13 +31,13 @@ export default function Home() {
     const down = () => cursor.classList.add("cursor-pressed");
     const up = () => cursor.classList.remove("cursor-pressed");
     const leave = () => cursor.classList.remove("cursor-visible", "cursor-hover");
-    window.addEventListener("mousemove", move);
+    window.addEventListener("pointermove", move);
     window.addEventListener("mousedown", down);
     window.addEventListener("mouseup", up);
     document.addEventListener("mouseleave", leave);
     return () => {
       document.body.classList.remove("custom-cursor-enabled");
-      window.removeEventListener("mousemove", move);
+      window.removeEventListener("pointermove", move);
       window.removeEventListener("mousedown", down);
       window.removeEventListener("mouseup", up);
       document.removeEventListener("mouseleave", leave);
@@ -83,7 +90,7 @@ export default function Home() {
     }
   }
 
-  return <main className="site-shell"><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div><div className="page-frame portfolio-frame">
+  return <main className="site-shell">{cursorReady && createPortal(<div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>, document.body)}<div className="page-frame portfolio-frame">
     <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><nav className="nav-pill" aria-label="Main navigation"><a href="#home">Home</a><a href="#visual-design">Visual Design</a><a href="#ui-ux">UI/UX</a><a href="#branding">Branding</a></nav><a className="app-link" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={14}/></a></header>
     <section className="hero portfolio-hero" id="home">
       <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}><Mail size={15}/> Get in touch</button></div></div>
