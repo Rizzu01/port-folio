@@ -11,27 +11,42 @@ export default function Home() {
   async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitError("");
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
+      setSubmitError("Email submission is not configured yet. Please add your Web3Forms Access Key.");
+      return;
+    }
+
     setSubmitStatus("loading");
     try {
-      const response = await fetch("https://formsubmit.co/ajax/rizwankhan36200@gmail.com", {
+      const formData = new FormData(event.currentTarget);
+      formData.set("access_key", accessKey);
+      formData.set("subject", `Portfolio contact: ${form.purpose}`);
+      formData.set("from_name", "Rizwan Khan Portfolio");
+      formData.set("name", form.name.trim());
+      formData.set("email", form.email.trim());
+      formData.set("phone", form.phone.trim());
+      formData.set("purpose", form.purpose);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `Portfolio contact: ${form.purpose}`,
-          _template: "table",
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          purpose: form.purpose,
-        }),
+        body: formData,
+        headers: { Accept: "application/json" },
       });
-      const result = await response.json();
-      if (!response.ok || !(result.success === true || result.success === "true")) throw new Error(result.message || "Message submission failed");
-      setSubmitStatus("success");
+      const result: { success?: boolean; message?: string; body?: { message?: string } } = await response.json();
+
+      if (!response.ok || result.success !== true) {
+        throw new Error(result.message || result.body?.message || "The email service could not accept your message.");
+      }
+
+      await new Promise<void>((resolve) => window.setTimeout(resolve, 1000));
       setForm({ name: "", email: "", phone: "", purpose: "" });
+      event.currentTarget.reset();
+      setSubmitStatus("success");
     } catch {
       setSubmitStatus("idle");
-      setSubmitError("Your message couldn’t be submitted. Please try again in a moment.");
+      setSubmitError("Your message couldn’t be sent. Please check your connection and try again.");
     }
   }
 
@@ -62,12 +77,13 @@ export default function Home() {
         <h3>Sending your message</h3>
         <p>Please wait a moment…</p>
       </div> :       <form className="contact-form" onSubmit={submitContact}>
+        <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden="true" className="contact-honeypot" />
         {submitError && <p className="contact-error" role="alert">{submitError}</p>}
-        <label>Name<input required autoComplete="name" value={form.name} onChange={(event) => setForm({...form, name: event.target.value})} placeholder="Your full name"/></label>
-        <label>Email<input required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
-        <label>Number<input required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
-        <label>Purpose of contact<select required value={form.purpose} onChange={(event) => setForm({...form, purpose: event.target.value})}><option value="" disabled>Select a purpose</option><option>UI/UX Design</option><option>Visual Design</option><option>Print Ready Design</option><option>Branding</option><option>Website / Development</option><option>Freelance Collaboration</option><option>Other</option></select></label>
-        <button className="button button-dark contact-submit" type="submit">Send via Email <ArrowRight size={16}/></button>
+        <label>Name<input name="name" required autoComplete="name" value={form.name} onChange={(event) => setForm({...form, name: event.target.value})} placeholder="Your full name"/></label>
+        <label>Email<input name="email" required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
+        <label>Number<input name="phone" required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
+        <label>Purpose of contact<select name="purpose" required value={form.purpose} onChange={(event) => setForm({...form, purpose: event.target.value})}><option value="" disabled>Select a purpose</option><option>UI/UX Design</option><option>Visual Design</option><option>Print Ready Design</option><option>Branding</option><option>Website / Development</option><option>Freelance Collaboration</option><option>Other</option></select></label>
+        <button className="button button-dark contact-submit" type="submit">{submitStatus === "loading" ? <>Submitting... <span className="button-spinner" aria-hidden="true"/></> : submitStatus === "success" ? <>Submitted! <span className="button-check" aria-hidden="true">✓</span></> : <>Send Message <ArrowRight size={16}/></>}</button>
       </form>}
     </section>
   </div>}
