@@ -3,7 +3,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
-const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE";
+const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
 
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function Home() {
     setSubmitError("");
 
     const accessKey = WEB3FORMS_ACCESS_KEY.trim();
-    if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
+    if (!accessKey || accessKey === "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11") {
       setSubmitError("Email submission is not configured yet. Add the Web3Forms Access Key generated for creativerizz.in@gmail.com in app/page.tsx.");
       return;
     }
