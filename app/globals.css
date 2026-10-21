@@ -1017,3 +1017,14 @@ body{background:#f2f2f0;color:#171717}
  .reference-site>.portfolio-hero .clarity-note{right:5%;bottom:58px}
  .reference-site>.portfolio-hero .trust-note p,.reference-site>.portfolio-hero .clarity-note p{font-size:8px}
 }
+
+
+/* Full-width canvas and a single reference-style navigation */
+.site-shell{width:100%;max-width:none;margin:0;padding:0!important;overflow:clip}
+.reference-site{width:100%;max-width:none;margin:0;border-radius:0;box-shadow:none;overflow:clip}
+.reference-nav{width:100%;padding-left:clamp(20px,5vw,76px);padding-right:clamp(20px,5vw,76px)}
+@media(max-width:760px){
+  .site-shell{padding:0!important}
+  .reference-site{width:100%;border-radius:0}
+  .reference-nav{padding-left:18px;padding-right:18px}
+}
