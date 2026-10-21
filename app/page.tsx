@@ -40,9 +40,9 @@ export default function Home() {
     };
   }, []);
   useEffect(() => {
-    const header = document.querySelector<HTMLElement>(".topbar");
+    const header = document.querySelector<HTMLElement>(".reference-nav");
     if (!header) return;
-    const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
+    const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 32);
     updateHeader();
     window.addEventListener("scroll", updateHeader, { passive: true });
     return () => window.removeEventListener("scroll", updateHeader);
@@ -185,7 +185,7 @@ export default function Home() {
 
   <div className="reference-site">
     <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
-      <a className="reference-availability" href="#contact"><span/> Available for new projects</a>
+      <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src="/Logo.svg" alt="Rizwan Khan logo"/></a>
       <nav className="reference-desktop-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
       <a className="reference-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={13}/></a>
       <button className="reference-menu-toggle" type="button" aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}>{mobileNavOpen ? <X size={18}/> : <Menu size={18}/>}</button>
