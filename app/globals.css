@@ -317,3 +317,56 @@ body{background:#fbfaf7}
   .portfolio-hero .hero-copy,.portfolio-hero .thought-card,.portfolio-hero .sync-card,.portfolio-hero .portrait-stage,.portfolio-hero .panel-focus,.portfolio-hero .panel-ideas,.portfolio-hero .panel-plan,.portfolio-hero .panel-print{opacity:1;translate:0 0;scale:1}
 }
 
+/* Hero headline spacing and custom desktop pointer */
+.portfolio-hero h1{
+  line-height:1.04;
+}
+@media(max-width:560px){
+  .portfolio-hero h1{line-height:1.08}
+}
+.custom-cursor{
+  --cursor-x:-100px;
+  --cursor-y:-100px;
+  position:fixed;
+  z-index:2000;
+  left:0;
+  top:0;
+  width:34px;
+  height:34px;
+  border:1px solid rgba(28,27,24,.42);
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  transform:translate3d(var(--cursor-x),var(--cursor-y),0) translate(-50%,-50%) scale(.72);
+  transition:opacity .2s ease,scale .22s var(--motion-ease),background-color .22s ease,border-color .22s ease;
+  will-change:transform;
+}
+.custom-cursor span{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#25241f;
+  transform:translate(-50%,-50%);
+  transition:width .22s var(--motion-ease),height .22s var(--motion-ease),background-color .22s ease;
+}
+.custom-cursor.cursor-visible{opacity:1;scale:1}
+.custom-cursor.cursor-hover{
+  border-color:rgba(28,27,24,.08);
+  background:rgba(28,27,24,.08);
+  scale:1.3;
+}
+.custom-cursor.cursor-hover span{width:6px;height:6px}
+.custom-cursor.cursor-pressed{scale:.82;background:rgba(28,27,24,.14)}
+body.custom-cursor-enabled,body.custom-cursor-enabled a,body.custom-cursor-enabled button,
+body.custom-cursor-enabled input,body.custom-cursor-enabled select,body.custom-cursor-enabled textarea,
+body.custom-cursor-enabled [role=button]{cursor:none!important}
+@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){
+  .custom-cursor{display:none!important}
+  body.custom-cursor-enabled,body.custom-cursor-enabled a,body.custom-cursor-enabled button,
+  body.custom-cursor-enabled input,body.custom-cursor-enabled select,body.custom-cursor-enabled textarea,
+  body.custom-cursor-enabled [role=button]{cursor:auto!important}
+}
+
