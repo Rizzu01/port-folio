@@ -220,22 +220,27 @@ export default function Home() {
       </div>
     </section>
     <section className="experience-section" id="experience" aria-labelledby="experience-title">
-      <div className="experience-topline"><span>02 / EXPERIENCE &amp; EDUCATION</span><span>MY PROFESSIONAL JOURNEY</span></div>
+      <div className="experience-topline"><span>02 / EXPERIENCE</span><span>PROFESSIONAL JOURNEY</span></div>
       <div className="experience-heading">
-        <div><p className="experience-kicker">WHERE I'VE BEEN</p><h2 id="experience-title">Experience that<br/><em>shapes the work.</em></h2></div>
-        <p className="experience-summary">From digital campaigns to user experiences, every role has helped me build a sharper eye for design, consistency, and the details that matter.</p>
+        <h2 id="experience-title">Where I’ve<br/><em>made an impact.</em></h2>
+        <p className="experience-summary">A few years of turning ideas into thoughtful visuals, consistent brand systems, and useful digital experiences.</p>
       </div>
-      <div className="experience-grid">
-        <div className="experience-timeline">
-          <article className="experience-item"><div className="experience-marker"><span/></div><div className="experience-item-heading"><div><p className="experience-company">SUNCRYPTO</p><h3>Graphic Designer &amp; UI/UX Designer</h3></div><span className="experience-date">Nov 2024 — Present</span></div><ul><li>Designed social media creatives, banners, and emailers.</li><li>Created visual assets aligned with brand guidelines.</li><li>Developed graphics for digital campaigns.</li><li>Collaborated with teams to maintain consistent design quality.</li></ul></article>
-          <article className="experience-item"><div className="experience-marker"><span/></div><div className="experience-item-heading"><div><p className="experience-company">DOOMSHELL SOFTWARE PVT. LTD.</p><h3>Graphic Designer &amp; UI/UX Designer</h3></div><span className="experience-date">2023 — 2024</span></div><ul><li>Designed and developed responsive web interfaces.</li><li>Translated UI designs into functional layouts.</li><li>Improved visual consistency and usability.</li></ul></article>
-          <article className="experience-item"><div className="experience-marker"><span/></div><div className="experience-item-heading"><div><p className="experience-company">TDI ONLINE SERVICES</p><h3>Graphic Designer</h3></div><span className="experience-date">2022 — 2023</span></div><ul><li>Created digital marketing creatives and graphics.</li><li>Designed layouts using typography and color theory.</li><li>Developed visual content for branding.</li></ul></article>
-        </div>
-        <aside className="experience-sidebar">
-          <div className="experience-side-block"><span className="experience-side-index">01</span><p className="experience-side-label">EDUCATION</p><h3>Bachelor of Science (B.Sc.)</h3><p>Maharaja Vinayak Global University</p><span className="experience-side-date">2019 — 2022</span></div>
-          <div className="experience-side-block"><span className="experience-side-index">02</span><p className="experience-side-label">DESIGN STUDIES</p><h3>Diploma in Designing</h3><p>DAAC Institute of Advance Computer</p><span className="experience-side-date">2020 — 2021</span></div>
-          <div className="experience-tools"><p className="experience-side-label">TOOLS I WORK WITH</p><div className="experience-tool-list"><span>Ai</span><span>Ps</span><span>Figma</span><span>Id</span><span>Xd</span></div></div>
-        </aside>
+      <div className="experience-list">
+        <article className="experience-row">
+          <span className="experience-period">NOV 2024 — NOW</span>
+          <div className="experience-role"><p className="experience-company">SUNCRYPTO</p><h3>Graphic Designer &amp; UI/UX Designer</h3><p>Social creatives, campaign banners, emailers, brand-led marketing assets, and digital product experiences.</p></div>
+          <span className="experience-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article className="experience-row">
+          <span className="experience-period">2023 — 2024</span>
+          <div className="experience-role"><p className="experience-company">DOOMSHELL SOFTWARE PVT. LTD.</p><h3>Graphic Designer &amp; UI/UX Designer</h3><p>Responsive web interfaces, functional UI layouts, and usability-focused visual refinements.</p></div>
+          <span className="experience-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article className="experience-row">
+          <span className="experience-period">2022 — 2023</span>
+          <div className="experience-role"><p className="experience-company">TDI ONLINE SERVICES</p><h3>Graphic Designer</h3><p>Digital marketing graphics, brand visuals, and layouts built around typography and color.</p></div>
+          <span className="experience-arrow" aria-hidden="true">↗</span>
+        </article>
       </div>
     </section>
   </div>
