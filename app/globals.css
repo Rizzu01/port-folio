@@ -251,3 +251,69 @@ body{background:#fbfaf7}
 .button-spinner{display:inline-block;width:14px;height:14px;border:1.7px solid currentColor;border-right-color:transparent;border-radius:50%;animation:contactSpin .7s linear infinite;vertical-align:middle}
 .button-check{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#edf7ed;color:#248344;font-size:13px;line-height:1;animation:checkPop .3s ease both}
 .contact-submit:focus-visible,.contact-modal-close:focus-visible,.contact-form input:focus-visible,.contact-form select:focus-visible{outline:2px solid #827a68;outline-offset:3px}
+
+/* Premium hover and motion pass */
+:root{--motion-ease:cubic-bezier(.22,.75,.25,1)}
+.nav-pill a{
+  position:relative;
+  transition:background-color .25s var(--motion-ease),color .25s var(--motion-ease),transform .25s var(--motion-ease);
+}
+.nav-pill a:hover{background:#eeece7;color:#111;transform:translateY(-1px)}
+.nav-pill a:active{transform:translateY(0) scale(.97)}
+.brand{transition:opacity .25s ease,letter-spacing .3s var(--motion-ease)}
+.brand:hover{opacity:.72;letter-spacing:-.4px}
+.app-link,.button{
+  transition:transform .28s var(--motion-ease),box-shadow .28s var(--motion-ease),background-color .28s var(--motion-ease),border-color .28s var(--motion-ease),color .28s var(--motion-ease);
+  will-change:transform;
+}
+.app-link:hover,.button-dark:hover{box-shadow:0 9px 22px rgba(20,20,18,.16)}
+.button-light:hover{background:#fff;border-color:#d5d0c6;box-shadow:0 8px 20px rgba(35,31,24,.07)}
+.button svg,.app-link svg{transition:transform .28s var(--motion-ease)}
+.button:hover svg,.app-link:hover svg{transform:translate(2px,-1px)}
+.float-card,.floating-panel{
+  transition:translate .32s var(--motion-ease),box-shadow .32s var(--motion-ease),border-color .32s ease,background-color .32s ease;
+}
+.float-card:hover,.floating-panel:hover{
+  translate:0 -6px;
+  box-shadow:0 20px 42px rgba(26,25,22,.13);
+  border-color:rgba(255,255,255,.98);
+  background:rgba(255,255,255,.92);
+}
+.mini-icon,.panel-icon,.avatar-stack span,.trust-avatars span{
+  transition:transform .3s var(--motion-ease),box-shadow .3s ease,filter .3s ease;
+}
+.float-card:hover .mini-icon,.floating-panel:hover .panel-icon{transform:scale(1.08) rotate(-5deg)}
+.avatar-stack span,.trust-avatars span{transition:transform .25s var(--motion-ease)}
+.avatar-stack span:hover,.trust-avatars span:hover{transform:translateY(-4px) scale(1.08);z-index:2}
+.orbit-stamp{animation:stampFloat 6s ease-in-out infinite;transform-origin:center}
+.stamp-star{transition:transform .45s var(--motion-ease),color .3s ease}
+.orbit-stamp:hover .stamp-star{transform:rotate(45deg) scale(1.12);color:#b18b36}
+.clarity-star{transition:transform .45s var(--motion-ease),color .3s ease}
+.clarity-note:hover .clarity-star{transform:rotate(45deg);color:#b18b36}
+.portfolio-hero .hero-copy{animation:heroRise .8s .05s var(--motion-ease) both}
+.portfolio-hero .thought-card{animation:cardRise .75s .25s var(--motion-ease) both}
+.portfolio-hero .sync-card{animation:cardRise .75s .38s var(--motion-ease) both}
+.portfolio-hero .portrait-stage{animation:portraitReveal 1s .12s var(--motion-ease) both}
+.portfolio-hero .panel-focus{animation:cardRise .7s .5s var(--motion-ease) both}
+.portfolio-hero .panel-ideas{animation:cardRise .7s .62s var(--motion-ease) both}
+.portfolio-hero .panel-plan{animation:cardRise .7s .7s var(--motion-ease) both}
+.portfolio-hero .panel-print{animation:cardRise .7s .78s var(--motion-ease) both}
+.contact-modal{animation:modalEnter .3s var(--motion-ease) both}
+.contact-modal-close{transition:transform .25s var(--motion-ease),background-color .25s ease,border-color .25s ease}
+.contact-modal-close:hover{transform:rotate(90deg);background:#f1eee8;border-color:#d7d1c7}
+.contact-form input,.contact-form select{transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease}
+.contact-submit:active,.app-link:active{transform:translateY(0) scale(.98)}
+@keyframes heroRise{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+@keyframes cardRise{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes portraitReveal{from{opacity:0;translate:0 18px;scale:.985}to{opacity:1;translate:0 0;scale:1}}
+@keyframes stampFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@keyframes modalEnter{from{opacity:0;translate:0 8px;scale:.985}to{opacity:1;translate:0 0;scale:1}}
+@media(hover:none){
+  .float-card:hover,.floating-panel:hover{translate:0 0;box-shadow:0 8px 26px #1e1e1e08}
+  .nav-pill a:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .portfolio-hero .hero-copy,.portfolio-hero .thought-card,.portfolio-hero .sync-card,.portfolio-hero .portrait-stage,.portfolio-hero .panel-focus,.portfolio-hero .panel-ideas,.portfolio-hero .panel-plan,.portfolio-hero .panel-print{opacity:1;translate:0 0;scale:1}
+}
+
