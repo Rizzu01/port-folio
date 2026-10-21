@@ -753,3 +753,38 @@ body.custom-cursor-enabled .app-link:active{
     align-self: center;
   }
 }
+
+/* Experience section — editorial timeline and education sidebar */
+.experience-section{position:relative;padding:82px 8% 96px;background:#fbfaf7;color:#171713;border-top:1px solid rgba(25,24,20,.1);overflow:hidden}
+.experience-topline{display:flex;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid rgba(25,24,20,.16);font-size:9px;letter-spacing:1.7px;color:#817d73}
+.experience-heading{display:grid;grid-template-columns:1.1fr .9fr;gap:9%;align-items:end;padding:58px 0 54px}
+.experience-kicker,.experience-side-label{font-size:9px;letter-spacing:1.8px;color:#8a7951;margin:0 0 17px}
+.experience-heading h2{font:500 clamp(42px,5.2vw,68px)/1.02 'Playfair Display',Georgia,serif;letter-spacing:-2.6px;margin:0}
+.experience-heading h2 em{font-weight:500;color:#8a7951}
+.experience-summary{max-width:400px;margin:0 0 5px;color:#77736b;font-size:13px;line-height:1.85}
+.experience-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,.72fr);gap:8%}
+.experience-timeline{position:relative}
+.experience-timeline:before{content:"";position:absolute;left:5px;top:9px;bottom:18px;width:1px;background:#d8d0bc}
+.experience-item{position:relative;padding:0 0 36px 31px}
+.experience-item:last-child{padding-bottom:0}
+.experience-marker{position:absolute;left:0;top:4px;width:11px;height:11px;border:1px solid #a28d59;background:#fbfaf7;border-radius:50%;display:grid;place-items:center;z-index:1}
+.experience-marker span{width:4px;height:4px;border-radius:50%;background:#a28d59}
+.experience-item-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:13px}
+.experience-company{font-size:10px;letter-spacing:.7px;font-weight:700;color:#5c70dd;margin:0 0 6px}
+.experience-item h3{font-size:13px;font-weight:600;line-height:1.5;margin:0;color:#292821}
+.experience-date{flex-shrink:0;padding:6px 9px;border:1px solid #e7e2d7;border-radius:20px;color:#6d685e;font-size:9px;white-space:nowrap}
+.experience-item ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.experience-item li{position:relative;padding-left:13px;color:#77736b;font-size:11px;line-height:1.65}
+.experience-item li:before{content:"";position:absolute;left:0;top:.65em;width:4px;height:4px;border-radius:50%;background:#b3a276}
+.experience-sidebar{align-self:start;background:#101326;color:#fff;border-radius:18px;padding:25px 23px}
+.experience-side-block{position:relative;padding:0 0 24px 29px;margin-bottom:23px;border-bottom:1px solid rgba(255,255,255,.12)}
+.experience-side-index{position:absolute;left:0;top:0;font-size:9px;color:#9aabff}
+.experience-side-label{color:#a6b3ff;margin-bottom:10px;font-size:8px}
+.experience-side-block h3{font-size:12px;line-height:1.5;font-weight:600;margin:0 0 6px}
+.experience-side-block>p:not(.experience-side-label){font-size:10px;line-height:1.6;color:#c1c3d2;margin:0 0 8px}
+.experience-side-date{font-size:9px;color:#a6abbd}
+.experience-tools{padding-left:29px}
+.experience-tool-list{display:flex;flex-wrap:wrap;gap:7px}
+.experience-tool-list span{display:grid;place-items:center;min-width:37px;height:34px;padding:0 8px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.07);font-size:10px;font-weight:700;color:#e8eaff}
+@media(max-width:850px){.experience-section{padding:68px 6% 76px}.experience-heading{gap:5%;padding:48px 0 42px}.experience-heading h2{font-size:clamp(38px,5.5vw,54px)}.experience-grid{grid-template-columns:minmax(0,1.3fr) minmax(190px,.7fr);gap:5%}.experience-sidebar{padding:21px 17px}.experience-item-heading{flex-direction:column;gap:8px}}
+@media(max-width:560px){.experience-section{padding:48px 22px 56px}.experience-topline{font-size:7px;letter-spacing:1px}.experience-heading{grid-template-columns:1fr;gap:20px;padding:38px 0 34px}.experience-heading h2{font-size:43px;letter-spacing:-1.8px}.experience-summary{font-size:12px}.experience-grid{grid-template-columns:1fr;gap:32px}.experience-item{padding-left:25px;padding-bottom:30px}.experience-item-heading{flex-direction:row;align-items:flex-start;gap:10px}.experience-company{font-size:9px;line-height:1.5}.experience-item h3{font-size:12px}.experience-date{font-size:8px;padding:5px 7px;white-space:normal;text-align:center;max-width:105px}.experience-item li{font-size:11px}.experience-sidebar{padding:24px 22px}.experience-side-block{padding-left:29px}}
