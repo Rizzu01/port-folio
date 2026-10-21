@@ -101,3 +101,35 @@
  .portfolio-hero .panel-plan{right:-10%;top:180px;transform:scale(.68) rotate(10deg);transform-origin:right top}
  .portfolio-hero .panel-note{display:none}
 }
+
+
+/* Print-ready design card replacing the generic ideas card */
+.portfolio-hero .print-ready-card{
+  display:block;
+  width:190px;
+  min-width:190px;
+  right:0;
+  top:335px;
+  padding:12px;
+  border-radius:16px;
+  transform:rotate(5deg);
+  background:rgba(255,255,255,.9);
+  box-shadow:0 16px 38px rgba(26,25,22,.14);
+}
+.print-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;font-size:8px;letter-spacing:1.4px;font-weight:700;color:#77736d}
+.print-card-dot{font-size:17px;color:#d8a82d}
+.print-artwork{height:94px;position:relative;overflow:hidden;border-radius:8px;background:#22251f;color:#f8f3e6;padding:12px}
+.print-art-label{position:relative;z-index:2;font:700 16px/.9 'DM Sans',Arial,sans-serif;letter-spacing:-.8px}
+.print-art-shape{position:absolute;width:88px;height:88px;border-radius:50%;right:-9px;top:23px;background:radial-gradient(circle at 30% 28%,#f0d36b,#c18d20 62%,#745219);box-shadow:0 0 20px #e4bb4b55}
+.print-art-lines{position:absolute;z-index:2;left:12px;bottom:12px;display:flex;gap:4px}
+.print-art-lines i{display:block;width:18px;height:3px;border-radius:4px;background:#e6bd46}
+.print-art-lines i:nth-child(2){width:10px;background:#f7f1df}
+.print-card-footer{padding:10px 2px 1px}
+.print-card-footer strong{display:block;font-size:11px;font-weight:600;margin-bottom:4px;color:#26241f}
+.print-card-footer small{display:block;font-size:8px;color:#8c877e;white-space:nowrap}
+@media(max-width:850px){
+ .portfolio-hero .print-ready-card{right:-3%;top:338px;transform:scale(.85) rotate(5deg);transform-origin:right top}
+}
+@media(max-width:560px){
+ .portfolio-hero .print-ready-card{display:block;right:-4%;top:333px;transform:scale(.62) rotate(5deg);transform-origin:right top}
+}
