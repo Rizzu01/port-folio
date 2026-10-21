@@ -6,9 +6,11 @@ export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", purpose: "" });
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [submitError, setSubmitError] = useState("");
 
   async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitError("");
     setSubmitStatus("loading");
     try {
       const response = await fetch("https://formsubmit.co/ajax/rizwankhan36200@gmail.com", {
@@ -24,12 +26,12 @@ export default function Home() {
         }),
       });
       const result = await response.json();
-      if (!response.ok || result.success !== "true") throw new Error("Message submission failed");
+      if (!response.ok || !(result.success === true || result.success === "true")) throw new Error(result.message || "Message submission failed");
       setSubmitStatus("success");
       setForm({ name: "", email: "", phone: "", purpose: "" });
     } catch {
       setSubmitStatus("idle");
-      window.alert("Sorry, your message could not be submitted. Please try again or use the Let's talk button.");
+      setSubmitError("Your message couldn’t be submitted. Please try again in a moment.");
     }
   }
 
@@ -60,6 +62,7 @@ export default function Home() {
         <h3>Sending your message</h3>
         <p>Please wait a moment…</p>
       </div> :       <form className="contact-form" onSubmit={submitContact}>
+        {submitError && <p className="contact-error" role="alert">{submitError}</p>}
         <label>Name<input required autoComplete="name" value={form.name} onChange={(event) => setForm({...form, name: event.target.value})} placeholder="Your full name"/></label>
         <label>Email<input required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
         <label>Number<input required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
