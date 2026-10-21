@@ -199,6 +199,19 @@ export default function Home() {
       <div className="portrait-stage"><div className="portrait-halo"/><div className="portrait-mask"><img src="/portrait.png" alt="Rizwan Khan portrait"/></div><div id="visual-design" className="floating-panel panel-focus"><span className="panel-icon green"><CheckIcon/></span><div><strong>Visual Design</strong><small>Shape the story clearly.</small></div></div><div id="ui-ux" className="floating-panel panel-ideas"><span className="panel-icon purple"><PanelsTopLeft size={15}/></span><div><strong>UI / UX</strong><small>Make every interaction count.</small></div></div><div id="branding" className="floating-panel panel-plan"><span className="panel-icon orange"><Sparkles size={15}/></span><div><strong>Branding</strong><small>Build a memorable identity.</small></div></div><div className="floating-panel panel-print"><span className="panel-icon orange"><Printer size={15}/></span><div><strong>Print Ready Design</strong><small>Production-ready artwork.</small></div></div></div>
       <div className="trust-note"><span className="tiny-rule"/><p>Design meets function.<br/>Details make the difference.</p><div className="trust-avatars"><span>V</span><span>U</span><span>G</span><span>D</span></div></div><div className="clarity-note"><span className="clarity-star">✳</span><span className="tiny-rule"/><p>Make it clear.<br/>Make it matter.</p></div>
     </section>
+    <section className="reference-about" id="about">
+      <div className="reference-section-heading"><span className="reference-ghost-title">ABOUT</span><p>/ A LITTLE ABOUT ME</p><span className="reference-section-note">The person behind the pixels</span></div>
+      <div className="reference-about-layout">
+        <div className="reference-about-image"><img src="/About.png" alt="Rizwan Khan at work"/><span>CURIOUS BY NATURE · DESIGNER BY CHOICE</span></div>
+        <div className="reference-about-copy">
+          <h2>I believe good design should <em>feel as good as it looks.</em></h2>
+          <p>I’m Rizwan, a graphic and UI/UX designer who enjoys turning complex ideas into clear, thoughtful visual experiences. My work moves between brand communication, digital products, and web design.</p>
+          <p>I care about the small details, the bigger picture, and making every design decision serve a purpose.</p>
+          <div className="reference-about-values"><div><span>01</span><strong>Think with clarity</strong></div><div><span>02</span><strong>Design with purpose</strong></div><div><span>03</span><strong>Care about details</strong></div></div>
+          <a className="reference-about-link" href="#experience">A little more about my journey <ArrowUpRight size={14}/></a>
+        </div>
+      </div>
+    </section>
     <section className="reference-work" id="work">
       <div className="reference-section-heading"><span className="reference-ghost-title">PORTFOLIO</span><p>/ SELECTED WORK</p><span className="reference-section-note">A selection of visual and digital projects</span></div>
       <div className="reference-project-grid">
