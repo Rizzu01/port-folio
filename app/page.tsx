@@ -7,20 +7,30 @@ export default function Home() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", purpose: "" });
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success">("idle");
 
-  function submitContact(event: FormEvent<HTMLFormElement>) {
+  async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const subject = `Portfolio contact: ${form.purpose}`;
-    const message = [
-      "New portfolio contact",
-      "",
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      `Number: ${form.phone}`,
-      `Purpose of contact: ${form.purpose}`,
-    ].join("\n");
     setSubmitStatus("loading");
-    window.location.href = `mailto:rizwankhan36200@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-    window.setTimeout(() => setSubmitStatus("success"), 1000);
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/rizwankhan36200@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Portfolio contact: ${form.purpose}`,
+          _template: "table",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          purpose: form.purpose,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || result.success !== "true") throw new Error("Message submission failed");
+      setSubmitStatus("success");
+      setForm({ name: "", email: "", phone: "", purpose: "" });
+    } catch {
+      setSubmitStatus("idle");
+      window.alert("Sorry, your message could not be submitted. Please try again or use the Let's talk button.");
+    }
   }
 
   return <main className="site-shell"><div className="page-frame portfolio-frame">
@@ -42,13 +52,13 @@ export default function Home() {
       <p>Share a few details and I’ll get back to you.</p>
       {submitStatus === "success" ? <div className="contact-feedback contact-success" role="status">
         <span className="success-check"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 18.5 15 25l13-14"/></svg></span>
-        <h3>Email draft is ready</h3>
-        <p>Your email app should open with your details filled in. Review it and press send to contact me.</p>
+        <h3>Message submitted!</h3>
+        <p>Thanks for reaching out. Your message has been sent successfully, and I’ll get back to you soon.</p>
         <button className="button button-dark contact-submit" type="button" onClick={() => { setContactOpen(false); setSubmitStatus("idle"); }}>Done <ArrowRight size={16}/></button>
       </div> : submitStatus === "loading" ? <div className="contact-feedback contact-loading" role="status" aria-live="polite">
         <span className="contact-spinner" aria-hidden="true"></span>
-        <h3>Preparing your message</h3>
-        <p>Just a moment…</p>
+        <h3>Sending your message</h3>
+        <p>Please wait a moment…</p>
       </div> :       <form className="contact-form" onSubmit={submitContact}>
         <label>Name<input required autoComplete="name" value={form.name} onChange={(event) => setForm({...form, name: event.target.value})} placeholder="Your full name"/></label>
         <label>Email<input required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
