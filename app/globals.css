@@ -788,3 +788,46 @@ body.custom-cursor-enabled .app-link:active{
 .experience-tool-list span{display:grid;place-items:center;min-width:37px;height:34px;padding:0 8px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.07);font-size:10px;font-weight:700;color:#e8eaff}
 @media(max-width:850px){.experience-section{padding:68px 6% 76px}.experience-heading{gap:5%;padding:48px 0 42px}.experience-heading h2{font-size:clamp(38px,5.5vw,54px)}.experience-grid{grid-template-columns:minmax(0,1.3fr) minmax(190px,.7fr);gap:5%}.experience-sidebar{padding:21px 17px}.experience-item-heading{flex-direction:column;gap:8px}}
 @media(max-width:560px){.experience-section{padding:48px 22px 56px}.experience-topline{font-size:7px;letter-spacing:1px}.experience-heading{grid-template-columns:1fr;gap:20px;padding:38px 0 34px}.experience-heading h2{font-size:43px;letter-spacing:-1.8px}.experience-summary{font-size:12px}.experience-grid{grid-template-columns:1fr;gap:32px}.experience-item{padding-left:25px;padding-bottom:30px}.experience-item-heading{flex-direction:row;align-items:flex-start;gap:10px}.experience-company{font-size:9px;line-height:1.5}.experience-item h3{font-size:12px}.experience-date{font-size:8px;padding:5px 7px;white-space:normal;text-align:center;max-width:105px}.experience-item li{font-size:11px}.experience-sidebar{padding:24px 22px}.experience-side-block{padding-left:29px}}
+
+
+/* Minimal experience section — typography-led, no education panel */
+.experience-section{
+  padding:76px 8% 88px;
+  background:#fbfaf7;
+  color:#171713;
+  border-top:1px solid rgba(25,24,20,.1);
+}
+.experience-topline{display:flex;justify-content:space-between;gap:20px;padding-bottom:16px;border-bottom:1px solid rgba(25,24,20,.14);font-size:9px;letter-spacing:1.5px;color:#817d73}
+.experience-heading{display:grid;grid-template-columns:1fr .7fr;align-items:end;gap:10%;padding:54px 0 38px}
+.experience-heading h2{font:500 clamp(42px,5vw,66px)/1.02 'Playfair Display',Georgia,serif;letter-spacing:-2.5px;margin:0}
+.experience-heading h2 em{font-weight:500;color:#8a7951}
+.experience-summary{max-width:360px;margin:0 0 5px;color:#77736b;font-size:13px;line-height:1.8}
+.experience-list{border-top:1px solid rgba(25,24,20,.14)}
+.experience-row{display:grid;grid-template-columns:150px minmax(0,1fr) 24px;gap:24px;align-items:start;padding:27px 0;border-bottom:1px solid rgba(25,24,20,.14);transition:padding .3s cubic-bezier(.22,.75,.25,1)}
+.experience-period{padding-top:3px;color:#827b6d;font-size:10px;letter-spacing:.4px;white-space:nowrap}
+.experience-company{margin:0 0 7px;color:#6b78d9;font-size:10px;font-weight:700;letter-spacing:.6px}
+.experience-role h3{margin:0 0 8px;font-size:15px;line-height:1.4;font-weight:600;letter-spacing:-.25px}
+.experience-role>p:last-child{max-width:610px;margin:0;color:#77736b;font-size:12px;line-height:1.7}
+.experience-arrow{color:#9b8a61;font-size:18px;transition:transform .25s ease}
+.experience-row:hover{padding-left:8px;padding-right:8px}
+.experience-row:hover .experience-arrow{transform:translate(2px,-2px)}
+@media(max-width:850px){
+ .experience-section{padding:64px 6% 72px}
+ .experience-heading{grid-template-columns:1fr .8fr;gap:6%;padding:44px 0 32px}
+ .experience-heading h2{font-size:clamp(38px,5.4vw,54px)}
+ .experience-row{grid-template-columns:120px minmax(0,1fr) 18px;gap:16px}
+}
+@media(max-width:560px){
+ .experience-section{padding:48px 22px 56px}
+ .experience-topline{font-size:7px;letter-spacing:1px}
+ .experience-heading{grid-template-columns:1fr;gap:16px;padding:36px 0 28px}
+ .experience-heading h2{font-size:43px;letter-spacing:-1.8px}
+ .experience-summary{font-size:12px;line-height:1.75}
+ .experience-row{grid-template-columns:1fr 20px;gap:8px 12px;padding:22px 0}
+ .experience-period{grid-column:1;grid-row:1;font-size:9px}
+ .experience-role{grid-column:1;grid-row:2}
+ .experience-arrow{grid-column:2;grid-row:1}
+ .experience-company{font-size:9px;line-height:1.5}
+ .experience-role h3{font-size:14px}
+ .experience-role>p:last-child{font-size:11px}
+}
