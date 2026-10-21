@@ -242,3 +242,5 @@ body{background:#fbfaf7}
 @keyframes checkPop{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes drawCheck{to{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){.contact-spinner,.success-check,.success-check path,.contact-feedback{animation:none}.success-check path{stroke-dashoffset:0}}
+
+.contact-error{margin:0;padding:10px 12px;border-radius:9px;background:#fff1ef;color:#a53c31;font-size:12px;line-height:1.5}
