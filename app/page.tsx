@@ -10,6 +10,7 @@ export default function Home() {
 
   async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     setSubmitError("");
 
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
@@ -20,7 +21,7 @@ export default function Home() {
 
     setSubmitStatus("loading");
     try {
-      const formData = new FormData(event.currentTarget);
+      const formData = new FormData(formElement);
       formData.set("access_key", accessKey);
       formData.set("subject", `Portfolio contact: ${form.purpose}`);
       formData.set("from_name", "Rizwan Khan Portfolio");
@@ -42,7 +43,7 @@ export default function Home() {
 
       await new Promise<void>((resolve) => window.setTimeout(resolve, 1000));
       setForm({ name: "", email: "", phone: "", purpose: "" });
-      event.currentTarget.reset();
+      formElement.reset();
       setSubmitStatus("success");
     } catch {
       setSubmitStatus("idle");
