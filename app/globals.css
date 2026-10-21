@@ -1082,3 +1082,54 @@ body{background:#fff!important}
  .reference-about-values{gap:8px;margin-top:23px}
  .reference-about-values strong{font-size:9px}
 }
+
+
+/* Logo + smooth glass navigation on scroll */
+.reference-nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:76px;
+  isolation:isolate;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid rgba(20,20,20,.06);
+  transition:height .55s cubic-bezier(.22,1,.36,1), margin .55s cubic-bezier(.22,1,.36,1), width .55s cubic-bezier(.22,1,.36,1), border-radius .55s cubic-bezier(.22,1,.36,1), background .45s ease, border-color .45s ease, box-shadow .45s ease, backdrop-filter .45s ease;
+}
+.reference-logo{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex:0 0 auto;
+  width:clamp(108px,13vw,154px);
+  height:100%;
+  transition:width .45s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1);
+}
+.reference-logo img{display:block;width:100%;max-width:150px;max-height:42px;object-fit:contain;object-position:left center;transition:max-height .45s ease,opacity .3s ease}
+.reference-nav.is-scrolled{
+  height:62px;
+  width:calc(100% - clamp(24px,7vw,100px));
+  margin:10px auto 0;
+  border:1px solid rgba(255,255,255,.68);
+  border-radius:18px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 10px 35px rgba(20,20,20,.08), inset 0 1px 0 rgba(255,255,255,.8);
+  backdrop-filter:blur(22px) saturate(1.35);
+  -webkit-backdrop-filter:blur(22px) saturate(1.35);
+}
+.reference-nav.is-scrolled .reference-logo{width:clamp(100px,12vw,138px)}
+.reference-nav.is-scrolled .reference-logo img{max-height:34px}
+.reference-nav.is-scrolled .reference-desktop-links{gap:clamp(14px,2vw,27px)}
+.reference-nav.is-scrolled .reference-talk{padding:9px 15px}
+.reference-nav.is-scrolled .reference-mobile-menu{top:calc(100% + 9px)}
+@media(max-width:760px){
+  .reference-nav{height:64px;padding-left:18px;padding-right:18px}
+  .reference-logo{width:118px}
+  .reference-logo img{max-height:36px}
+  .reference-nav.is-scrolled{height:56px;width:calc(100% - 24px);margin:8px auto 0;border-radius:15px;padding-left:14px;padding-right:14px}
+  .reference-nav.is-scrolled .reference-logo{width:108px}
+  .reference-nav.is-scrolled .reference-logo img{max-height:31px}
+  .reference-nav.is-scrolled .reference-menu-toggle{background:rgba(255,255,255,.72)}
+}
+@media(prefers-reduced-motion:reduce){
+  .reference-nav,.reference-logo,.reference-logo img{transition:none!important}
+}
