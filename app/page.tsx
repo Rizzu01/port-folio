@@ -30,6 +30,21 @@ export default function Home() {
       <div className="trust-note"><span className="tiny-rule"/><p>Design meets function.<br/>Details make the difference.</p><div className="trust-avatars"><span>V</span><span>U</span><span>G</span><span>D</span></div></div><div className="clarity-note"><span className="clarity-star">✳</span><span className="tiny-rule"/><p>Make it clear.<br/>Make it matter.</p></div>
     </section>
   </div>
+  {contactOpen && <div className="contact-modal-backdrop" onClick={() => setContactOpen(false)}>
+    <section className="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" onClick={(event) => event.stopPropagation()}>
+      <button className="contact-modal-close" type="button" aria-label="Close contact form" onClick={() => setContactOpen(false)}><X size={18}/></button>
+      <span className="contact-modal-kicker">LET'S CONNECT</span>
+      <h2 id="contact-modal-title">Tell me about your project.</h2>
+      <p>Share a few details and I’ll get back to you.</p>
+      <form className="contact-form" onSubmit={submitContact}>
+        <label>Name<input required autoComplete="name" value={form.name} onChange={(event) => setForm({...form, name: event.target.value})} placeholder="Your full name"/></label>
+        <label>Email<input required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
+        <label>Number<input required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
+        <label>Purpose of contact<select required value={form.purpose} onChange={(event) => setForm({...form, purpose: event.target.value})}><option value="" disabled>Select a purpose</option><option>UI/UX Design</option><option>Visual Design</option><option>Print Ready Design</option><option>Branding</option><option>Website / Development</option><option>Freelance Collaboration</option><option>Other</option></select></label>
+        <button className="button button-dark contact-submit" type="submit">Continue to WhatsApp <ArrowRight size={16}/></button>
+      </form>
+    </section>
+  </div>}
 </main>;
 }
 function CheckIcon(){return <Sparkles size={15}/>;}
