@@ -1055,3 +1055,30 @@ body{background:#fff!important}
 .site-shell{background:#fff!important;box-shadow:none!important}
 .reference-site{background:#fff!important;box-shadow:none!important}
 @media(min-width:1441px){body{background:#fff!important}}
+
+
+/* About section — same restrained editorial language as Work and Services */
+.reference-about{position:relative;padding:72px 8% 78px;background:#fff}
+.reference-about-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,6vw,78px);align-items:center}
+.reference-about-image{position:relative;min-height:390px;background:#efefec;overflow:hidden}
+.reference-about-image img{display:block;width:100%;height:390px;object-fit:cover;object-position:center 28%;filter:grayscale(1);mix-blend-mode:multiply}
+.reference-about-image>span{position:absolute;left:15px;bottom:14px;padding:8px 10px;background:rgba(255,255,255,.88);font-size:7px;letter-spacing:1.1px;color:#62625c}
+.reference-about-copy h2{font-size:clamp(27px,3.7vw,43px);font-weight:500;line-height:1.08;letter-spacing:-1.7px;margin:0 0 22px;max-width:490px}
+.reference-about-copy h2 em{font-family:'Playfair Display',Georgia,serif;font-weight:500;color:#858879}
+.reference-about-copy>p{max-width:470px;color:#777;font-size:11px;line-height:1.9;margin:0 0 13px}
+.reference-about-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px;padding-top:17px;border-top:1px solid #e8e8e5}
+.reference-about-values div{display:flex;flex-direction:column;gap:9px}
+.reference-about-values span{font-size:8px;color:#999}
+.reference-about-values strong{font-size:10px;font-weight:500;line-height:1.4}
+.reference-about-link{display:inline-flex;align-items:center;gap:8px;margin-top:25px;padding-bottom:5px;border-bottom:1px solid #c9c9c3;font-size:10px;transition:gap .25s}
+.reference-about-link:hover{gap:13px}
+@media(max-width:760px){
+ .reference-about{padding:55px 20px 58px}
+ .reference-about-layout{grid-template-columns:1fr;gap:25px}
+ .reference-about-image{min-height:0;max-height:360px}
+ .reference-about-image img{height:clamp(260px,80vw,360px);object-position:center 25%}
+ .reference-about-copy h2{font-size:34px;letter-spacing:-1.2px;margin-bottom:17px}
+ .reference-about-copy>p{font-size:11px}
+ .reference-about-values{gap:8px;margin-top:23px}
+ .reference-about-values strong{font-size:9px}
+}
