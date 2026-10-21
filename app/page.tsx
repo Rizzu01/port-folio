@@ -8,14 +8,16 @@ export default function Home() {
 
   function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const subject = `Portfolio contact: ${form.purpose}`;
     const message = [
-      "Hi Rizwan, I'd like to get in touch.",
+      "New portfolio contact",
+      "",
       `Name: ${form.name}`,
       `Email: ${form.email}`,
-      `Phone: ${form.phone}`,
-      `Purpose: ${form.purpose}`,
+      `Number: ${form.phone}`,
+      `Purpose of contact: ${form.purpose}`,
     ].join("\n");
-    window.open(`https://wa.me/919024043673?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    window.location.href = `mailto:rizwankhan36200@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
     setContactOpen(false);
   }
 
@@ -41,7 +43,7 @@ export default function Home() {
         <label>Email<input required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
         <label>Number<input required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
         <label>Purpose of contact<select required value={form.purpose} onChange={(event) => setForm({...form, purpose: event.target.value})}><option value="" disabled>Select a purpose</option><option>UI/UX Design</option><option>Visual Design</option><option>Print Ready Design</option><option>Branding</option><option>Website / Development</option><option>Freelance Collaboration</option><option>Other</option></select></label>
-        <button className="button button-dark contact-submit" type="submit">Continue to WhatsApp <ArrowRight size={16}/></button>
+        <button className="button button-dark contact-submit" type="submit">Send via Email <ArrowRight size={16}/></button>
       </form>
     </section>
   </div>}
