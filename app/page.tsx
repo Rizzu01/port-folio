@@ -219,6 +219,25 @@ export default function Home() {
         <article><span>03</span><h3>Care about details</h3><p>Balance craft, clarity, and function in every decision.</p></article>
       </div>
     </section>
+    <section className="experience-section" id="experience" aria-labelledby="experience-title">
+      <div className="experience-topline"><span>02 / EXPERIENCE &amp; EDUCATION</span><span>MY PROFESSIONAL JOURNEY</span></div>
+      <div className="experience-heading">
+        <div><p className="experience-kicker">WHERE I'VE BEEN</p><h2 id="experience-title">Experience that<br/><em>shapes the work.</em></h2></div>
+        <p className="experience-summary">From digital campaigns to user experiences, every role has helped me build a sharper eye for design, consistency, and the details that matter.</p>
+      </div>
+      <div className="experience-grid">
+        <div className="experience-timeline">
+          <article className="experience-item"><div className="experience-marker"><span/></div><div className="experience-item-heading"><div><p className="experience-company">SUNCRYPTO</p><h3>Graphic Designer &amp; UI/UX Designer</h3></div><span className="experience-date">Nov 2024 — Present</span></div><ul><li>Designed social media creatives, banners, and emailers.</li><li>Created visual assets aligned with brand guidelines.</li><li>Developed graphics for digital campaigns.</li><li>Collaborated with teams to maintain consistent design quality.</li></ul></article>
+          <article className="experience-item"><div className="experience-marker"><span/></div><div className="experience-item-heading"><div><p className="experience-company">DOOMSHELL SOFTWARE PVT. LTD.</p><h3>Graphic Designer &amp; UI/UX Designer</h3></div><span className="experience-date">2023 — 2024</span></div><ul><li>Designed and developed responsive web interfaces.</li><li>Translated UI designs into functional layouts.</li><li>Improved visual consistency and usability.</li></ul></article>
+          <article className="experience-item"><div className="experience-marker"><span/></div><div className="experience-item-heading"><div><p className="experience-company">TDI ONLINE SERVICES</p><h3>Graphic Designer</h3></div><span className="experience-date">2022 — 2023</span></div><ul><li>Created digital marketing creatives and graphics.</li><li>Designed layouts using typography and color theory.</li><li>Developed visual content for branding.</li></ul></article>
+        </div>
+        <aside className="experience-sidebar">
+          <div className="experience-side-block"><span className="experience-side-index">01</span><p className="experience-side-label">EDUCATION</p><h3>Bachelor of Science (B.Sc.)</h3><p>Maharaja Vinayak Global University</p><span className="experience-side-date">2019 — 2022</span></div>
+          <div className="experience-side-block"><span className="experience-side-index">02</span><p className="experience-side-label">DESIGN STUDIES</p><h3>Diploma in Designing</h3><p>DAAC Institute of Advance Computer</p><span className="experience-side-date">2020 — 2021</span></div>
+          <div className="experience-tools"><p className="experience-side-label">TOOLS I WORK WITH</p><div className="experience-tool-list"><span>Ai</span><span>Ps</span><span>Figma</span><span>Id</span><span>Xd</span></div></div>
+        </aside>
+      </div>
+    </section>
   </div>
   {contactOpen && <div className="contact-modal-backdrop" onClick={() => setContactOpen(false)}>
     <section className="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" onClick={(event) => event.stopPropagation()}>
