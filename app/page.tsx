@@ -35,6 +35,14 @@ export default function Home() {
       document.removeEventListener("mouseleave", leave);
     };
   }, []);
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>(".topbar");
+    if (!header) return;
+    const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, []);
   const [form, setForm] = useState({ name: "", email: "", phone: "", purpose: "" });
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success">("idle");
   const [submitError, setSubmitError] = useState("");
