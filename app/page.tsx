@@ -17,7 +17,7 @@ export default function Home() {
     setSubmitError("");
 
     const accessKey = WEB3FORMS_ACCESS_KEY.trim();
-    if (!accessKey || accessKey === "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11") {
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
       setSubmitError("Email submission is not configured yet. Add the Web3Forms Access Key generated for creativerizz.in@gmail.com in app/page.tsx.");
       return;
     }
@@ -83,7 +83,7 @@ export default function Home() {
         <label>Email<input name="email" required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
         <label>Number<input name="phone" required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
         <label>Purpose of contact<select name="purpose" required value={form.purpose} onChange={(event) => setForm({...form, purpose: event.target.value})}><option value="" disabled>Select a purpose</option><option>UI/UX Design</option><option>Visual Design</option><option>Print Ready Design</option><option>Branding</option><option>Website / Development</option><option>Freelance Collaboration</option><option>Other</option></select></label>
-        <button className="button button-dark contact-submit" type="submit" disabled={submitStatus === "loading"}>{submitStatus === "loading" ? <>Submitting... <span className="button-spinner" aria-hidden="true"/></> : submitStatus === "success" ? <>Submitted! <span className="button-check" aria-hidden="true">✓</span></> : <>Send Message <ArrowRight size={16}/></>}</button>
+        <button className="button button-dark contact-submit" type="submit" disabled={submitStatus === "loading"}>{submitStatus === "loading" ? <>Submitting... <span className="button-spinner" aria-hidden="true"/></> : <>Send Message <ArrowRight size={16}/></>}</button>
       </form>}
     </section>
   </div>}
