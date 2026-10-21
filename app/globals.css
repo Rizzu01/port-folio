@@ -474,3 +474,44 @@ body.custom-cursor-enabled .app-link:active{
 @media(min-width:561px){
   .topbar .nav-pill{top:50%;transform:translate(-50%,-50%)}
 }
+
+
+/* Header stays in the page flow at the top and becomes a glass fixed bar after scrolling */
+.topbar{
+  position:relative;
+  top:auto;left:auto;transform:none;
+  width:100%;max-width:none;height:90px;
+  padding:0 6%;margin:0;
+  border:1px solid transparent;border-radius:0;
+  background:transparent;box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  z-index:999;
+}
+.topbar::before{display:none}
+.topbar.is-scrolled{
+  position:fixed;top:12px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 48px);max-width:1380px;height:68px;
+  padding:0 clamp(18px,4vw,54px);
+  border:1px solid rgba(255,255,255,.72);border-radius:22px;
+  background:rgba(251,250,247,.68);
+  -webkit-backdrop-filter:blur(22px) saturate(155%);
+  backdrop-filter:blur(22px) saturate(155%);
+  box-shadow:0 8px 32px rgba(37,33,24,.07),inset 0 1px 0 rgba(255,255,255,.75);
+}
+.topbar.is-scrolled::before{
+  display:block;content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.42),transparent 42%,rgba(255,255,255,.12));
+}
+.topbar.is-scrolled>*{position:relative;z-index:1}
+.topbar .nav-pill{left:50%;right:auto;margin:0}
+@media(min-width:561px){.topbar .nav-pill{top:50%;transform:translate(-50%,-50%)}}
+@media(max-width:850px){
+  .topbar{height:76px;padding:0 5%}
+  .topbar.is-scrolled{top:10px;width:calc(100% - 28px);height:62px;padding:0 20px;border-radius:19px}
+}
+@media(max-width:560px){
+  .topbar{height:68px;padding:0 18px}
+  .topbar.is-scrolled{top:8px;width:calc(100% - 20px);height:58px;padding:0 14px;border-radius:17px}
+  .topbar .nav-pill{top:70px}
+  .topbar.is-scrolled .nav-pill{top:70px}
+}
