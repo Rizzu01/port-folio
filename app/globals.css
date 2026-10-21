@@ -227,3 +227,18 @@ body{background:#fbfaf7}
  .contact-modal h2{font-size:29px}
  .contact-modal-backdrop{padding:12px}
 }
+
+/* Contact form submit feedback */
+.contact-feedback{min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px 6px;animation:contactFadeIn .35s ease both}
+.contact-feedback h3{margin:18px 0 7px;font-size:20px;letter-spacing:-.5px;font-weight:600;color:#24231f}
+.contact-feedback p{max-width:285px;margin:0 0 20px;font-size:12px;line-height:1.7;color:#777168}
+.contact-feedback .contact-submit{margin-top:6px}
+.contact-spinner{width:34px;height:34px;border:2px solid #e9e5dc;border-top-color:#24231f;border-radius:50%;animation:contactSpin .7s linear infinite}
+.success-check{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#edf7ed;color:#248344;animation:checkPop .35s cubic-bezier(.2,.8,.2,1) both}
+.success-check svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.success-check path{stroke-dasharray:34;stroke-dashoffset:34;animation:drawCheck .45s .12s ease forwards}
+@keyframes contactSpin{to{transform:rotate(360deg)}}
+@keyframes contactFadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes checkPop{from{transform:scale(.72);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes drawCheck{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.contact-spinner,.success-check,.success-check path,.contact-feedback{animation:none}.success-check path{stroke-dashoffset:0}}
