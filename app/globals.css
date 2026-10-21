@@ -133,3 +133,17 @@
 @media(max-width:560px){
  .portfolio-hero .print-ready-card{display:block;right:-4%;top:333px;transform:scale(.62) rotate(5deg);transform-origin:right top}
 }
+
+
+/* Print-ready card uses the same compact floating-card system as UI/UX and Visual Design */
+.portfolio-hero .panel-print{
+  right:-5%;
+  top:330px;
+  transform:rotate(7deg);
+}
+@media(max-width:850px){
+  .portfolio-hero .panel-print{right:-6%;top:330px;transform:scale(.82) rotate(7deg);transform-origin:right top}
+}
+@media(max-width:560px){
+  .portfolio-hero .panel-print{right:-8%;top:315px;transform:scale(.68) rotate(7deg);transform-origin:right top}
+}
