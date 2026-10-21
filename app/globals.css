@@ -727,3 +727,29 @@ body.custom-cursor-enabled .app-link:active{
     transform: translateY(0) scale(1);
   }
 }
+
+
+/* Keep the mobile menu trigger anchored to the right in both header states */
+@media (max-width: 850px) {
+  .topbar,
+  .topbar.is-scrolled {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar .brand {
+    flex: 0 0 auto;
+    margin-right: auto;
+  }
+  .topbar .mobile-menu-toggle {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    flex: 0 0 42px;
+    margin-left: auto !important;
+    align-self: center;
+  }
+}
