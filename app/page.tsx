@@ -92,6 +92,26 @@ export default function Home() {
       <div className="portrait-stage"><div className="portrait-halo"/><div className="portrait-mask"><img src="/portrait.png" alt="Rizwan Khan portrait"/></div><div id="visual-design" className="floating-panel panel-focus"><span className="panel-icon green"><CheckIcon/></span><div><strong>Visual Design</strong><small>Shape the story clearly.</small></div></div><div id="ui-ux" className="floating-panel panel-ideas"><span className="panel-icon purple"><PanelsTopLeft size={15}/></span><div><strong>UI / UX</strong><small>Make every interaction count.</small></div></div><div id="branding" className="floating-panel panel-plan"><span className="panel-icon orange"><Sparkles size={15}/></span><div><strong>Branding</strong><small>Build a memorable identity.</small></div></div><div className="floating-panel panel-print"><span className="panel-icon orange"><Printer size={15}/></span><div><strong>Print Ready Design</strong><small>Production-ready artwork.</small></div></div></div>
       <div className="trust-note"><span className="tiny-rule"/><p>Design meets function.<br/>Details make the difference.</p><div className="trust-avatars"><span>V</span><span>U</span><span>G</span><span>D</span></div></div><div className="clarity-note"><span className="clarity-star">✳</span><span className="tiny-rule"/><p>Make it clear.<br/>Make it matter.</p></div>
     </section>
+    <section className="about-section" id="about" aria-labelledby="about-title">
+      <div className="about-topline"><span>01 / A LITTLE ABOUT ME</span><span>DESIGNER · DELHI, INDIA</span></div>
+      <div className="about-layout">
+        <div className="about-intro">
+          <p className="about-kicker">BEHIND THE PIXELS</p>
+          <h2 id="about-title">Curiosity first.<br/><em>Design with purpose.</em></h2>
+        </div>
+        <div className="about-description">
+          <p className="about-lead">Hey, I’m Rizwan — a multidisciplinary designer who turns ideas into clear, thoughtful visual experiences.</p>
+          <p>My work lives at the intersection of graphic design, branding, and UI/UX. I enjoy finding the story behind a brief, shaping it into a strong visual direction, and making sure every detail has a reason to be there.</p>
+          <p>From brand identities and campaign creatives to intuitive digital products, I care about work that looks considered, feels human, and solves a real problem.</p>
+          <a className="about-cta" href="#experience">A little more about my journey <ArrowRight size={15}/></a>
+        </div>
+      </div>
+      <div className="about-principles">
+        <article><span>01</span><h3>Think clearly</h3><p>Understand the problem before jumping into the pixels.</p></article>
+        <article><span>02</span><h3>Make it meaningful</h3><p>Build visual stories that connect people with ideas.</p></article>
+        <article><span>03</span><h3>Care about details</h3><p>Balance craft, clarity, and function in every decision.</p></article>
+      </div>
+    </section>
   </div>
   {contactOpen && <div className="contact-modal-backdrop" onClick={() => setContactOpen(false)}>
     <section className="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" onClick={(event) => event.stopPropagation()}>
