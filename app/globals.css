@@ -147,3 +147,49 @@
 @media(max-width:560px){
   .portfolio-hero .panel-print{right:-8%;top:315px;transform:scale(.68) rotate(7deg);transform-origin:right top}
 }
+
+
+/* Full-width hero-only layout: remove the outer frame, page gutters, and contrasting backdrop */
+html,body{min-height:100%;background:#fbfaf7}
+body{background:#fbfaf7}
+.site-shell{width:100%;min-height:100vh;padding:0;background:#fbfaf7}
+.page-frame,.portfolio-frame{
+  width:100%;
+  max-width:none;
+  min-height:100vh;
+  margin:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:#fbfaf7;
+  overflow:hidden;
+}
+.topbar{width:100%;padding-left:6%;padding-right:6%}
+.portfolio-hero{
+  width:100%;
+  min-height:calc(100vh - 90px);
+  background:#fbfaf7;
+  overflow:hidden;
+}
+.hero-nav-label{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+  white-space:nowrap;
+  color:#8b8882;
+  font-size:9px;
+  letter-spacing:1.8px;
+  background:transparent;
+  border:0;
+  padding:10px;
+}
+@media(max-width:850px){
+  .page-frame,.portfolio-frame{min-height:100vh}
+  .portfolio-hero{min-height:calc(100vh - 76px)}
+}
+@media(max-width:560px){
+  .topbar{padding-left:18px;padding-right:18px}
+  .hero-nav-label{top:70px}
+  .portfolio-hero{min-height:900px}
+}
