@@ -1028,3 +1028,23 @@ body{background:#f2f2f0;color:#171717}
   .reference-site{width:100%;border-radius:0}
   .reference-nav{padding-left:18px;padding-right:18px}
 }
+
+
+/* Center the complete portfolio inside a 1440px max-width canvas */
+.site-shell{
+  width:100%;
+  max-width:1440px;
+  margin-inline:auto;
+  padding:0!important;
+  overflow:clip;
+}
+.reference-site{
+  width:100%;
+  max-width:1440px;
+  margin-inline:auto;
+  border-radius:0;
+  overflow:clip;
+}
+@media(min-width:1441px){
+  body{background:#f2f2f0}
+}
