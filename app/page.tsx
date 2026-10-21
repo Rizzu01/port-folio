@@ -73,18 +73,14 @@ export default function Home() {
         <h3>Message submitted!</h3>
         <p>Thanks for reaching out. Your message has been sent successfully, and I’ll get back to you soon.</p>
         <button className="button button-dark contact-submit" type="button" onClick={() => { setContactOpen(false); setSubmitStatus("idle"); }}>Done <ArrowRight size={16}/></button>
-      </div> : submitStatus === "loading" ? <div className="contact-feedback contact-loading" role="status" aria-live="polite">
-        <span className="contact-spinner" aria-hidden="true"></span>
-        <h3>Sending your message</h3>
-        <p>Please wait a moment…</p>
-      </div> :       <form className="contact-form" onSubmit={submitContact}>
+      </div> : <form className="contact-form" onSubmit={submitContact}>
         <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden="true" className="contact-honeypot" />
         {submitError && <p className="contact-error" role="alert">{submitError}</p>}
         <label>Name<input name="name" required autoComplete="name" value={form.name} onChange={(event) => setForm({...form, name: event.target.value})} placeholder="Your full name"/></label>
         <label>Email<input name="email" required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form, email: event.target.value})} placeholder="you@example.com"/></label>
         <label>Number<input name="phone" required type="tel" autoComplete="tel" value={form.phone} onChange={(event) => setForm({...form, phone: event.target.value})} placeholder="+91 98765 43210"/></label>
         <label>Purpose of contact<select name="purpose" required value={form.purpose} onChange={(event) => setForm({...form, purpose: event.target.value})}><option value="" disabled>Select a purpose</option><option>UI/UX Design</option><option>Visual Design</option><option>Print Ready Design</option><option>Branding</option><option>Website / Development</option><option>Freelance Collaboration</option><option>Other</option></select></label>
-        <button className="button button-dark contact-submit" type="submit">{submitStatus === "loading" ? <>Submitting... <span className="button-spinner" aria-hidden="true"/></> : submitStatus === "success" ? <>Submitted! <span className="button-check" aria-hidden="true">✓</span></> : <>Send Message <ArrowRight size={16}/></>}</button>
+        <button className="button button-dark contact-submit" type="submit" disabled={submitStatus === "loading"}>{submitStatus === "loading" ? <>Submitting... <span className="button-spinner" aria-hidden="true"/></> : submitStatus === "success" ? <>Submitted! <span className="button-check" aria-hidden="true">✓</span></> : <>Send Message <ArrowRight size={16}/></>}</button>
       </form>}
     </section>
   </div>}
