@@ -370,3 +370,10 @@ body.custom-cursor-enabled [role=button]{cursor:none!important}
   body.custom-cursor-enabled [role=button]{cursor:auto!important}
 }
 
+
+
+/* Keep interactive targets stationary so the custom cursor never flickers on hover */
+body.custom-cursor-enabled .button:hover,
+body.custom-cursor-enabled .app-link:hover{
+  transform:none;
+}
