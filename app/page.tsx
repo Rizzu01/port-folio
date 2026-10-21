@@ -17,7 +17,7 @@ export default function Home() {
     setSubmitError("");
 
     const accessKey = WEB3FORMS_ACCESS_KEY.trim();
-    if (!accessKey || accessKey === "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11") {
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
       setSubmitError("Email submission is not configured yet. Add the Web3Forms Access Key generated for creativerizz.in@gmail.com in app/page.tsx.");
       return;
     }
