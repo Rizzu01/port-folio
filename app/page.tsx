@@ -183,66 +183,50 @@ export default function Home() {
 
   return <main ref={pageRef} className="site-shell"><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>
     <header className={`topbar${mobileNavOpen ? " mobile-nav-open" : ""}`}><a className="brand" href="#home" onClick={() => setMobileNavOpen(false)}>Rizwan<span>°</span></a><nav className="nav-pill desktop-nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#visual-design">Visual Design</a><a href="#ui-ux">UI/UX</a><a href="#branding">Branding</a></nav><a className="app-link desktop-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={14}/></a><button className="mobile-menu-toggle" type="button" aria-label={mobileNavOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}><span>{mobileNavOpen ? <X size={20}/> : <Menu size={20}/>}</span></button><div className="mobile-nav-drawer" aria-hidden={!mobileNavOpen}><nav aria-label="Mobile navigation"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home <ArrowUpRight size={15}/></a><a href="#visual-design" onClick={() => setMobileNavOpen(false)}>Visual Design <ArrowUpRight size={15}/></a><a href="#ui-ux" onClick={() => setMobileNavOpen(false)}>UI/UX <ArrowUpRight size={15}/></a><a href="#branding" onClick={() => setMobileNavOpen(false)}>Branding <ArrowUpRight size={15}/></a></nav><a className="mobile-drawer-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer" onClick={() => setMobileNavOpen(false)}>Let’s talk <ArrowUpRight size={16}/></a></div></header>
-  <div className="page-frame portfolio-frame">
-    <section className="hero portfolio-hero" id="home">
-      <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}><Mail size={15}/> Get in touch</button></div></div>
-      <div className="orbit-stamp"><span className="stamp-top">DESIGN WITH INTENT</span><span className="stamp-star">✳</span><span className="stamp-bottom">STAY CURIOUS</span></div>
-      <div className="float-card thought-card"><span className="mini-icon"><Palette size={17}/></span><strong>Visual stories<br/>that connect.</strong><p>Branding, graphics<br/>and digital craft.</p></div>
-      <div className="float-card sync-card"><div className="avatar-stack"><span>U</span><span>I</span><span>✳</span></div><strong>Thoughtful by design.</strong><p>Purposeful details.<br/>Clear experiences.</p></div>
-      <div className="portrait-stage"><div className="portrait-halo"/><div className="portrait-mask"><img src="/portrait.png" alt="Rizwan Khan portrait"/></div><div id="visual-design" className="floating-panel panel-focus"><span className="panel-icon green"><CheckIcon/></span><div><strong>Visual Design</strong><small>Shape the story clearly.</small></div></div><div id="ui-ux" className="floating-panel panel-ideas"><span className="panel-icon purple"><PanelsTopLeft size={15}/></span><div><strong>UI / UX</strong><small>Make every interaction count.</small></div></div><div id="branding" className="floating-panel panel-plan"><span className="panel-icon orange"><Sparkles size={15}/></span><div><strong>Branding</strong><small>Build a memorable identity.</small></div></div><div className="floating-panel panel-print"><span className="panel-icon orange"><Printer size={15}/></span><div><strong>Print Ready Design</strong><small>Production-ready artwork.</small></div></div></div>
-      <div className="trust-note"><span className="tiny-rule"/><p>Design meets function.<br/>Details make the difference.</p><div className="trust-avatars"><span>V</span><span>U</span><span>G</span><span>D</span></div></div><div className="clarity-note"><span className="clarity-star">✳</span><span className="tiny-rule"/><p>Make it clear.<br/>Make it matter.</p></div>
+  <div className="reference-site">
+    <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
+      <a className="reference-availability" href="#contact"><span/> Available for new projects</a>
+      <nav className="reference-desktop-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+      <a className="reference-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={13}/></a>
+      <button className="reference-menu-toggle" type="button" aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}>{mobileNavOpen ? <X size={18}/> : <Menu size={18}/>}</button>
+      <div className="reference-mobile-menu"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home</a><a href="#work" onClick={() => setMobileNavOpen(false)}>Work</a><a href="#services" onClick={() => setMobileNavOpen(false)}>Services</a><a href="#experience" onClick={() => setMobileNavOpen(false)}>Experience</a><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a><a href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer" onClick={() => setMobileNavOpen(false)}>Let’s talk ↗</a></div>
+    </header>
+    <section className="reference-hero" id="home">
+      <div className="reference-name" aria-label="Rizwan Khan"><span>RIZWAN</span><strong>KHAN</strong></div>
+      <div className="reference-hero-info"><div className="reference-role"><p>Graphic Designer</p><p>&amp; UI/UX Designer</p><span>I build visual identities and digital experiences that make brands feel clear, considered, and memorable.</span><button className="reference-pill-button" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}>Let’s collaborate <ArrowUpRight size={13}/></button></div>
+        <div className="reference-portrait"><img src="/portrait.png" alt="Portrait of Rizwan Khan"/></div>
+        <div className="reference-socials"><a href="https://www.linkedin.com/in/rizwan-khan-44771826b/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={12}/></a><a href="https://www.instagram.com/suncryptoin/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={12}/></a><a href="https://www.behance.net/" target="_blank" rel="noopener noreferrer">Behance <ArrowUpRight size={12}/></a><a href="mailto:creativerizz.in@gmail.com">Email <ArrowUpRight size={12}/></a></div>
+      </div>
+      <div className="reference-hero-bottom"><span>BASED IN INDIA · WORKING WORLDWIDE</span><a href="#work">SCROLL TO EXPLORE ↓</a></div>
     </section>
-    <section className="about-section" id="about" aria-labelledby="about-title">
-      <div className="about-topline"><span>01 / A LITTLE ABOUT ME</span><span>DESIGNER · DELHI, INDIA</span></div>
-      <div className="about-layout">
-        <div className="about-portrait-wrap">
-          <div className="about-photo-accent"/>
-          <div className="about-portrait-frame"><img src="/About.png" alt="Rizwan Khan — portrait" loading="lazy"/></div>
-          <div className="about-photo-caption"><span/> A little about me</div>
-        </div>
-        <div className="about-content">
-          <div className="about-intro">
-            <p className="about-kicker">BEHIND THE PIXELS</p>
-            <h2 id="about-title">Curiosity first.<br/><em>Design with purpose.</em></h2>
-          </div>
-          <div className="about-description">
-          <p className="about-lead">Hey, I’m Rizwan — a multidisciplinary designer who turns ideas into clear, thoughtful visual experiences.</p>
-          <p>My work lives at the intersection of graphic design, branding, and UI/UX. I enjoy finding the story behind a brief, shaping it into a strong visual direction, and making sure every detail has a reason to be there.</p>
-          <p>From brand identities and campaign creatives to intuitive digital products, I care about work that looks considered, feels human, and solves a real problem.</p>
-          <a className="about-cta" href="#experience">A little more about my journey <ArrowRight size={15}/></a>
-          </div>
-        </div>
+    <section className="reference-work" id="work">
+      <div className="reference-section-heading"><span className="reference-ghost-title">PORTFOLIO</span><p>/ SELECTED WORK</p><span className="reference-section-note">A selection of visual and digital projects</span></div>
+      <div className="reference-project-grid">
+        <a className="reference-project project-crypto" href="#contact"><div className="project-art project-art-crypto"><span className="project-art-label">SUNCRYPTO / CAMPAIGNS</span><div className="project-coin">₿</div><strong>MAKE<br/>YOUR MOVE.</strong><span className="project-art-footer">DESIGN THAT MOVES MARKETS</span></div><div className="reference-project-caption"><div><h3>Crypto Campaigns</h3><p>Visual design · Digital marketing</p></div><span>↗</span></div></a>
+        <a className="reference-project project-product" href="#contact"><div className="project-art project-art-product"><span className="project-art-label">DIGITAL PRODUCT / UI UX</span><div className="product-window"><div className="product-window-bar"><i/><i/><i/></div><div className="product-window-content"><span>Good design<br/>feels effortless.</span><div className="product-window-shape"/></div></div><span className="project-art-footer">INTERFACES WITH INTENT</span></div><div className="reference-project-caption"><div><h3>Digital Experiences</h3><p>UI/UX design · Web design</p></div><span>↗</span></div></a>
+        <a className="reference-project project-brand" href="#contact"><div className="project-art project-art-brand"><span className="project-art-label">IDENTITY / BRANDING</span><div className="brand-monogram">K<span>.</span></div><strong>BUILT TO<br/>BE REMEMBERED.</strong><span className="project-art-footer">IDENTITY &amp; ART DIRECTION</span></div><div className="reference-project-caption"><div><h3>Brand Identity</h3><p>Branding · Art direction</p></div><span>↗</span></div></a>
+        <a className="reference-project project-print" href="#contact"><div className="project-art project-art-print"><span className="project-art-label">PRINT / CAMPAIGNS</span><div className="print-card"><span>IDEAS<br/>INTO<br/><em>IMPACT.</em></span><i>DESIGN STUDIO — 2026</i></div><span className="project-art-footer">FROM SCREEN TO PRINT</span></div><div className="reference-project-caption"><div><h3>Print &amp; Marketing</h3><p>Campaigns · Print-ready design</p></div><span>↗</span></div></a>
       </div>
-      <div className="about-principles">
-        <article><span>01</span><h3>Think clearly</h3><p>Understand the problem before jumping into the pixels.</p></article>
-        <article><span>02</span><h3>Make it meaningful</h3><p>Build visual stories that connect people with ideas.</p></article>
-        <article><span>03</span><h3>Care about details</h3><p>Balance craft, clarity, and function in every decision.</p></article>
-      </div>
+      <a className="reference-all-work" href="https://www.behance.net/" target="_blank" rel="noopener noreferrer">Explore more work <ArrowUpRight size={14}/></a>
     </section>
-    <section className="experience-section" id="experience" aria-labelledby="experience-title">
-      <div className="experience-topline"><span>02 / EXPERIENCE</span><span>PROFESSIONAL JOURNEY</span></div>
-      <div className="experience-heading">
-        <h2 id="experience-title">Where I’ve<br/><em>made an impact.</em></h2>
-        <p className="experience-summary">A few years of turning ideas into thoughtful visuals, consistent brand systems, and useful digital experiences.</p>
-      </div>
-      <div className="experience-list">
-        <article className="experience-row">
-          <span className="experience-period">NOV 2024 — NOW</span>
-          <div className="experience-role"><p className="experience-company">SUNCRYPTO</p><h3>Graphic Designer &amp; UI/UX Designer</h3><p>Social creatives, campaign banners, emailers, brand-led marketing assets, and digital product experiences.</p></div>
-          <span className="experience-arrow" aria-hidden="true">↗</span>
-        </article>
-        <article className="experience-row">
-          <span className="experience-period">2023 — 2024</span>
-          <div className="experience-role"><p className="experience-company">DOOMSHELL SOFTWARE PVT. LTD.</p><h3>Graphic Designer &amp; UI/UX Designer</h3><p>Responsive web interfaces, functional UI layouts, and usability-focused visual refinements.</p></div>
-          <span className="experience-arrow" aria-hidden="true">↗</span>
-        </article>
-        <article className="experience-row">
-          <span className="experience-period">2022 — 2023</span>
-          <div className="experience-role"><p className="experience-company">TDI ONLINE SERVICES</p><h3>Graphic Designer</h3><p>Digital marketing graphics, brand visuals, and layouts built around typography and color.</p></div>
-          <span className="experience-arrow" aria-hidden="true">↗</span>
-        </article>
+    <section className="reference-services" id="services">
+      <div className="reference-section-heading"><span className="reference-ghost-title">SERVICES</span><p>/ WHAT I DO</p></div>
+      <div className="reference-service-list">
+        <a href="#contact"><span className="reference-service-index">01</span><span className="reference-service-name">Visual Design</span><span className="reference-service-detail">Campaigns, social media, marketing assets</span><ArrowUpRight size={17}/></a>
+        <a href="#contact"><span className="reference-service-index">02</span><span className="reference-service-name">UI/UX Design</span><span className="reference-service-detail">Research-led, intuitive digital products</span><ArrowUpRight size={17}/></a>
+        <a href="#contact"><span className="reference-service-index">03</span><span className="reference-service-name">Web Design &amp; Development</span><span className="reference-service-detail">Responsive websites and landing pages</span><ArrowUpRight size={17}/></a>
+        <a href="#contact"><span className="reference-service-index">04</span><span className="reference-service-name">Branding</span><span className="reference-service-detail">Identity systems and visual direction</span><ArrowUpRight size={17}/></a>
       </div>
     </section>
+    <section className="reference-experience" id="experience">
+      <div className="reference-experience-top"><div><span className="reference-dark-kicker">/ EXPERIENCE</span><h2>Good work comes<br/>from <em>good thinking.</em></h2></div><span className="reference-experience-years">4+ years of experience</span></div>
+      <div className="reference-experience-list">
+        <article><div><h3>SunCrypto</h3><p>Graphic Designer &amp; UI/UX Designer</p></div><span>Nov 2024 — Present</span><div className="reference-company-note">Campaign design, brand communication, email marketing and digital experiences.</div></article>
+        <article><div><h3>Doomshell Software Pvt. Ltd.</h3><p>Graphic Designer &amp; UI/UX Designer</p></div><span>2023 — 2024</span><div className="reference-company-note">Responsive interfaces, functional layouts and usability improvements.</div></article>
+        <article><div><h3>TDI Online Services</h3><p>Graphic Designer</p></div><span>2022 — 2023</span><div className="reference-company-note">Digital marketing creatives, branding and visual communication.</div></article>
+      </div>
+    </section>
+    <section className="reference-contact" id="contact"><span className="reference-contact-kicker"><span/> Available for new projects</span><h2>Have a project<br/>in mind<span>?</span></h2><p>Let’s create something thoughtful, useful, and memorable together.</p><button className="reference-pill-button" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}>Start a conversation <ArrowUpRight size={13}/></button><div className="reference-contact-footer"><span>RIZWAN KHAN · DESIGNER</span><a href="mailto:creativerizz.in@gmail.com">CREATIVERIZZ.IN@GMAIL.COM</a><span>© 2026</span></div></section>
   </div>
   {contactOpen && <div className="contact-modal-backdrop" onClick={() => setContactOpen(false)}>
     <section className="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" onClick={(event) => event.stopPropagation()}>
