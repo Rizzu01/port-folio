@@ -987,7 +987,7 @@ body{background:#f2f2f0;color:#171717}
 .reference-site>.portfolio-hero .hero-actions{display:flex;justify-content:center;gap:10px}
 .reference-site>.portfolio-hero .thought-card{left:8.5%;top:170px;width:155px}
 .reference-site>.portfolio-hero .sync-card{right:8.2%;top:248px;width:147px}
-.reference-site>.portfolio-hero .portrait-stage{width:min(640px,64vw);height:390px}
+.reference-site>.portfolio-hero .portrait-stage{width:min(760px,72vw);height:460px}
 .reference-site>.portfolio-hero .trust-note{left:6.2%;bottom:105px}
 .reference-site>.portfolio-hero .clarity-note{right:6.2%;bottom:100px}
 @media(max-width:760px){
@@ -1004,7 +1004,7 @@ body{background:#f2f2f0;color:#171717}
  .reference-site>.portfolio-hero .sync-card{right:4%;top:320px;width:120px;padding:13px;border-radius:17px}
  .reference-site>.portfolio-hero .float-card strong{font-size:11px}
  .reference-site>.portfolio-hero .float-card p{font-size:9px}
- .reference-site>.portfolio-hero .portrait-stage{width:100%;max-width:440px;height:320px}
+ .reference-site>.portfolio-hero .portrait-stage{width:108%;max-width:500px;height:350px}
  .reference-site>.portfolio-hero .panel-focus{left:4%;top:55px}
  .reference-site>.portfolio-hero .panel-ideas{left:5%;top:160px}
  .reference-site>.portfolio-hero .panel-plan{right:2%;top:120px}
