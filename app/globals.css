@@ -972,3 +972,48 @@ body{background:#f2f2f0;color:#171717}
  .reference-contact-footer{margin-top:65px;flex-wrap:wrap;font-size:7px}
 }
 @media(prefers-reduced-motion:reduce){.reference-project,.reference-service-list>a,.reference-pill-button{transition:none!important}}
+
+
+/* Restore original portfolio hero while keeping the reference-inspired sections below */
+.reference-site>.portfolio-hero{
+  min-height:680px;
+  padding:0;
+  background:transparent;
+  text-align:center;
+  overflow:hidden;
+}
+.reference-site>.portfolio-hero .hero-copy{padding-top:7px}
+.reference-site>.portfolio-hero .hero-subtitle{font-size:13px;line-height:1.35;color:#8b8885}
+.reference-site>.portfolio-hero .hero-actions{display:flex;justify-content:center;gap:10px}
+.reference-site>.portfolio-hero .thought-card{left:8.5%;top:170px;width:155px}
+.reference-site>.portfolio-hero .sync-card{right:8.2%;top:248px;width:147px}
+.reference-site>.portfolio-hero .portrait-stage{width:min(640px,64vw);height:390px}
+.reference-site>.portfolio-hero .trust-note{left:6.2%;bottom:105px}
+.reference-site>.portfolio-hero .clarity-note{right:6.2%;bottom:100px}
+@media(max-width:760px){
+ .reference-site>.portfolio-hero{min-height:620px;padding:0 0 10px}
+ .reference-site>.portfolio-hero .hero-copy{padding:8px 15px 0}
+ .reference-site>.portfolio-hero .portfolio-eyebrow{font-size:7px;letter-spacing:1px}
+ .reference-site>.portfolio-hero h1{font-size:clamp(43px,10vw,62px);letter-spacing:-2.5px}
+ .reference-site>.portfolio-hero .hero-subtitle{font-size:10px;line-height:1.5;padding:0 8px}
+ .reference-site>.portfolio-hero .desktop-break{display:none}
+ .reference-site>.portfolio-hero .hero-actions{gap:7px}
+ .reference-site>.portfolio-hero .button{padding:10px 13px;font-size:10px}
+ .reference-site>.portfolio-hero .orbit-stamp{right:5%;top:190px;transform:scale(.75)}
+ .reference-site>.portfolio-hero .thought-card{left:4%;top:245px;width:125px;padding:13px;border-radius:17px}
+ .reference-site>.portfolio-hero .sync-card{right:4%;top:320px;width:120px;padding:13px;border-radius:17px}
+ .reference-site>.portfolio-hero .float-card strong{font-size:11px}
+ .reference-site>.portfolio-hero .float-card p{font-size:9px}
+ .reference-site>.portfolio-hero .portrait-stage{width:100%;max-width:440px;height:320px}
+ .reference-site>.portfolio-hero .panel-focus{left:4%;top:55px}
+ .reference-site>.portfolio-hero .panel-ideas{left:5%;top:160px}
+ .reference-site>.portfolio-hero .panel-plan{right:2%;top:120px}
+ .reference-site>.portfolio-hero .panel-print{right:2%;top:215px}
+ .reference-site>.portfolio-hero .floating-panel{min-width:0;padding:8px 9px;gap:6px;border-radius:10px}
+ .reference-site>.portfolio-hero .floating-panel strong{font-size:9px}
+ .reference-site>.portfolio-hero .floating-panel small{font-size:7px}
+ .reference-site>.portfolio-hero .panel-icon{width:20px;height:20px}
+ .reference-site>.portfolio-hero .trust-note{left:5%;bottom:65px}
+ .reference-site>.portfolio-hero .clarity-note{right:5%;bottom:58px}
+ .reference-site>.portfolio-hero .trust-note p,.reference-site>.portfolio-hero .clarity-note p{font-size:8px}
+}
