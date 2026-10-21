@@ -351,9 +351,18 @@ body{background:#fbfaf7}
 body.custom-cursor-enabled,body.custom-cursor-enabled a,body.custom-cursor-enabled button,
 body.custom-cursor-enabled input,body.custom-cursor-enabled select,body.custom-cursor-enabled textarea,
 body.custom-cursor-enabled [role=button]{cursor:none!important}
-@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){
+@media(hover:none) and (any-pointer:coarse),(prefers-reduced-motion:reduce){
   .custom-cursor{display:none!important}
   body.custom-cursor-enabled,body.custom-cursor-enabled a,body.custom-cursor-enabled button,
   body.custom-cursor-enabled input,body.custom-cursor-enabled select,body.custom-cursor-enabled textarea,
   body.custom-cursor-enabled [role=button]{cursor:auto!important}
+}
+
+
+/* Stable hover geometry for the custom cursor: animate visuals, not target position */
+body.custom-cursor-enabled .button:hover,
+body.custom-cursor-enabled .button:active,
+body.custom-cursor-enabled .app-link:hover,
+body.custom-cursor-enabled .app-link:active{
+  transform:none !important;
 }
