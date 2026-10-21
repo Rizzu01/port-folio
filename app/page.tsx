@@ -95,15 +95,22 @@ export default function Home() {
     <section className="about-section" id="about" aria-labelledby="about-title">
       <div className="about-topline"><span>01 / A LITTLE ABOUT ME</span><span>DESIGNER · DELHI, INDIA</span></div>
       <div className="about-layout">
-        <div className="about-intro">
-          <p className="about-kicker">BEHIND THE PIXELS</p>
-          <h2 id="about-title">Curiosity first.<br/><em>Design with purpose.</em></h2>
+        <div className="about-portrait-wrap">
+          <div className="about-photo-accent"/>
+          <div className="about-portrait-frame"><img src="/About.png" alt="Rizwan Khan — portrait" loading="lazy"/></div>
+          <div className="about-photo-caption"><span/> A little about me</div>
         </div>
-        <div className="about-description">
+        <div className="about-content">
+          <div className="about-intro">
+            <p className="about-kicker">BEHIND THE PIXELS</p>
+            <h2 id="about-title">Curiosity first.<br/><em>Design with purpose.</em></h2>
+          </div>
+          <div className="about-description">
           <p className="about-lead">Hey, I’m Rizwan — a multidisciplinary designer who turns ideas into clear, thoughtful visual experiences.</p>
           <p>My work lives at the intersection of graphic design, branding, and UI/UX. I enjoy finding the story behind a brief, shaping it into a strong visual direction, and making sure every detail has a reason to be there.</p>
           <p>From brand identities and campaign creatives to intuitive digital products, I care about work that looks considered, feels human, and solves a real problem.</p>
           <a className="about-cta" href="#experience">A little more about my journey <ArrowRight size={15}/></a>
+          </div>
         </div>
       </div>
       <div className="about-principles">
