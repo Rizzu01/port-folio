@@ -1,11 +1,28 @@
 "use client";
-import { ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkles } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { ArrowRight, ArrowUpRight, Mail, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
 
 export default function Home() {
+  const [contactOpen, setContactOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", purpose: "" });
+
+  function submitContact(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const message = [
+      "Hi Rizwan, I'd like to get in touch.",
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      `Phone: ${form.phone}`,
+      `Purpose: ${form.purpose}`,
+    ].join("\\n");
+    window.open(`https://wa.me/919024043673?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    setContactOpen(false);
+  }
+
   return <main className="site-shell"><div className="page-frame portfolio-frame">
     <header className="topbar"><a className="brand" href="#home">Rizwan<span>°</span></a><nav className="nav-pill" aria-label="Main navigation"><a href="#home">Home</a><a href="#visual-design">Visual Design</a><a href="#ui-ux">UI/UX</a><a href="#branding">Branding</a></nav><a className="app-link" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={14}/></a></header>
     <section className="hero portfolio-hero" id="home">
-      <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><a className="button button-light" href="mailto:rizwankhan36200@gmail.com"><Mail size={15}/> Get in touch</a></div></div>
+      <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning & feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#experience">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => setContactOpen(true)}><Mail size={15}/> Get in touch</button></div></div>
       <div className="orbit-stamp"><span className="stamp-top">DESIGN WITH INTENT</span><span className="stamp-star">✳</span><span className="stamp-bottom">STAY CURIOUS</span></div>
       <div className="float-card thought-card"><span className="mini-icon"><Palette size={17}/></span><strong>Visual stories<br/>that connect.</strong><p>Branding, graphics<br/>and digital craft.</p></div>
       <div className="float-card sync-card"><div className="avatar-stack"><span>U</span><span>I</span><span>✳</span></div><strong>Thoughtful by design.</strong><p>Purposeful details.<br/>Clear experiences.</p></div>
