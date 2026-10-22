@@ -125,6 +125,24 @@ export function setupPortfolioAnimations(root: HTMLElement) {
       });
 
       // Selected work: headings, cards, and small image parallax inside the existing frames.
+      // Editorial image reveal: reveal the existing image inside its current frame.
+      const projectFrames = Array.from($(".reference-project-image"));
+      projectFrames.forEach((frame) => {
+        const image = frame.querySelector("img");
+        gsap.fromTo(frame, { clipPath: "inset(0 0 100% 0)" }, {
+          clipPath: "inset(0 0 0% 0)", duration: 0.95, ease: "power3.inOut",
+          scrollTrigger: { trigger: frame, ...once },
+          onComplete: () => gsap.set(frame, { clearProps: "clipPath" })
+        });
+        if (image) {
+          gsap.fromTo(image, { scale: 1.08 }, {
+            scale: 1, duration: 1.2, ease: "power3.out",
+            scrollTrigger: { trigger: frame, ...once },
+            onComplete: () => gsap.set(image, { clearProps: "transform" })
+          });
+        }
+      });
+
       gsap.fromTo($(".reference-work .reference-section-heading > *"), { y: 16, opacity: 0 }, {
         y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: "power3.out",
         clearProps: "transform,opacity", scrollTrigger: { trigger: $(".reference-work")[0], ...once }
@@ -196,6 +214,44 @@ export function setupPortfolioAnimations(root: HTMLElement) {
         target.addEventListener("mouseleave", () => gsap.to(target, { y: 0, duration: 0.25, ease: "power2.out", overwrite: true }));
       });
 
+      // Micro-interactions: restrained pointer tilt on project cards and a small magnetic pull on CTAs.
+      const projectCards = Array.from($(".reference-project"));
+      const pointerCleanups: Array<() => void> = [];
+      mm.add("(hover: hover) and (pointer: fine)", () => {
+        projectCards.forEach((card) => {
+          const onMove = (event: PointerEvent) => {
+            const rect = card.getBoundingClientRect();
+            const px = (event.clientX - rect.left) / rect.width - 0.5;
+            const py = (event.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(card, { rotateX: -py * 1.8, rotateY: px * 2.2, transformPerspective: 900, duration: 0.35, ease: "power2.out", overwrite: true });
+          };
+          const onLeave = () => gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.45, ease: "power3.out", overwrite: true });
+          card.addEventListener("pointermove", onMove);
+          card.addEventListener("pointerleave", onLeave);
+          pointerCleanups.push(() => {
+            card.removeEventListener("pointermove", onMove);
+            card.removeEventListener("pointerleave", onLeave);
+          });
+        });
+
+        const magneticTargets = Array.from($(".hero-actions .button, .reference-talk, .reference-all-work, .reference-pill-button"));
+        magneticTargets.forEach((target) => {
+          const onMove = (event: PointerEvent) => {
+            const rect = target.getBoundingClientRect();
+            const dx = event.clientX - (rect.left + rect.width / 2);
+            const dy = event.clientY - (rect.top + rect.height / 2);
+            gsap.to(target, { x: dx * 0.08, y: dy * 0.10, duration: 0.28, ease: "power2.out", overwrite: true });
+          };
+          const onLeave = () => gsap.to(target, { x: 0, y: 0, duration: 0.45, ease: "elastic.out(1, 0.45)", overwrite: true });
+          target.addEventListener("pointermove", onMove);
+          target.addEventListener("pointerleave", onLeave);
+          pointerCleanups.push(() => {
+            target.removeEventListener("pointermove", onMove);
+            target.removeEventListener("pointerleave", onLeave);
+          });
+        });
+      });
+
       // Small top-level reusable animation API: opt in with data-anim attributes.
       const generic: Record<string, { from: gsap.TweenVars; to: gsap.TweenVars }> = {
         "fade-up": { from: { y: 20, opacity: 0 }, to: { y: 0, opacity: 1 } },
@@ -235,6 +291,7 @@ export function setupPortfolioAnimations(root: HTMLElement) {
 
   ScrollTrigger.refresh();
   return () => {
+    pointerCleanups.forEach((cleanup) => cleanup());
     ctx.revert();
     mm.revert();
   };
