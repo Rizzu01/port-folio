@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
-import gsap from "gsap";
 import { setupPortfolioAnimations } from "./portfolio-animations";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
