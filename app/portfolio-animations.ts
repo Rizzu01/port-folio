@@ -13,8 +13,7 @@ const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
  */
 export function setupPortfolioAnimations(root: HTMLElement) {
   if (window.matchMedia(REDUCED_MOTION).matches) {
-    // Leave the page fully visible and in its original layout.
-    gsap.set(root.querySelectorAll("*"), { clearProps: "transform,opacity,clipPath" });
+    // Do not initialize any animation; the unanimated page remains visible.
     return () => {};
   }
 
