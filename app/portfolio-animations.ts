@@ -30,14 +30,18 @@ export function setupPortfolioAnimations(root: HTMLElement) {
         y: 0, opacity: 1, duration: 0.75, ease: "power3.out", clearProps: "transform,opacity"
       });
 
+      let navHidden = false;
       ScrollTrigger.create({
         start: 90,
         end: "max",
         onUpdate: (self) => {
-          if (window.scrollY < 90 || self.direction < 0) {
-            gsap.to(nav, { y: 0, duration: 0.28, ease: "power2.out", overwrite: true });
-          } else if (self.direction > 0 && window.scrollY > 160 && !nav.classList.contains("reference-nav-open")) {
+          const shouldHide = window.scrollY > 160 && self.direction > 0 && !nav.classList.contains("reference-nav-open");
+          if (!shouldHide) {
+            if (navHidden) gsap.to(nav, { y: 0, duration: 0.28, ease: "power2.out", overwrite: true });
+            navHidden = false;
+          } else if (!navHidden) {
             gsap.to(nav, { y: -nav.getBoundingClientRect().height - 18, duration: 0.25, ease: "power2.out", overwrite: true });
+            navHidden = true;
           }
         }
       });
