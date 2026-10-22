@@ -244,6 +244,7 @@ export function setupPortfolioAnimations(root: HTMLElement) {
       root.querySelectorAll("img").forEach((img) => {
         if (!img.complete) img.addEventListener("load", refresh, { once: true });
       });
+    });
   }, root);
 
   ScrollTrigger.refresh();
