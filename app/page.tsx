@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setupPortfolioAnimations } from "./portfolio-animations";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
 const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
@@ -49,91 +49,10 @@ export default function Home() {
   }, []);
   useEffect(() => {
     const root = pageRef.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    const motion = gsap.matchMedia();
-    const context = gsap.context(() => {
-      // A gentle, scroll-linked depth effect in the hero — not scroll-jacking.
-      gsap.to(".portrait-stage", {
-        yPercent: -9,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".portfolio-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.1,
-        },
-      });
-      gsap.to(".thought-card", {
-        y: -42,
-        rotate: -3,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".portfolio-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.4,
-        },
-      });
-      gsap.to(".sync-card", {
-        y: -24,
-        rotate: 3,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".portfolio-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.6,
-        },
-      });
-
-      gsap.fromTo(".about-topline",
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 0.85, ease: "power3.out",
-          scrollTrigger: { trigger: ".about-section", start: "top 82%", once: true } }
-      );
-      gsap.fromTo(".about-portrait-wrap",
-        { opacity: 0, y: 44, rotate: -2, scale: 0.97 },
-        { opacity: 1, y: 0, rotate: 0, scale: 1, duration: 1.05, ease: "power3.out",
-          scrollTrigger: { trigger: ".about-layout", start: "top 78%", once: true } }
-      );
-      gsap.fromTo(".about-intro",
-        { opacity: 0, y: 34 },
-        { opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-          scrollTrigger: { trigger: ".about-intro", start: "top 84%", once: true } }
-      );
-      gsap.fromTo(".about-description > *",
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 0.72, stagger: 0.12, ease: "power2.out",
-          scrollTrigger: { trigger: ".about-description", start: "top 84%", once: true } }
-      );
-      gsap.fromTo(".about-principles article",
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.14, ease: "power3.out",
-          scrollTrigger: { trigger: ".about-principles", start: "top 88%", once: true } }
-      );
-
-      // Keep the motion setup scoped to this page and responsive to viewport changes.
-      motion.add("(min-width: 861px)", () => {
-        gsap.to(".about-photo-accent", {
-          yPercent: -10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".about-portrait-wrap",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.2,
-          },
-        });
-      });
-    }, root);
-
-    return () => {
-      context.revert();
-      motion.revert();
-    };
+    if (!root) return;
+    return setupPortfolioAnimations(root);
   }, []);
+
   const [form, setForm] = useState({ name: "", email: "", phone: "", purpose: "" });
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success">("idle");
   const [submitError, setSubmitError] = useState("");
