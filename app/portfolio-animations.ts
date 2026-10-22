@@ -62,6 +62,7 @@ export function setupPortfolioAnimations(root: HTMLElement) {
           },
         });
       });
+    }
 
       // Hero: calm staged reveal. No text is split or rewritten in the DOM.
       gsap.fromTo($(".portfolio-eyebrow"), { y: 12, opacity: 0 }, {
