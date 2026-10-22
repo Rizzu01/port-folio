@@ -1187,3 +1187,36 @@ body{background:#fff!important}
   .reference-site>.portfolio-hero .float-card p{font-size:10px}
   .reference-site>.portfolio-hero .floating-panel small{font-size:9px}
 }
+
+
+/* Second readability pass: noticeably larger supporting text */
+.reference-site > .portfolio-hero .hero-subtitle{font-size:17px;line-height:1.7}
+.reference-section-heading>p{font-size:13px}
+.reference-section-note{font-size:14px}
+.reference-project-caption p{font-size:14px;line-height:1.6}
+.reference-service-detail{font-size:14px;line-height:1.6}
+.reference-experience-list p{font-size:14px;line-height:1.6}
+.reference-company-note{font-size:14px;line-height:1.7}
+.reference-contact>p{font-size:16px;line-height:1.7}
+.reference-about-copy>p{font-size:16px;line-height:1.8}
+.reference-about-values strong{font-size:13px}
+.reference-role>span{font-size:14px;line-height:1.7}
+.reference-site>.portfolio-hero .float-card p{font-size:13px;line-height:1.5}
+.reference-site>.portfolio-hero .floating-panel small{font-size:11px;line-height:1.4}
+.reference-site>.portfolio-hero .portfolio-eyebrow{font-size:11px}
+
+@media(max-width:760px){
+  .reference-site > .portfolio-hero .hero-subtitle{font-size:15px;line-height:1.65}
+  .reference-section-heading>p{font-size:12px}
+  .reference-section-note{font-size:12px}
+  .reference-project-caption p{font-size:13px;line-height:1.55}
+  .reference-service-detail{font-size:13px;line-height:1.55}
+  .reference-experience-list p,.reference-company-note{font-size:13px;line-height:1.65}
+  .reference-contact>p{font-size:14px;line-height:1.7}
+  .reference-about-copy>p{font-size:14px;line-height:1.8}
+  .reference-about-values strong{font-size:12px}
+  .reference-role>span{font-size:13px}
+  .reference-site>.portfolio-hero .float-card p{font-size:11px}
+  .reference-site>.portfolio-hero .floating-panel small{font-size:10px}
+  .reference-site>.portfolio-hero .portfolio-eyebrow{font-size:9px}
+}
