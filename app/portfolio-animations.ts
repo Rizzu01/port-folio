@@ -18,6 +18,7 @@ export function setupPortfolioAnimations(root: HTMLElement) {
   }
 
   const mm = gsap.matchMedia();
+  const pointerCleanups: Array<() => void> = [];
   const ctx = gsap.context(() => {
     const $ = (selector: string) => root.querySelectorAll<HTMLElement>(selector);
     const once = { start: "top 85%", toggleActions: "play none none none" };
@@ -216,7 +217,6 @@ export function setupPortfolioAnimations(root: HTMLElement) {
 
       // Micro-interactions: restrained pointer tilt on project cards and a small magnetic pull on CTAs.
       const projectCards = Array.from($(".reference-project"));
-      const pointerCleanups: Array<() => void> = [];
       mm.add("(hover: hover) and (pointer: fine)", () => {
         projectCards.forEach((card) => {
           const onMove = (event: PointerEvent) => {
