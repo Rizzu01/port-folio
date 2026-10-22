@@ -29,22 +29,8 @@ export function setupPortfolioAnimations(root: HTMLElement) {
         y: 0, opacity: 1, duration: 0.75, ease: "power3.out", clearProps: "transform,opacity"
       });
 
-      let navHidden = false;
-      ScrollTrigger.create({
-        start: 90,
-        end: "max",
-        onUpdate: (self) => {
-          const shouldHide = window.scrollY > 160 && self.direction > 0 && !nav.classList.contains("reference-nav-open");
-          if (!shouldHide) {
-            if (navHidden) gsap.to(nav, { y: 0, duration: 0.28, ease: "power2.out", overwrite: true });
-            navHidden = false;
-          } else if (!navHidden) {
-            gsap.to(nav, { y: -nav.getBoundingClientRect().height - 18, duration: 0.25, ease: "power2.out", overwrite: true });
-            navHidden = true;
-          }
-        }
-      });
-
+      // Keep the sticky navbar visible while scrolling in either direction.
+      // The previous direction-based ScrollTrigger hid it on downward scroll.
       const sections = ["home", "work", "services", "experience", "contact"]
         .map((id) => root.querySelector<HTMLElement>(`#${id}`))
         .filter((section): section is HTMLElement => Boolean(section));
