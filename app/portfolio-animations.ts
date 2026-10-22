@@ -30,23 +30,17 @@ export function setupPortfolioAnimations(root: HTMLElement) {
         y: 0, opacity: 1, duration: 0.75, ease: "power3.out", clearProps: "transform,opacity"
       });
 
-      let previousY = window.scrollY;
-      let scheduled = false;
-      const onScroll = () => {
-        if (scheduled) return;
-        scheduled = true;
-        window.requestAnimationFrame(() => {
-          const currentY = window.scrollY;
-          if (currentY < 70 || currentY < previousY - 2) {
+      ScrollTrigger.create({
+        start: 90,
+        end: "max",
+        onUpdate: (self) => {
+          if (window.scrollY < 90 || self.direction < 0) {
             gsap.to(nav, { y: 0, duration: 0.28, ease: "power2.out", overwrite: true });
-          } else if (currentY > previousY + 4 && currentY > 160 && !nav.classList.contains("reference-nav-open")) {
+          } else if (self.direction > 0 && window.scrollY > 160 && !nav.classList.contains("reference-nav-open")) {
             gsap.to(nav, { y: -nav.getBoundingClientRect().height - 18, duration: 0.25, ease: "power2.out", overwrite: true });
           }
-          previousY = currentY;
-          scheduled = false;
-        });
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
+        }
+      });
 
       const sections = ["home", "work", "services", "experience", "contact"]
         .map((id) => root.querySelector<HTMLElement>(`#${id}`))
@@ -249,11 +243,6 @@ export function setupPortfolioAnimations(root: HTMLElement) {
       });
     }, root);
 
-    return () => {
-      window.removeEventListener("scroll", () => {});
-      ctx.revert();
-      mm.revert();
-    };
   }, root);
 
   ScrollTrigger.refresh();
