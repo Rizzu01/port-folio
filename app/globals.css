@@ -1220,3 +1220,42 @@ body{background:#fff!important}
   .reference-site>.portfolio-hero .floating-panel small{font-size:10px}
   .reference-site>.portfolio-hero .portfolio-eyebrow{font-size:9px}
 }
+
+
+/* Compact social profile links in the main navigation */
+.reference-social-links{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex:0 0 auto;
+}
+.reference-social-links a{
+  display:grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  color:#555;
+  border:1px solid #e9e9e6;
+  border-radius:50%;
+  background:rgba(255,255,255,.7);
+  transition:color .25s ease,background .25s ease,border-color .25s ease,transform .25s ease;
+}
+.reference-social-links a:hover{
+  color:#111;
+  background:#f1f1ed;
+  border-color:#d4d4cf;
+  transform:translateY(-2px);
+}
+.reference-social-links svg{display:block;width:16px;height:16px;fill:currentColor}
+.reference-social-links a:last-child svg{fill:none}
+.reference-nav.is-scrolled .reference-social-links a{width:30px;height:30px}
+@media(max-width:760px){
+  .reference-social-links{gap:5px;margin-left:auto;margin-right:10px}
+  .reference-social-links a{width:29px;height:29px}
+  .reference-nav.is-scrolled .reference-social-links a{width:27px;height:27px}
+  .reference-social-links svg{width:14px;height:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .reference-social-links a{transition:none!important}
+}
