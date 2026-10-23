@@ -1306,3 +1306,36 @@ body{background:#fff!important}
 @media(prefers-reduced-motion:reduce){
   .reference-site > .portfolio-hero .hero-socials a{transition:none!important}
 }
+
+
+/* Move hero social links off the center line and into the right-side rail */
+.reference-site > .portfolio-hero .hero-socials{
+  position:absolute;
+  top:48%;
+  right:clamp(18px,3.2vw,48px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  margin:0;
+  transform:translateY(-50%);
+  z-index:8;
+}
+@media(max-width:760px){
+  .reference-site > .portfolio-hero .hero-socials{
+    top:auto;
+    right:16px;
+    bottom:118px;
+    transform:none;
+    gap:8px;
+  }
+  .reference-site > .portfolio-hero .hero-socials a{
+    width:30px;
+    height:30px;
+  }
+  .reference-site > .portfolio-hero .hero-socials svg{
+    width:13px;
+    height:13px;
+  }
+}
