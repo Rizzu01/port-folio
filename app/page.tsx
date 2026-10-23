@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X, Linkedin } from "lucide-react";
 import { setupPortfolioAnimations } from "./portfolio-animations";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
@@ -106,6 +106,11 @@ export default function Home() {
       <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src="/Logo.svg" alt="Rizwan Khan logo"/></a>
       <nav className="reference-desktop-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
       <a className="reference-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={13}/></a>
+      <div className="reference-social-links" aria-label="Social profiles">
+        <a href="https://in.pinterest.com/Creative___Rizz/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.64 19.31c-.02-.78 0-1.72.19-2.58l1.35-5.72s-.34-.68-.34-1.68c0-1.57.91-2.75 2.04-2.75.96 0 1.42.72 1.42 1.58 0 .96-.61 2.39-.92 3.72-.26 1.11.56 2.02 1.65 2.02 1.98 0 3.51-2.09 3.51-5.11 0-2.67-1.92-4.53-4.66-4.53-3.17 0-5.03 2.38-5.03 4.84 0 .96.37 1.99.83 2.55a.33.33 0 0 1 .08.32l-.31 1.27c-.05.2-.17.24-.39.14-1.47-.69-2.39-2.84-2.39-4.57 0-3.72 2.7-7.13 7.79-7.13 4.09 0 7.27 2.92 7.27 6.82 0 4.07-2.57 7.35-6.13 7.35-1.2 0-2.34-.63-2.73-1.37l-.74 2.8c-.27 1.02-1 2.29-1.49 3.06A10 10 0 1 0 12 2Z"/></svg></a>
+        <a href="https://www.behance.net/creativeriz01" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h8.1c3.05 0 4.82 1.56 4.82 4.03 0 1.58-.75 2.69-2.08 3.25 1.82.47 2.8 1.78 2.8 3.67C16.64 18.8 14.46 20 11.5 20H3V5Zm4 3v3h3.55c.91 0 1.42-.52 1.42-1.5S11.46 8 10.55 8H7Zm0 6v3h4.15c.94 0 1.55-.5 1.55-1.5 0-1.04-.61-1.5-1.55-1.5H7Zm10-7h5v1.7h-5V7Zm2.5 3c3.13 0 4.5 2.27 4.5 5.1v.6h-6.4c.1 1.22.75 1.9 1.9 1.9.72 0 1.4-.32 1.62-.9h2.65c-.5 1.9-2.2 2.9-4.3 2.9-2.9 0-4.7-1.9-4.7-4.8 0-2.9 1.8-4.8 4.73-4.8Zm0 2c-.96 0-1.58.56-1.82 1.7h3.48c-.1-1.1-.7-1.7-1.66-1.7Z"/></svg></a>
+        <a href="https://www.linkedin.com/in/rizwan-khan-44771826b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin size={16} strokeWidth={2}/></a>
+      </div>
       <button className="reference-menu-toggle" type="button" aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}>{mobileNavOpen ? <X size={18}/> : <Menu size={18}/>}</button>
       <div className="reference-mobile-menu"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home</a><a href="#work" onClick={() => setMobileNavOpen(false)}>Work</a><a href="#services" onClick={() => setMobileNavOpen(false)}>Services</a><a href="#experience" onClick={() => setMobileNavOpen(false)}>Experience</a><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a><a href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer" onClick={() => setMobileNavOpen(false)}>Let’s talk ↗</a></div>
     </header>
