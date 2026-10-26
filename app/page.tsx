@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X, Linkedin } from "lucide-react";
 import { setupPortfolioAnimations } from "./portfolio-animations";
+import { PinterestProjects } from "./components/pinterest-projects";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
 const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
@@ -132,6 +133,7 @@ export default function Home() {
     </section>
     <section className="reference-work" id="work">
       <div className="reference-section-heading"><span className="reference-ghost-title">PORTFOLIO</span><p>/ SELECTED WORK</p><span className="reference-section-note">A selection of visual and digital projects</span></div>
+      <PinterestProjects />
       <div className="reference-project-grid reference-project-grid-real">
         <a className="reference-project project-crypto" href="#contact"><div className="reference-project-image"><img src="/U-1.jpg" alt="BitZup crypto campaign and social media creative designs" loading="lazy"/></div><div className="reference-project-caption"><div><h3>Crypto Campaigns</h3><p>Visual design · Digital marketing</p></div><span>↗</span></div></a>
         <a className="reference-project project-product" href="#contact"><div className="reference-project-image"><img src="/U-2.jpg" alt="Software company website UI and web design mockup" loading="lazy"/></div><div className="reference-project-caption"><div><h3>UI/UX &amp; Web Design</h3><p>Website design · Digital experiences</p></div><span>↗</span></div></a>
