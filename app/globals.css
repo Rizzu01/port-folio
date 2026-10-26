@@ -984,7 +984,7 @@ body{background:#f2f2f0;color:#171717}
 }
 .reference-site>.portfolio-hero .hero-copy{padding-top:7px}
 .reference-site>.portfolio-hero .hero-subtitle{font-size:13px;line-height:1.35;color:#8b8885}
-.reference-site>.portfolio-hero .hero-actions{display:flex;justify-content:center;gap:10px}
+.reference-site>.portfolio-hero .hero-actions{display:flex;justify-content:center;gap:10px;margin-bottom:22px}
 .reference-site>.portfolio-hero .thought-card{left:8.5%;top:170px;width:155px}
 .reference-site>.portfolio-hero .sync-card{right:8.2%;top:248px;width:147px}
 .reference-site>.portfolio-hero .portrait-stage{width:min(760px,72vw);height:460px}
