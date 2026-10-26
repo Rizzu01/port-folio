@@ -1271,3 +1271,10 @@ body{background:#fff!important}
 .reference-site > .portfolio-hero .hero-socials a:focus-visible{outline:2px solid #555;outline-offset:3px}
 @media(max-width:760px){.reference-site > .portfolio-hero .hero-socials{gap:8px;margin-top:14px}.reference-site > .portfolio-hero .hero-socials a{width:33px;height:33px}.reference-site > .portfolio-hero .hero-socials a img{display:block;width:20px;height:20px;object-fit:contain}}
 @media(prefers-reduced-motion:reduce){.reference-site > .portfolio-hero .hero-socials a{transition:none!important}}
+
+/* Pinterest-backed projects use the same visual system as the existing portfolio cards. */
+.pinterest-project-status{margin:0 0 28px;padding:22px 24px;border:1px solid #e8e8e5;background:#fafaf8;color:#777;font-size:13px;line-height:1.7}
+.pinterest-project-status p{margin:0 0 8px}
+.pinterest-project-status a{display:inline-flex;align-items:center;gap:7px;color:#222;text-decoration:none;border-bottom:1px solid #c9c9c3;padding-bottom:3px}
+.pinterest-project-grid{margin-bottom:28px}
+.pinterest-project .reference-project-image img{object-fit:cover}
