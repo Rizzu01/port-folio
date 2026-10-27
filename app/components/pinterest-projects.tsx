@@ -24,7 +24,7 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/api/pinterest/pins", { signal: controller.signal })
+    fetch("/api/pinterest/pins", { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error("Pinterest request failed");
         return response.json() as Promise<PinResponse>;
@@ -35,7 +35,24 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
           setData({ configured: false, pins: [], message: "Pinterest projects are temporarily unavailable." });
         }
       });
-    return () => controller.abort();
+    const refreshPins = () => {
+      fetch("/api/pinterest/pins", { cache: "no-store" })
+        .then((response) => {
+          if (!response.ok) throw new Error("Pinterest request failed");
+          return response.json() as Promise<PinResponse>;
+        })
+        .then(setData)
+        .catch(() => {
+          // Keep the last successfully loaded Pins visible if a background refresh fails.
+        });
+    };
+    const interval = window.setInterval(refreshPins, 5 * 60 * 1000);
+    window.addEventListener("focus", refreshPins);
+    return () => {
+      controller.abort();
+      window.clearInterval(interval);
+      window.removeEventListener("focus", refreshPins);
+    };
   }, []);
 
   useEffect(() => {
