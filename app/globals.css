@@ -1491,3 +1491,60 @@ body{background:#fff!important}
   .pinterest-category-filter{padding:10px 13px;font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){.pinterest-category-filter{transition:none!important}}
+
+/* Mobile hero card alignment: keep all skill cards inside the viewport */
+@media (min-width: 320px) and (max-width: 430px) {
+  .portfolio-hero {
+    overflow: hidden;
+  }
+
+  .portfolio-hero .portrait-stage {
+    width: min(390px, 92vw);
+    height: 490px;
+    bottom: 18px;
+  }
+
+  .portfolio-hero .panel-focus {
+    left: 0;
+    top: 78px;
+    transform: scale(.64) rotate(-9deg);
+    transform-origin: left top;
+  }
+
+  .portfolio-hero .panel-ideas {
+    left: 0;
+    top: 218px;
+    transform: scale(.64) rotate(-4deg);
+    transform-origin: left top;
+  }
+
+  .portfolio-hero .panel-plan {
+    right: 0;
+    top: 178px;
+    transform: scale(.64) rotate(8deg);
+    transform-origin: right top;
+  }
+
+  .portfolio-hero .panel-print {
+    right: 0;
+    top: 310px;
+    transform: scale(.64) rotate(6deg);
+    transform-origin: right top;
+  }
+
+  .portfolio-hero .print-ready-card {
+    display: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .portfolio-hero .panel-focus,
+  .portfolio-hero .panel-ideas {
+    transform: scale(.58) rotate(-6deg);
+  }
+
+  .portfolio-hero .panel-plan,
+  .portfolio-hero .panel-print {
+    transform: scale(.58) rotate(6deg);
+  }
+}
