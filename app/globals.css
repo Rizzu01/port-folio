@@ -1657,3 +1657,108 @@ body{background:#fff!important}
     transform: scale(.55) rotate(4deg);
   }
 }
+
+/* Final mobile override: target the active reference-site hero selectors directly */
+@media (min-width: 320px) and (max-width: 430px) {
+  .reference-site > .portfolio-hero {
+    min-height: 1060px;
+    padding-bottom: 0;
+  }
+
+  .reference-site > .portfolio-hero .thought-card {
+    left: 8px;
+    right: auto;
+    top: 510px;
+    width: 124px;
+    padding: 12px;
+    transform: scale(.78) rotate(-5deg);
+    transform-origin: left top;
+    z-index: 5;
+  }
+
+  .reference-site > .portfolio-hero .sync-card {
+    left: auto;
+    right: 8px;
+    top: 555px;
+    width: 120px;
+    padding: 12px;
+    transform: scale(.78) rotate(5deg);
+    transform-origin: right top;
+    z-index: 5;
+  }
+
+  .reference-site > .portfolio-hero .portrait-stage {
+    width: min(390px, 100vw);
+    max-width: 390px;
+    height: 490px;
+    bottom: 65px;
+  }
+
+  .reference-site > .portfolio-hero .panel-focus {
+    left: 8px;
+    right: auto;
+    top: 72px;
+    transform: scale(.60) rotate(-5deg);
+    transform-origin: left top;
+  }
+
+  .reference-site > .portfolio-hero .panel-ideas {
+    left: 8px;
+    right: auto;
+    top: 205px;
+    transform: scale(.60) rotate(-3deg);
+    transform-origin: left top;
+  }
+
+  .reference-site > .portfolio-hero .panel-plan {
+    left: auto;
+    right: 8px;
+    top: 175px;
+    transform: scale(.60) rotate(5deg);
+    transform-origin: right top;
+  }
+
+  .reference-site > .portfolio-hero .panel-print {
+    left: auto;
+    right: 8px;
+    top: 300px;
+    transform: scale(.60) rotate(4deg);
+    transform-origin: right top;
+  }
+
+  .reference-site > .portfolio-hero .print-ready-card {
+    display: none;
+  }
+
+  .reference-site > .portfolio-hero .trust-note {
+    left: 18px;
+    bottom: 18px;
+  }
+
+  .reference-site > .portfolio-hero .clarity-note {
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+  .reference-site > .portfolio-hero .thought-card {
+    left: 2px;
+    transform: scale(.70) rotate(-4deg);
+  }
+
+  .reference-site > .portfolio-hero .sync-card {
+    right: 2px;
+    transform: scale(.70) rotate(4deg);
+  }
+
+  .reference-site > .portfolio-hero .panel-focus,
+  .reference-site > .portfolio-hero .panel-ideas {
+    transform: scale(.53) rotate(-3deg);
+  }
+
+  .reference-site > .portfolio-hero .panel-plan,
+  .reference-site > .portfolio-hero .panel-print {
+    transform: scale(.53) rotate(3deg);
+  }
+}
