@@ -1459,3 +1459,35 @@ body{background:#fff!important}
 .pinterest-card-source-link img{display:block;width:19px;height:19px;object-fit:contain}
 .pinterest-card-source-link:hover{transform:translateY(-2px);background:#fff}
 .pinterest-card-source-link:focus-visible{outline:2px solid #222;outline-offset:3px}
+
+
+/* Three category tabs for the Pinterest-backed work gallery. */
+.pinterest-category-filters{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0 0 30px;
+}
+.pinterest-category-filter{
+  appearance:none;
+  border:1px solid #e5e5e0;
+  border-radius:999px;
+  padding:12px 20px;
+  background:rgba(255,255,255,.72);
+  color:#555550;
+  font:inherit;
+  font-size:13px;
+  line-height:1.2;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+}
+.pinterest-category-filter:hover{border-color:#bdbdb5;transform:translateY(-1px)}
+.pinterest-category-filter.is-active{background:#171717;border-color:#171717;color:#fff}
+.pinterest-category-filter:focus-visible{outline:2px solid #555;outline-offset:3px}
+@media(max-width:560px){
+  .pinterest-category-filters{justify-content:flex-start;gap:7px;margin-bottom:22px}
+  .pinterest-category-filter{padding:10px 13px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.pinterest-category-filter{transition:none!important}}
