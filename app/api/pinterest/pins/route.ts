@@ -14,9 +14,9 @@ type PinterestPage<T> = { items?: T[]; bookmark?: string | null };
 type Category = { label: string; slug: string; envKey: string; aliases: string[] };
 
 const CATEGORIES: Category[] = [
-  { label: "Social Media Posts", slug: "social-media-post", envKey: "PINTEREST_SOCIAL_MEDIA_BOARD_ID", aliases: ["social media post", "social media posts"] },
-  { label: "UI/UX Designs", slug: "uiux-design", envKey: "PINTEREST_UIUX_BOARD_ID", aliases: ["ui ux design", "ui ux designs", "uiux design", "uiux designs"] },
-  { label: "Printed Designs", slug: "printed-designs", envKey: "PINTEREST_PRINTED_BOARD_ID", aliases: ["printed design", "printed designs"] },
+  { label: "Social Media Posts", slug: "social-media-post", envKey: "PINTEREST_BOARD_ID", aliases: ["social media post", "social media posts"] },
+  { label: "UI/UX Designs", slug: "uiux-design", envKey: "PINTEREST_UI_UX_BOARD_ID", aliases: ["ui ux design", "ui ux designs", "uiux design", "uiux designs"] },
+  { label: "Printed Designs", slug: "printed-designs", envKey: "PINTEREST_PRINT_DESIGN_BOARD_ID", aliases: ["printed design", "printed designs"] },
 ];
 
 const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
