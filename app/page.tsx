@@ -134,13 +134,6 @@ export default function Home() {
     <section className="reference-work" id="work">
       <div className="reference-section-heading"><span className="reference-ghost-title">PORTFOLIO</span><p>/ SELECTED WORK</p><span className="reference-section-note">A selection of visual and digital projects</span></div>
       <PinterestProjects />
-      <div className="reference-project-grid reference-project-grid-real">
-        <a className="reference-project project-crypto" href="#contact"><div className="reference-project-image"><img src="/U-1.jpg" alt="BitZup crypto campaign and social media creative designs" loading="lazy"/></div><div className="reference-project-caption"><div><h3>Crypto Campaigns</h3><p>Visual design · Digital marketing</p></div><span>↗</span></div></a>
-        <a className="reference-project project-product" href="#contact"><div className="reference-project-image"><img src="/U-2.jpg" alt="Software company website UI and web design mockup" loading="lazy"/></div><div className="reference-project-caption"><div><h3>UI/UX &amp; Web Design</h3><p>Website design · Digital experiences</p></div><span>↗</span></div></a>
-        <a className="reference-project project-brand" href="#contact"><div className="reference-project-image"><img src="/U-3.jpg" alt="Social media product creative designs displayed in a portfolio mockup" loading="lazy"/></div><div className="reference-project-caption"><div><h3>Social Media Creatives</h3><p>Product visuals · Campaign design</p></div><span>↗</span></div></a>
-        <a className="reference-project project-brand" href="#contact"><div className="reference-project-image"><img src="/U-4.jpg" alt="Branding and creative design project displayed in a portfolio mockup" loading="lazy"/></div><div className="reference-project-caption"><div><h3>Branding &amp; Creative Design</h3><p>Brand identity · Visual communication</p></div><span>↗</span></div></a>
-      </div>
-      <a className="reference-all-work" href="https://www.behance.net/" target="_blank" rel="noopener noreferrer">Explore more work <ArrowUpRight size={14}/></a>
     </section>
     <section className="reference-services" id="services">
       <div className="reference-section-heading"><span className="reference-ghost-title">SERVICES</span><p>/ WHAT I DO</p></div>
