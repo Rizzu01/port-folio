@@ -1449,3 +1449,13 @@ body{background:#fff!important}
  .pinterest-all-work-section{padding:30px 20px 50px!important}
 }
 @media(prefers-reduced-motion:reduce){.pinterest-lightbox-backdrop{animation:none}}
+
+
+/* A separate Pinterest action on each work card opens that exact Pin. */
+.pinterest-project-card{position:relative}
+.pinterest-project-card .pinterest-project-trigger{display:block;width:100%;min-width:0;padding:0;border:0;border-radius:0;background:transparent;color:inherit;text-align:left;cursor:zoom-in;font:inherit}
+.pinterest-project-card .pinterest-project-trigger .reference-project-image{display:flex}
+.pinterest-card-source-link{position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid rgba(0,0,0,.08);border-radius:50%;background:rgba(255,255,255,.96);box-shadow:0 2px 10px rgba(0,0,0,.08);transition:transform .18s ease,background .18s ease}
+.pinterest-card-source-link img{display:block;width:19px;height:19px;object-fit:contain}
+.pinterest-card-source-link:hover{transform:translateY(-2px);background:#fff}
+.pinterest-card-source-link:focus-visible{outline:2px solid #222;outline-offset:3px}
