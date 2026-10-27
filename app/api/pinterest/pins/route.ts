@@ -11,6 +11,8 @@ type PinterestPin = {
   created_at?: string;
 };
 
+type PinterestPage = { items?: PinterestPin[]; bookmark?: string | null };
+
 export async function GET() {
   const token = process.env.PINTEREST_ACCESS_TOKEN;
   const boardId = process.env.PINTEREST_BOARD_ID;
@@ -23,23 +25,30 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(
-      `https://api.pinterest.com/v5/boards/${encodeURIComponent(boardId)}/pins?page_size=25`,
-      {
+    const allItems: PinterestPin[] = [];
+    let bookmark: string | null = null;
+    // Fetch pages until Pinterest has no next bookmark, with a safety cap.
+    for (let page = 0; page < 10; page += 1) {
+      const url = new URL(`https://api.pinterest.com/v5/boards/${encodeURIComponent(boardId)}/pins`);
+      url.searchParams.set("page_size", "100");
+      if (bookmark) url.searchParams.set("bookmark", bookmark);
+      const response = await fetch(url.toString(), {
         headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
         next: { revalidate: 3600 },
-      },
-    );
-
-    if (!response.ok) {
-      console.error("Pinterest API request failed:", response.status);
-      return NextResponse.json({ configured: true, pins: [], message: "Pinterest could not return the board Pins." }, { status: 502 });
+      });
+      if (!response.ok) {
+        console.error("Pinterest API request failed:", response.status);
+        return NextResponse.json({ configured: true, pins: [], message: "Pinterest could not return the board Pins." }, { status: 502 });
+      }
+      const data = (await response.json()) as PinterestPage;
+      allItems.push(...(data.items ?? []));
+      if (!data.bookmark) break;
+      bookmark = data.bookmark;
     }
 
-    const data = (await response.json()) as { items?: PinterestPin[] };
-    const pins = (data.items ?? []).map((pin) => {
+    const pins = allItems.map((pin) => {
       const images = pin.media?.images ?? {};
-      const image = images["1200x"] ?? images["600x"] ?? Object.values(images).sort((a,b) => (b.width ?? 0) - (a.width ?? 0))[0];
+      const image = images["1200x"] ?? images["600x"] ?? Object.values(images).sort((a, b) => (b.width ?? 0) - (a.width ?? 0))[0];
       return {
         id: pin.id,
         title: pin.title?.trim() || pin.description?.trim().split("\n")[0] || "Selected design",
