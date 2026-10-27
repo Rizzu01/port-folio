@@ -1296,3 +1296,81 @@ body{background:#fff!important}
 .privacy-disclaimer{border-top:1px solid #e8e8e5;margin-top:42px;padding-top:18px;font-size:12px!important;color:#777!important}
 .privacy-footer{border-top:1px solid #ecece8;padding:22px clamp(20px,7vw,100px);display:flex;justify-content:space-between;gap:16px;font-size:11px}
 @media(max-width:600px){.privacy-content{padding:48px 20px 56px}.privacy-content p,.privacy-content li{font-size:14px}.privacy-content h2{font-size:18px}.privacy-nav{padding:0 20px}}
+
+
+/* Pinterest work showcase: display the complete artwork in a calm, balanced grid. */
+.pinterest-project-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:start;
+  gap:clamp(18px,2.2vw,32px);
+  margin:0;
+}
+.pinterest-project{
+  min-width:0;
+}
+.pinterest-project-image{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:180px;
+  max-height:360px;
+  aspect-ratio:auto!important;
+  padding:10px;
+  overflow:hidden;
+  background:#f5f5f2;
+  border:1px solid #eeeeea;
+  border-radius:3px;
+}
+.pinterest-project .pinterest-project-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:338px;
+  object-fit:contain!important;
+  object-position:center;
+  transform:none!important;
+  filter:none;
+}
+.pinterest-project:hover .pinterest-project-image img{
+  transform:scale(1.015)!important;
+}
+.pinterest-project .reference-project-caption{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding-top:13px;
+}
+.pinterest-project .reference-project-caption h3{
+  margin:0 0 5px;
+  font-size:clamp(13px,1.1vw,16px);
+  line-height:1.4;
+  font-weight:500;
+}
+.pinterest-project .reference-project-caption p{
+  margin:0;
+  color:#777;
+  font-size:12px;
+  line-height:1.5;
+}
+.pinterest-project .reference-project-caption>span{
+  flex:0 0 auto;
+  color:#777;
+  font-size:16px;
+  line-height:1.2;
+}
+@media(max-width:900px){
+  .pinterest-project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 18px}
+  .pinterest-project-image{max-height:340px;min-height:160px;padding:8px}
+  .pinterest-project .pinterest-project-image img{max-height:322px}
+}
+@media(max-width:560px){
+  .pinterest-project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}
+  .pinterest-project-image{min-height:130px;max-height:260px;padding:6px}
+  .pinterest-project .pinterest-project-image img{max-height:248px}
+  .pinterest-project .reference-project-caption{padding-top:9px;gap:6px}
+  .pinterest-project .reference-project-caption h3{font-size:12px}
+  .pinterest-project .reference-project-caption p{font-size:10px}
+}
