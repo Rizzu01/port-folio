@@ -10,7 +10,6 @@ type Pin = {
   imageUrl: string;
   pinUrl: string;
   createdAt: string;
-  category: string;
 };
 
 type PinResponse = { configured: boolean; pins: Pin[]; message?: string };
@@ -18,7 +17,6 @@ type PinResponse = { configured: boolean; pins: Pin[]; message?: string };
 export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) {
   const [data, setData] = useState<PinResponse | null>(null);
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
-  const [activeCategory, setActiveCategory] = useState("All Work");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -65,17 +63,11 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
     );
   }
 
-  const filteredPins = activeCategory === "All Work" ? data.pins : data.pins.filter((pin) => pin.category === activeCategory);
-  const pinsToShow = fullPage ? filteredPins : filteredPins.slice(0, 6);
+  const pinsToShow = fullPage ? data.pins : data.pins.slice(0, 6);
 
   return (
     <>
-      <nav className="pinterest-category-filters" aria-label="Filter work by category">
-        {["All Work", "Social Media Posts", "UI/UX Designs", "Printed Designs"].map((category) => (
-          <button key={category} type="button" className={activeCategory === category ? "pinterest-category-filter is-active" : "pinterest-category-filter"} aria-pressed={activeCategory === category} onClick={() => setActiveCategory(category)}>{category}</button>
-        ))}
-      </nav>
-      {pinsToShow.length > 0 ? <div className="reference-project-grid reference-project-grid-real pinterest-project-grid" aria-label="Pinterest projects">
+      <div className="reference-project-grid reference-project-grid-real pinterest-project-grid" aria-label="Pinterest projects">
         {pinsToShow.map((pin) => (
           <article className="reference-project pinterest-project pinterest-project-card" key={pin.id}>
             <button className="pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} aria-label={`Preview ${pin.title}`}>
@@ -85,7 +77,7 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
               <span className="reference-project-caption">
                 <span className="pinterest-project-caption-copy">
                   <span className="pinterest-project-title">{pin.title}</span>
-                  <span className="pinterest-project-subtitle">{pin.category} · Pinterest</span>
+                  <span className="pinterest-project-subtitle">Work Showcase · Pinterest</span>
                 </span>
                 <span className="pinterest-project-arrow" aria-hidden="true">↗</span>
               </span>
@@ -95,8 +87,8 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
             </a>
           </article>
         ))}
-      </div> : <div className="pinterest-project-status">No designs found in this category yet. Add Pins to your Pinterest board and refresh later.</div>}
-      {!fullPage && filteredPins.length > 6 && (
+      </div>
+      {!fullPage && data.pins.length > 6 && (
         <div className="pinterest-more-wrap">
           <a className="reference-all-work pinterest-more-button" href="/work">More work <ArrowUpRight size={14} /></a>
         </div>
