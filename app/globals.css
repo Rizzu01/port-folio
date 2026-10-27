@@ -1762,3 +1762,58 @@ body{background:#fff!important}
     transform: scale(.53) rotate(3deg);
   }
 }
+
+/* Mobile hero: reduce the empty gap between intro and portrait */
+@media (min-width: 320px) and (max-width: 430px) {
+  .reference-site > .portfolio-hero {
+    min-height: 900px;
+  }
+
+  .reference-site > .portfolio-hero .portrait-stage {
+    bottom: 28px;
+    height: 440px;
+  }
+
+  .reference-site > .portfolio-hero .thought-card {
+    top: 430px;
+  }
+
+  .reference-site > .portfolio-hero .sync-card {
+    top: 470px;
+  }
+
+  .reference-site > .portfolio-hero .panel-focus {
+    top: 58px;
+  }
+
+  .reference-site > .portfolio-hero .panel-ideas {
+    top: 170px;
+  }
+
+  .reference-site > .portfolio-hero .panel-plan {
+    top: 145px;
+  }
+
+  .reference-site > .portfolio-hero .panel-print {
+    top: 255px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+  .reference-site > .portfolio-hero {
+    min-height: 870px;
+  }
+
+  .reference-site > .portfolio-hero .portrait-stage {
+    height: 420px;
+    bottom: 26px;
+  }
+
+  .reference-site > .portfolio-hero .thought-card {
+    top: 410px;
+  }
+
+  .reference-site > .portfolio-hero .sync-card {
+    top: 445px;
+  }
+}
