@@ -69,18 +69,23 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
     <>
       <div className="reference-project-grid reference-project-grid-real pinterest-project-grid" aria-label="Pinterest projects">
         {pinsToShow.map((pin) => (
-          <button className="reference-project pinterest-project pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} key={pin.id} aria-label={`View ${pin.title}`}>
-            <span className="reference-project-image pinterest-project-image">
-              <img src={pin.imageUrl} alt={pin.title} loading="lazy" />
-            </span>
-            <span className="reference-project-caption">
-              <span className="pinterest-project-caption-copy">
-                <span className="pinterest-project-title">{pin.title}</span>
-                <span className="pinterest-project-subtitle">Work Showcase · Pinterest</span>
+          <article className="reference-project pinterest-project pinterest-project-card" key={pin.id}>
+            <button className="pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} aria-label={`Preview ${pin.title}`}>
+              <span className="reference-project-image pinterest-project-image">
+                <img src={pin.imageUrl} alt={pin.title} loading="lazy" />
               </span>
-              <span className="pinterest-project-arrow" aria-hidden="true">↗</span>
-            </span>
-          </button>
+              <span className="reference-project-caption">
+                <span className="pinterest-project-caption-copy">
+                  <span className="pinterest-project-title">{pin.title}</span>
+                  <span className="pinterest-project-subtitle">Work Showcase · Pinterest</span>
+                </span>
+                <span className="pinterest-project-arrow" aria-hidden="true">↗</span>
+              </span>
+            </button>
+            <a className="pinterest-card-source-link" href={pin.pinUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${pin.title} on Pinterest`} title="Open this Pin on Pinterest">
+              <img src="/Pinterest.svg" alt="" />
+            </a>
+          </article>
         ))}
       </div>
       {!fullPage && data.pins.length > 6 && (
