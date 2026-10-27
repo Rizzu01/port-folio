@@ -61,9 +61,9 @@ export function PinterestProjects() {
 
   return (
     <div className="reference-project-grid reference-project-grid-real pinterest-project-grid" aria-label="Latest Pinterest projects">
-      {data.pins.map((pin) => (
+      {data.pins.slice(0, 12).map((pin) => (
         <a className="reference-project pinterest-project" href={pin.pinUrl} key={pin.id} target="_blank" rel="noopener noreferrer">
-          <div className="reference-project-image">
+          <div className="reference-project-image pinterest-project-image">
             {/* Pinterest supplies this image URL through its authenticated API. */}
             <img src={pin.imageUrl} alt={pin.title} loading="lazy" />
           </div>
