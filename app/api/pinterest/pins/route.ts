@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type PinterestPin = {
   id: string;
@@ -30,7 +31,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
     if (bookmark) pageUrl.searchParams.set("bookmark", bookmark);
     const response = await fetch(pageUrl.toString(), {
       headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!response.ok) throw new Error(`Pinterest API request failed: ${response.status}`);
     const data = (await response.json()) as PinterestPage<T>;
@@ -44,7 +45,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
 export async function GET() {
   const token = process.env.PINTEREST_ACCESS_TOKEN;
   if (!token) {
-    return NextResponse.json({ configured: false, pins: [], message: "Pinterest API is not configured yet." });
+    return NextResponse.json({ configured: false, pins: [], message: "Pinterest API is not configured yet." }, { headers: { "Cache-Control": "no-store" } });
   }
 
   try {
@@ -110,9 +111,9 @@ export async function GET() {
       configured: true,
       pins: allPins,
       message: allPins.length ? undefined : "No Pins found. Check that the three boards are public and named Social Media Posts, UI/UX Designs, and Printed Designs.",
-    }, { headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" } });
+    }, { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0" } });
   } catch (error) {
     console.error("Pinterest board sync failed:", error);
-    return NextResponse.json({ configured: true, pins: [], message: "Pinterest could not load the boards. The access token may need refreshing." }, { status: 502 });
+    return NextResponse.json({ configured: true, pins: [], message: "Pinterest could not load the boards. The access token may need refreshing." }, { status: 502, headers: { "Cache-Control": "no-store" } });
   }
 }
