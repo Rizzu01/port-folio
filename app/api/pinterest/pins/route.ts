@@ -54,7 +54,7 @@ export async function GET() {
         title: pin.title?.trim() || pin.description?.trim().split("\n")[0] || "Selected design",
         description: pin.description ?? "",
         imageUrl: image?.url ?? "",
-        pinUrl: pin.link || `https://www.pinterest.com/pin/${pin.id}/`,
+        pinUrl: `https://www.pinterest.com/pin/${pin.id}/`,
         createdAt: pin.created_at ?? "",
       };
     }).filter((pin) => pin.imageUrl);
