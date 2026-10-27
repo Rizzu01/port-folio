@@ -1548,3 +1548,112 @@ body{background:#fff!important}
     transform: scale(.58) rotate(6deg);
   }
 }
+
+/* Refine mobile hero composition from real-device review (320–430px) */
+@media (min-width: 320px) and (max-width: 430px) {
+  .portfolio-hero {
+    min-height: 1080px;
+    overflow: hidden;
+  }
+
+  .portfolio-hero .hero-copy {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .portfolio-hero .thought-card,
+  .portfolio-hero .sync-card {
+    width: 124px;
+    padding: 12px;
+    border-radius: 17px;
+    z-index: 5;
+  }
+
+  .portfolio-hero .thought-card {
+    left: 8px;
+    top: 575px;
+    transform: scale(.82) rotate(-5deg);
+    transform-origin: left top;
+  }
+
+  .portfolio-hero .sync-card {
+    right: 8px;
+    top: 615px;
+    transform: scale(.82) rotate(5deg);
+    transform-origin: right top;
+  }
+
+  .portfolio-hero .portrait-stage {
+    width: min(390px, 100vw);
+    height: 490px;
+    bottom: 70px;
+  }
+
+  .portfolio-hero .panel-focus {
+    left: 8px;
+    top: 75px;
+    transform: scale(.62) rotate(-6deg);
+    transform-origin: left top;
+  }
+
+  .portfolio-hero .panel-ideas {
+    left: 8px;
+    top: 205px;
+    transform: scale(.62) rotate(-3deg);
+    transform-origin: left top;
+  }
+
+  .portfolio-hero .panel-plan {
+    right: 8px;
+    top: 175px;
+    transform: scale(.62) rotate(6deg);
+    transform-origin: right top;
+  }
+
+  .portfolio-hero .panel-print {
+    right: 8px;
+    top: 300px;
+    transform: scale(.62) rotate(5deg);
+    transform-origin: right top;
+  }
+
+  .portfolio-hero .trust-note {
+    left: 18px;
+    bottom: 22px;
+  }
+
+  .portfolio-hero .clarity-note {
+    right: 18px;
+    bottom: 22px;
+  }
+
+  .portfolio-hero .print-ready-card {
+    display: none;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+  .portfolio-hero {
+    min-height: 1040px;
+  }
+
+  .portfolio-hero .thought-card {
+    left: 2px;
+    transform: scale(.72) rotate(-5deg);
+  }
+
+  .portfolio-hero .sync-card {
+    right: 2px;
+    transform: scale(.72) rotate(5deg);
+  }
+
+  .portfolio-hero .panel-focus,
+  .portfolio-hero .panel-ideas {
+    transform: scale(.55) rotate(-4deg);
+  }
+
+  .portfolio-hero .panel-plan,
+  .portfolio-hero .panel-print {
+    transform: scale(.55) rotate(4deg);
+  }
+}
