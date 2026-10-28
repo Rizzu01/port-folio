@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getPinterestAccessToken } from "@/lib/pinterest-token";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -43,7 +44,13 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
 }
 
 export async function GET() {
-  const token = process.env.PINTEREST_ACCESS_TOKEN;
+  let token: string | null;
+  try {
+    token = await getPinterestAccessToken();
+  } catch (error) {
+    console.error("Pinterest token retrieval failed:", error);
+    return NextResponse.json({ configured: true, pins: [], message: "Pinterest token refresh failed. Reconnect Pinterest from the server setup." }, { status: 502, headers: { "Cache-Control": "no-store" } });
+  }
   if (!token) {
     return NextResponse.json({ configured: false, pins: [], message: "Pinterest API is not configured yet." }, { headers: { "Cache-Control": "no-store" } });
   }
