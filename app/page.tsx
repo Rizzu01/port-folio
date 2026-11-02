@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X, Linkedin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X, Linkedin, Sun, Moon } from "lucide-react";
 import { setupPortfolioAnimations } from "./portfolio-animations";
 import { PinterestProjects } from "./components/pinterest-projects";
 
@@ -10,6 +10,21 @@ const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("creativerizz-theme");
+    const initialDark = savedTheme === "dark";
+    setDarkTheme(initialDark);
+    document.documentElement.dataset.theme = initialDark ? "dark" : "light";
+  }, []);
+
+  function toggleTheme() {
+    const nextTheme = darkTheme ? "light" : "dark";
+    setDarkTheme(nextTheme === "dark");
+    document.documentElement.dataset.theme = nextTheme;
+    window.localStorage.setItem("creativerizz-theme", nextTheme);
+  }
   const pageRef = useRef<HTMLElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -106,9 +121,10 @@ export default function Home() {
     <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
       <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src="/Logo.svg" alt="Rizwan Khan logo"/></a>
       <nav className="reference-desktop-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+      <button className="reference-theme-toggle" type="button" onClick={toggleTheme} aria-label={darkTheme ? "Switch to light theme" : "Switch to dark theme"} title={darkTheme ? "Switch to light theme" : "Switch to dark theme"}>{darkTheme ? <Sun size={17} /> : <Moon size={17} />}</button>
       <a className="reference-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={13}/></a>
       <button className="reference-menu-toggle" type="button" aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}>{mobileNavOpen ? <X size={18}/> : <Menu size={18}/>}</button>
-      <div className="reference-mobile-menu"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home</a><a href="#work" onClick={() => setMobileNavOpen(false)}>Work</a><a href="#services" onClick={() => setMobileNavOpen(false)}>Services</a><a href="#experience" onClick={() => setMobileNavOpen(false)}>Experience</a><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a><a href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer" onClick={() => setMobileNavOpen(false)}>Let’s talk ↗</a></div>
+      <div className="reference-mobile-menu"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home</a><a href="#work" onClick={() => setMobileNavOpen(false)}>Work</a><a href="#services" onClick={() => setMobileNavOpen(false)}>Services</a><a href="#experience" onClick={() => setMobileNavOpen(false)}>Experience</a><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a><button className="reference-theme-toggle mobile-theme-toggle" type="button" onClick={toggleTheme} aria-label={darkTheme ? "Switch to light theme" : "Switch to dark theme"}>{darkTheme ? <Sun size={17} /> : <Moon size={17} />} {darkTheme ? "Light theme" : "Dark theme"}</button><a href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer" onClick={() => setMobileNavOpen(false)}>Let’s talk ↗</a></div>
     </header>
     <section className="hero portfolio-hero" id="home">
       <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>Designing with<br/><em>meaning &amp; feeling.</em></h1><p className="hero-subtitle">I’m Rizwan Khan — a designer focused on visual communication, branding,<br className="desktop-break"/> digital experiences, and thoughtful UI/UX.</p><div className="hero-actions"><a className="button button-dark" href="#work">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}><Mail size={15}/> Get in touch</button></div><div className="hero-socials" aria-label="Social profiles"><a href="https://in.pinterest.com/Creative___Rizz/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest"><img src="/Pinterest.svg" alt="" /></a><a href="https://www.behance.net/creativeriz01" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance"><img src="/behance-round-color-icon.svg" alt="" /></a><a href="https://www.linkedin.com/in/rizwan-khan-44771826b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><img src="/linkedin-svgrepo-com.svg" alt="" /></a></div></div>
