@@ -119,7 +119,7 @@ export default function Home() {
 
   <div className="reference-site">
     <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
-      <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src="/Logo.svg" alt="Rizwan Khan logo"/></a>
+      <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src={darkTheme ? "/Logo-dark.svg" : "/Logo.svg"} alt="Rizwan Khan logo"/></a>
       <nav className="reference-desktop-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
       <button className="reference-theme-toggle" type="button" onClick={toggleTheme} aria-label={darkTheme ? "Switch to light theme" : "Switch to dark theme"} title={darkTheme ? "Switch to light theme" : "Switch to dark theme"}>{darkTheme ? <Sun size={17} /> : <Moon size={17} />}</button>
       <a className="reference-talk" href="https://wa.me/919024043673" target="_blank" rel="noopener noreferrer">Let’s talk <ArrowUpRight size={13}/></a>
