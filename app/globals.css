@@ -1904,3 +1904,17 @@ html[data-theme="dark"] .privacy-nav,
 html[data-theme="dark"] .privacy-footer{border-color:#383934}
 html[data-theme="dark"] .privacy-disclaimer{border-color:#383934;color:#aaa99f!important}
 @media(max-width:760px){.mobile-theme-toggle{display:flex!important;align-items:center;justify-content:flex-start;gap:10px;width:100%!important;height:auto!important;padding:12px 14px!important;border-radius:10px!important}.reference-nav>.reference-theme-toggle{width:34px;height:34px}}
+
+
+/* Dark-mode cursor and logo contrast */
+html[data-theme="dark"] .custom-cursor,
+html[data-theme="dark"] .custom-cursor-enabled .cursor,
+html[data-theme="dark"] .cursor-dot,
+html[data-theme="dark"] .cursor-ring{border-color:#fff!important;color:#fff!important}
+html[data-theme="dark"] .custom-cursor-enabled .custom-cursor,
+html[data-theme="dark"] .custom-cursor-enabled .cursor{background:#fff!important}
+html[data-theme="dark"] .custom-cursor-enabled .cursor::before,
+html[data-theme="dark"] .custom-cursor-enabled .cursor::after{background:#fff!important;border-color:#fff!important}
+html[data-theme="dark"] .reference-nav .reference-logo img,
+html[data-theme="dark"] .reference-nav .brand img,
+html[data-theme="dark"] .reference-nav .logo img{filter:brightness(0) invert(1)}
