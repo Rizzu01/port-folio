@@ -1915,6 +1915,4 @@ html[data-theme="dark"] .custom-cursor-enabled .custom-cursor,
 html[data-theme="dark"] .custom-cursor-enabled .cursor{background:#fff!important}
 html[data-theme="dark"] .custom-cursor-enabled .cursor::before,
 html[data-theme="dark"] .custom-cursor-enabled .cursor::after{background:#fff!important;border-color:#fff!important}
-html[data-theme="dark"] .reference-nav .reference-logo img,
-html[data-theme="dark"] .reference-nav .brand img,
-html[data-theme="dark"] .reference-nav .logo img{filter:brightness(0) invert(1)}
+/* Dark logo asset changes black paths to white while preserving orange. */
