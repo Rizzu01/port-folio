@@ -1817,3 +1817,90 @@ body{background:#fff!important}
     top: 445px;
   }
 }
+
+
+/* Global persistent light/dark theme */
+html[data-theme="light"]{color-scheme:light}
+html[data-theme="dark"]{color-scheme:dark;--paper:#151615;--ink:#f1f0eb;--line:rgba(240,240,235,.14)}
+html[data-theme="dark"],html[data-theme="dark"] body,
+html[data-theme="dark"] .site-shell,
+html[data-theme="dark"] .reference-site,
+html[data-theme="dark"] .reference-site>section,
+html[data-theme="dark"] .portfolio-hero,
+html[data-theme="dark"] .page-frame,
+html[data-theme="dark"] .portfolio-frame{background:#151615!important;color:#f1f0eb}
+html[data-theme="dark"] .reference-nav{background:rgba(21,22,21,.82);border-color:rgba(255,255,255,.12)}
+html[data-theme="dark"] .reference-nav.is-scrolled{background:rgba(21,22,21,.9)}
+html[data-theme="dark"] .reference-nav a,
+html[data-theme="dark"] .reference-nav button{color:#f1f0eb}
+html[data-theme="dark"] .reference-talk{background:#f1f0eb;color:#151615!important}
+html[data-theme="dark"] .reference-theme-toggle{display:grid;place-items:center;width:38px;height:38px;flex:0 0 auto;border:1px solid rgba(240,240,235,.22);border-radius:50%;background:rgba(255,255,255,.06);color:inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+html[data-theme="dark"] .reference-theme-toggle:hover{background:rgba(255,255,255,.13);transform:translateY(-1px)}
+html[data-theme="light"] .reference-theme-toggle{display:grid;place-items:center;width:38px;height:38px;flex:0 0 auto;border:1px solid rgba(25,25,22,.14);border-radius:50%;background:rgba(255,255,255,.72);color:#222;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+html[data-theme="light"] .reference-theme-toggle:hover{background:#fff;transform:translateY(-1px)}
+.mobile-theme-toggle{display:none}
+html[data-theme="dark"] .reference-nav .reference-mobile-menu{background:#1c1d1b;border-color:rgba(255,255,255,.13)}
+html[data-theme="dark"] .reference-mobile-menu a:hover{background:rgba(255,255,255,.08)}
+html[data-theme="dark"] .reference-nav .reference-menu-toggle{border-color:rgba(255,255,255,.2);background:#20211f}
+html[data-theme="dark"] .reference-nav .reference-desktop-links a:hover{color:#c8c7bf}
+html[data-theme="dark"] .portfolio-eyebrow,
+html[data-theme="dark"] .hero-subtitle,
+html[data-theme="dark"] .reference-section-heading p,
+html[data-theme="dark"] .reference-section-note,
+html[data-theme="dark"] .muted-note,
+html[data-theme="dark"] .about-copy,
+html[data-theme="dark"] .experience-main p,
+html[data-theme="dark"] .experience-period,
+html[data-theme="dark"] .skill-cloud span,
+html[data-theme="dark"] .education-strip p,
+html[data-theme="dark"] .bottom-cta p,
+html[data-theme="dark"] .site-footer>span{color:#aaa99f}
+html[data-theme="dark"] .float-card,
+html[data-theme="dark"] .floating-panel,
+html[data-theme="dark"] .reference-project-card,
+html[data-theme="dark"] .reference-service-card,
+html[data-theme="dark"] .reference-experience-card,
+html[data-theme="dark"] .reference-about-card,
+html[data-theme="dark"] .reference-contact-card{background:#20211f;border-color:rgba(255,255,255,.12);color:#f1f0eb}
+html[data-theme="dark"] .button-light,
+html[data-theme="dark"] .reference-project-image,
+html[data-theme="dark"] .pinterest-project-image,
+html[data-theme="dark"] .pinterest-project-status,
+html[data-theme="dark"] .pinterest-category-filter{background:#20211f;border-color:#373833;color:#e9e8e1}
+html[data-theme="dark"] .button-dark,
+html[data-theme="dark"] .pinterest-category-filter.is-active{background:#f1f0eb;border-color:#f1f0eb;color:#151615}
+html[data-theme="dark"] .pinterest-category-filter:hover{border-color:#77786f}
+html[data-theme="dark"] .pinterest-project-caption p,
+html[data-theme="dark"] .pinterest-project-subtitle,
+html[data-theme="dark"] .pinterest-project-arrow{color:#aaa99f}
+html[data-theme="dark"] .pinterest-lightbox{background:#20211f;border-color:#41423c;color:#f1f0eb}
+html[data-theme="dark"] .pinterest-lightbox-artwork{background:#171816;border-color:#393a35}
+html[data-theme="dark"] .pinterest-lightbox-close{background:#292a27;border-color:#454640;color:#f1f0eb}
+html[data-theme="dark"] .pinterest-source-link{color:#f1f0eb;border-color:#454640}
+html[data-theme="dark"] .pinterest-source-link:hover{background:#30312d}
+html[data-theme="dark"] .reference-project-caption h3,
+html[data-theme="dark"] .reference-section-heading h2,
+html[data-theme="dark"] .reference-about h2,
+html[data-theme="dark"] .reference-work h2,
+html[data-theme="dark"] .reference-services h2,
+html[data-theme="dark"] .reference-experience h2,
+html[data-theme="dark"] .reference-contact h2{color:#f1f0eb}
+html[data-theme="dark"] .reference-site input,
+html[data-theme="dark"] .reference-site textarea,
+html[data-theme="dark"] .reference-site select,
+html[data-theme="dark"] .contact-modal,
+html[data-theme="dark"] .contact-modal-content{background:#20211f;color:#f1f0eb;border-color:#41423c}
+html[data-theme="dark"] .reference-site input::placeholder,
+html[data-theme="dark"] .reference-site textarea::placeholder{color:#96978e}
+html[data-theme="dark"] .privacy-page{background:#151615;color:#f1f0eb}
+html[data-theme="dark"] .privacy-content p,
+html[data-theme="dark"] .privacy-content li,
+html[data-theme="dark"] .privacy-updated,
+html[data-theme="dark"] .privacy-content h2,
+html[data-theme="dark"] .privacy-content a,
+html[data-theme="dark"] .privacy-nav,
+html[data-theme="dark"] .privacy-footer{color:#d4d3cb}
+html[data-theme="dark"] .privacy-nav,
+html[data-theme="dark"] .privacy-footer{border-color:#383934}
+html[data-theme="dark"] .privacy-disclaimer{border-color:#383934;color:#aaa99f!important}
+@media(max-width:760px){.mobile-theme-toggle{display:flex!important;align-items:center;justify-content:flex-start;gap:10px;width:100%!important;height:auto!important;padding:12px 14px!important;border-radius:10px!important}.reference-nav>.reference-theme-toggle{width:34px;height:34px}}
