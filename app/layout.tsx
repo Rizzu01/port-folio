@@ -7,11 +7,11 @@ const siteUrl = "https://creativerizz.in";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Rizwan Khan | UI/UX, Graphic & Web Designer",
+    default: "Rizwan Khan | UI/UX, Graphic & Web Designer in India",
     template: "%s | Rizwan Khan",
   },
   description:
-    "Explore Rizwan Khan's design portfolio featuring UI/UX design, graphic design, branding, web design, fintech creatives, and digital experiences. Available for opportunities and freelance projects.",
+    "Rizwan Khan is a UI/UX, graphic and web designer in India, creating thoughtful digital experiences, visual identities, campaign creatives and responsive websites. Explore selected work and connect for freelance or design opportunities.",
   applicationName: "CreativeRizz",
   alternates: {
     canonical: "/",
@@ -19,17 +19,19 @@ export const metadata: Metadata = {
   keywords: [
     "Rizwan Khan designer",
     "UI/UX designer portfolio",
+    "UI UX designer India",
     "graphic designer portfolio",
+    "graphic designer India",
     "web designer portfolio",
     "brand identity design",
     "fintech design",
     "crypto graphic design",
-    "freelance designer",
+    "freelance UI UX designer",
   ],
   openGraph: {
     title: "Rizwan Khan | UI/UX, Graphic & Web Designer",
     description:
-      "Selected work in UI/UX, graphic design, branding, web design, and fintech creative design.",
+      "Explore selected UI/UX, graphic design, branding, web design and fintech creative work by Rizwan Khan.",
     url: siteUrl,
     siteName: "CreativeRizz",
     locale: "en_IN",
@@ -37,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rizwan Khan | Designer Portfolio",
+    title: "Rizwan Khan | UI/UX, Graphic & Web Designer",
     description:
-      "UI/UX, graphic design, branding, web design, and fintech creative projects.",
+      "UI/UX, graphic design, branding, web design and fintech creative projects.",
   },
   robots: {
     index: true,
@@ -59,10 +61,14 @@ const personSchema = {
   "@type": "Person",
   name: "Rizwan Khan",
   url: siteUrl,
-  jobTitle: "Designer",
+  jobTitle: "UI/UX, Graphic & Web Designer",
   description:
     "Designer working across UI/UX, graphic design, branding, web design, and fintech creative projects.",
-  sameAs: ["https://www.linkedin.com/in/rizwan-khan-44771826b/"],
+  sameAs: [
+    "https://www.linkedin.com/in/rizwan-khan-44771826b/",
+    "https://www.behance.net/creativeriz01",
+    "https://in.pinterest.com/Creative___Rizz/",
+  ],
 };
 
 export default function RootLayout({
