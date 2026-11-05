@@ -5,6 +5,7 @@ const siteUrl = "https://creativerizz.in";
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "",
+    "/work",
     "/ui-ux-design",
     "/graphic-design",
     "/web-design",
@@ -14,8 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return pages.map((page) => ({
     url: page ? `${siteUrl}${page}` : siteUrl,
-    lastModified: new Date(),
     changeFrequency: page === "" ? "weekly" : "monthly",
-    priority: page === "" ? 1 : 0.8,
+    priority: page === "" ? 1 : page === "/work" ? 0.9 : 0.8,
   }));
 }
