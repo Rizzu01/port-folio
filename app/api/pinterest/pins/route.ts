@@ -47,7 +47,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
 
 type SeoFields = { title: string; description: string; altText: string };
 const seoMemory = new Map<string, SeoFields>();
-const MAX_NEW_ANALYSES_PER_REQUEST = 5;
+const MAX_NEW_ANALYSES_PER_REQUEST = 1;
 
 function fallbackSeo(pin: { title: string; description: string; category: string }): SeoFields {
   const title = pin.title === "Selected design" ? `${pin.category} Portfolio Design` : pin.title;
@@ -190,15 +190,15 @@ async function generateSeo(pin: { id: string; title: string; description: string
       return null;
     }
     const parsed = JSON.parse(cleanContent.slice(jsonStart, jsonEnd + 1)) as Partial<SeoFields>;
-    if (!parsed.title?.trim() || !parsed.description?.trim() || !parsed.altText?.trim()) {
-      console.error("Groq Pinterest SEO returned incomplete fields:", rawContent.slice(0, 800));
+    if (!parsed.title?.trim() || !parsed.description?.trim()) {
+      console.error("Groq Pinterest SEO returned incomplete title/description:", rawContent.slice(0, 800));
       return null;
     }
 
     const value = {
       title: parsed.title.trim().slice(0, 65),
       description: parsed.description.trim().slice(0, 155),
-      altText: parsed.altText.trim().slice(0, 125),
+      altText: parsed.altText?.trim().slice(0, 125) || parsed.description.trim().slice(0, 125),
     };
     if (isGenericSeo(value)) {
       console.error("Groq Pinterest SEO rejected generic metadata:", JSON.stringify(value));
@@ -235,7 +235,7 @@ async function generateSeo(pin: { id: string; title: string; description: string
   }
 }
 async function enrichPins<T extends { id: string; title: string; description: string; imageUrl: string; category: string }>(pins: T[]): Promise<Array<T & { altText: string }>> {
-  // Read cached SEO in parallel, then analyze at most one uncached image per refresh.
+  // Read cached SEO in parallel, then analyze one uncached image per refresh to stay within Groq's token rate limits.
   const cached = await Promise.all(pins.map((pin) => readSeo(pin.id)));
   const missingIndexes = cached.map((value, index) => value ? -1 : index).filter((index) => index >= 0);
   const indexesToAnalyze = missingIndexes.slice(0, MAX_NEW_ANALYSES_PER_REQUEST);
