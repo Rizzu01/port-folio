@@ -1394,6 +1394,7 @@ body{background:#fff!important}
 .pinterest-project-caption-copy{display:flex;flex-direction:column;min-width:0;gap:5px}
 .pinterest-project-title{display:block;margin:0;font-size:clamp(13px,1.1vw,16px);font-weight:500;line-height:1.4}
 .pinterest-project-subtitle{display:block;color:#777;font-size:12px;line-height:1.5}
+.pinterest-project-description{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;color:#777;font-size:12px;line-height:1.5}
 .pinterest-project-arrow{flex:0 0 auto;color:#777;font-size:16px;line-height:1.2}
 .pinterest-project-trigger:hover .pinterest-project-image img{transform:scale(1.015)!important}
 .pinterest-more-wrap{display:flex;justify-content:center;margin-top:34px}
