@@ -102,7 +102,7 @@ async function generateSeo(pin: { id: string; title: string; description: string
     if (!response.ok) { console.error("OpenRouter Pinterest SEO request failed:", response.status, (await response.text()).slice(0, 1000)); return null; }
     const json = await response.json() as { choices?: Array<{ message?: { content?: string } }> };
     const rawContent = json.choices?.[0]?.message?.content || "{}";
-    const cleanContent = rawContent.replace(/^```(?:json)?\\s*/i, "").replace(/\\s*```$/, "").trim();
+    const cleanContent = rawContent.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
     const parsed = JSON.parse(cleanContent) as Partial<SeoFields>;
     if (!parsed.title?.trim() || !parsed.description?.trim() || !parsed.altText?.trim()) return null;
     const value = { title: parsed.title.trim().slice(0, 65), description: parsed.description.trim().slice(0, 155), altText: parsed.altText.trim().slice(0, 125) };
