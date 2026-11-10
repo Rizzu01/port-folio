@@ -182,7 +182,7 @@ async function generateSeo(pin: { id: string; title: string; description: string
       return null;
     }
 
-    const cleanContent = rawContent.replace(/^\`\`\`(?:json)?\\s*/i, "").replace(/\\s*\`\`\`$/, "").trim();
+    const cleanContent = rawContent.trim();
     const jsonStart = cleanContent.indexOf("{");
     const jsonEnd = cleanContent.lastIndexOf("}");
     if (jsonStart < 0 || jsonEnd <= jsonStart) {
