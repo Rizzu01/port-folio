@@ -47,7 +47,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
 
 type SeoFields = { title: string; description: string; altText: string };
 const seoMemory = new Map<string, SeoFields>();
-const MAX_NEW_ANALYSES_PER_REQUEST = 1;
+const MAX_NEW_ANALYSES_PER_REQUEST = 5;
 
 function fallbackSeo(pin: { title: string; description: string; category: string }): SeoFields {
   const title = pin.title === "Selected design" ? `${pin.category} Portfolio Design` : pin.title;
