@@ -52,7 +52,7 @@ function fallbackSeo(pin: { title: string; description: string; category: string
   const title = pin.title === "Selected design" ? `${pin.category} Portfolio Design` : pin.title;
   return {
     title,
-    description: pin.description || `Explore this ${pin.category.toLowerCase()} project from Rizwan Khan's design portfolio.`,
+    description: pin.description.trim() || `Explore this ${pin.category.toLowerCase()} project from Rizwan Khan's design portfolio.`,
     altText: `${title} — ${pin.category.toLowerCase()} portfolio work by Rizwan Khan`,
   };
 }
@@ -77,7 +77,7 @@ async function readSeo(id: string): Promise<SeoFields | null> {
 
 async function generateSeo(pin: { id: string; title: string; description: string; imageUrl: string; category: string }): Promise<SeoFields | null> {
   const key = process.env.OPENROUTER_API_KEY;
-  if (!key || !process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
+  if (!key || !process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) { console.error("Pinterest SEO generation skipped: missing required OpenRouter or Supabase environment variables."); return null; }
   try {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -97,7 +97,7 @@ async function generateSeo(pin: { id: string; title: string; description: string
       }),
       signal: AbortSignal.timeout(15000),
     });
-    if (!response.ok) return null;
+    if (!response.ok) { console.error("OpenRouter Pinterest SEO request failed:", response.status, (await response.text()).slice(0, 1000)); return null; }
     const json = await response.json() as { choices?: Array<{ message?: { content?: string } }> };
     const parsed = JSON.parse(json.choices?.[0]?.message?.content || "{}") as Partial<SeoFields>;
     if (!parsed.title?.trim() || !parsed.description?.trim() || !parsed.altText?.trim()) return null;
@@ -109,7 +109,7 @@ async function generateSeo(pin: { id: string; title: string; description: string
       headers: { apikey: service, Authorization: `Bearer ${service}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal" },
       body: JSON.stringify({ pin_id: pin.id, title: value.title, description: value.description, alt_text: value.altText }),
     });
-    if (!saved.ok) return null; // Avoid repeated paid calls when persistence is not configured.
+    if (!saved.ok) { console.error("Pinterest SEO Supabase save failed:", saved.status, (await saved.text()).slice(0, 1000)); return null; } // Avoid repeated AI calls when persistence is unavailable.
     seoMemory.set(pin.id, value);
     return value;
   } catch (error) {
