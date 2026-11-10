@@ -11,9 +11,10 @@ Pinterest remains the source of truth for portfolio images. The `app/api/pintere
 
 Keep all values server-side; do not prefix them with `NEXT_PUBLIC_`.
 
-- `OPENAI_API_KEY` — OpenAI API key for image analysis.
+- `OPENROUTER_API_KEY` — OpenRouter API key for image analysis.
 - `SUPABASE_URL` — Supabase project URL.
 - `SUPABASE_SERVICE_ROLE_KEY` — Supabase service-role key. Never expose this in client code.
+- `OPENROUTER_MODEL` — optional model ID; defaults to `nvidia/nemotron-3.5-super-vl:free`.
 
 The existing Pinterest OAuth and board environment variables are still required.
 
