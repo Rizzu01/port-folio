@@ -76,14 +76,14 @@ async function readSeo(id: string): Promise<SeoFields | null> {
 }
 
 async function generateSeo(pin: { id: string; title: string; description: string; imageUrl: string; category: string }): Promise<SeoFields | null> {
-  const key = process.env.OPENAI_API_KEY;
+  const key = process.env.OPENROUTER_API_KEY;
   if (!key || !process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json", "HTTP-Referer": "https://creativerizz.in", "X-Title": "CreativeRizz Pinterest SEO" },
       body: JSON.stringify({
-        model: process.env.PINTEREST_SEO_MODEL || "gpt-4.1-mini",
+        model: process.env.OPENROUTER_MODEL || "nvidia/nemotron-3.5-super-vl:free",
         temperature: 0.2,
         max_tokens: 250,
         response_format: { type: "json_object" },
