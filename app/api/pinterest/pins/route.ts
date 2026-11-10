@@ -106,10 +106,15 @@ async function generateSeo(pin: { id: string; title: string; description: string
       "If the Pinterest title or description conflicts with the image, trust the image.",
     ].join("\n");
 
-    const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`, {
+    // Gemini 2.5 Flash is no longer available to newly provisioned API users.
+    // Also override a stale Vercel GEMINI_MODEL value so it cannot keep breaking SEO generation.
+    const configuredModel = process.env.GEMINI_MODEL?.trim();
+    const model = !configuredModel || configuredModel === "gemini-2.5-flash" || configuredModel === "models/gemini-2.5-flash"
+      ? "gemini-3.8-flash"
+      : configuredModel.replace(/^models\//, "");
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
       body: JSON.stringify({
         contents: [{ role: "user", parts: [{ text: prompt }, { inlineData: { mimeType: contentType, data: imageBytes.toString("base64") } }] }],
         generationConfig: { temperature: 0.2, maxOutputTokens: 500, responseMimeType: "application/json" },
