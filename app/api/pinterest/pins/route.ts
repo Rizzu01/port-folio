@@ -132,7 +132,8 @@ async function generateSeo(pin: { id: string; title: string; description: string
     const value = { title: parsed.title.trim().slice(0, 65), description: parsed.description.trim().slice(0, 155), altText: parsed.altText.trim().slice(0, 125) };
     const base = process.env.SUPABASE_URL!;
     const service = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-    const saved = await fetch(`${base.replace(/\/$/, "")}/rest/v1/pinterest_pin_seo?on_conflict=pin_id`, {
+    const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
+    const saved = await fetch(`${normalizedBase}/rest/v1/pinterest_pin_seo?on_conflict=pin_id`, {
       method: "POST",
       headers: { apikey: service, Authorization: `Bearer ${service}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal" },
       body: JSON.stringify({ pin_id: pin.id, title: value.title, description: value.description, alt_text: value.altText }),
