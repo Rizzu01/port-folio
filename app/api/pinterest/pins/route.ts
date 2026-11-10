@@ -47,7 +47,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
 
 type SeoFields = { title: string; description: string; altText: string };
 const seoMemory = new Map<string, SeoFields>();
-const MAX_NEW_ANALYSES_PER_REQUEST = 2;
+const MAX_NEW_ANALYSES_PER_REQUEST = 1;
 
 function fallbackSeo(pin: { title: string; description: string; category: string }): SeoFields {
   const title = pin.title === "Selected design" ? `${pin.category} Portfolio Design` : pin.title;
@@ -156,12 +156,14 @@ async function generateSeo(pin: { id: string; title: string; description: string
         });
         if (response.ok) break;
         lastError = await response.text();
-        if (![429, 500, 502, 503, 504].includes(response.status)) break;
+        // A 429 is a quota/rate-limit response; retrying another model on the same key
+        // consumes more requests without fixing the exhausted project quota.
+        if (response.status === 429 || ![500, 502, 503, 504].includes(response.status)) break;
         console.warn(`Gemini Pinterest SEO temporary failure on ${candidateModel} (attempt ${attempt + 1}):`, response.status);
         if (attempt === 0) await new Promise((resolve) => setTimeout(resolve, 900));
       }
       if (response?.ok) break;
-      if (response && ![429, 500, 502, 503, 504].includes(response.status)) break;
+      if (response?.status === 429 || (response && ![500, 502, 503, 504].includes(response.status))) break;
     }
     if (!response?.ok) {
       console.error("Gemini Pinterest SEO failed after retries/fallback:", response?.status, lastError.slice(0, 1000));
