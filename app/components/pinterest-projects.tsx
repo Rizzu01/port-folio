@@ -119,6 +119,7 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
                     <span className="pinterest-project-caption-copy">
                       <span className="pinterest-project-title">{pin.title}</span>
                       <span className="pinterest-project-subtitle">{pin.category} · Pinterest</span>
+                      {pin.description && <span className="pinterest-project-description">{pin.description}</span>}
                     </span>
                     <span className="pinterest-project-arrow" aria-hidden="true">↗</span>
                   </span>
