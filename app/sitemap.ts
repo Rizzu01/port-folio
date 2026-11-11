@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/web-design", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/branding", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/fintech-crypto-design", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" as const },
   ];
 
   return pages.map(({ path, priority, changeFrequency }) => ({
