@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "Crypto campaign creatives, fintech interfaces and digital visual communication.",
     url: "https://creativerizz.in/fintech-crypto-design",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
