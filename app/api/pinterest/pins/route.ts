@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getManualPinterestMetadata } from "@/lib/pinterest-manual-metadata";
 import { getPinterestAccessToken } from "@/lib/pinterest-token";
 
 export const dynamic = "force-dynamic";
@@ -43,7 +44,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
   return items;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   let token: string | null;
   try {
     token = await getPinterestAccessToken();
@@ -114,9 +115,22 @@ export async function GET() {
       }).filter((pin) => pin.imageUrl));
     }
 
+    let responsePins = allPins;
+    if (new URL(request.url).searchParams.get("raw") !== "1") {
+      try {
+        const manualMetadata = await getManualPinterestMetadata();
+        responsePins = allPins.map((pin) => {
+          const manual = manualMetadata[pin.id];
+          return manual ? { ...pin, title: manual.title, description: manual.description, altText: manual.alt_text } : pin;
+        });
+      } catch (metadataError) {
+        console.error("Manual Pinterest metadata unavailable; using original Pinterest content:", metadataError);
+      }
+    }
+
     return NextResponse.json({
       configured: true,
-      pins: allPins,
+      pins: responsePins,
       message: allPins.length ? undefined : "No Pins found. Check that the three boards are public and named Social Media Posts, UI/UX Designs, and Printed Designs.",
     }, { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0" } });
   } catch (error) {
