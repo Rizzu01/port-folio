@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import ServiceLanding from "../components/ServiceLanding";
 
 export const metadata: Metadata = {
-  title: "Web Designer Portfolio & Responsive Website Design",
+  title: "Responsive Web Design Portfolio | Rizwan Khan",
   description:
     "Explore responsive web design by Rizwan Khan, including website layouts, landing pages, interface systems and frontend-focused digital experiences.",
   alternates: { canonical: "/web-design" },
   openGraph: {
     title: "Web Design & Responsive Websites | Rizwan Khan",
     description: "Responsive website layouts, landing pages and thoughtful digital experiences.",
-    url: "https://creativerizz.in/web-design",
+    url: "https://www.creativerizz.in/web-design",
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
