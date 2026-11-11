@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "Visual identity, creative direction and consistent brand applications.",
     url: "https://creativerizz.in/branding",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
