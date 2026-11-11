@@ -8,6 +8,7 @@ type SeoRequest = {
   title?: unknown;
   description?: unknown;
   pinUrl?: unknown;
+  imageUrl?: unknown;
 };
 
 function clean(value: unknown, max: number) {
@@ -35,14 +36,23 @@ export async function POST(request: NextRequest) {
   const title = clean(body.title, 120);
   const description = clean(body.description, 1000);
   const pinUrl = clean(body.pinUrl, 300);
+  const imageUrl = clean(body.imageUrl, 2000);
 
-  if (!category || !title) {
-    return NextResponse.json({ error: "Project category and title are required." }, { status: 400 });
+  if (!category || !imageUrl) {
+    return NextResponse.json({ error: "Project category and image are required." }, { status: 400 });
+  }
+  let image: URL;
+  try {
+    image = new URL(imageUrl);
+    if (image.protocol !== "https:" || image.username || image.password || !/^(?:[a-z0-9-]+\\.)*(?:pinimg\\.com|pinterest\\.com)$/i.test(image.hostname)) throw new Error("Unsupported image host");
+  } catch {
+    return NextResponse.json({ error: "A valid Pinterest image URL is required." }, { status: 400 });
   }
 
   const systemPrompt = [
     "You are an expert SEO copywriter for CreativeRizz, a professional graphic and UI/UX design portfolio.",
-    "Create accurate, natural, search-friendly metadata for one portfolio project.",
+    "Create accurate, natural, search-friendly metadata for one portfolio project based primarily on the actual image analysis.",
+    "Describe the specific visible objects, layout, typography, colors, subject and design style where relevant. Do not guess unreadable text.",
     "Do not keyword-stuff, invent clients, brands, campaign results, tools, deliverables or project details.",
     "Keep the title descriptive and compelling, ideally 45–65 characters when natural, and never exceed 120 characters.",
     "Write a useful description around 120–300 characters when the available facts allow it; never exceed 1000 characters.",
@@ -52,13 +62,38 @@ export async function POST(request: NextRequest) {
 
   const userPrompt = [
     `Portfolio category: ${category}`,
-    `Current project title: ${title}`,
+    `Current project title (may be missing): ${title || "Not provided"}`,
     `Current project description: ${description || "Not provided"}`,
-    `Pinterest project URL: ${pinUrl || "Not provided"}`,
+    `Pinterest project URL (reference only): ${pinUrl || "Not provided"}`,
+    "Image analysis (primary source): ${IMAGE_ANALYSIS}",
     "Create improved SEO metadata. Keep the wording specific to this design portfolio item, not generic marketing copy.",
   ].join("\n");
 
   try {
+    const visionResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "meta-llama/llama-4-scout-17b-16e-instruct",
+        messages: [{ role: "user", content: [
+          { type: "text", text: "Examine this portfolio design image carefully. Report only visible details: subject, objects, layout, typography or legible words, colors, visual style, and type of design. Be specific and factual. Do not invent a brand, client, text or context. If you cannot see the image, say IMAGE_NOT_VISIBLE." },
+          { type: "image_url", image_url: { url: image.href } }
+        ] }],
+        temperature: 0.2,
+        max_completion_tokens: 500
+      }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(25000)
+    });
+    if (!visionResponse.ok) {
+      console.error("Groq image analysis failed:", visionResponse.status, await visionResponse.text().catch(() => ""));
+      return NextResponse.json({ error: "AI could not analyse this Pinterest image. Please try again." }, { status: 502 });
+    }
+    const visionPayload = await visionResponse.json();
+    const imageAnalysis = visionPayload.choices?.[0]?.message?.content;
+    if (typeof imageAnalysis !== "string" || !imageAnalysis.trim() || imageAnalysis.includes("IMAGE_NOT_VISIBLE")) {
+      return NextResponse.json({ error: "AI could not see the selected image." }, { status: 502 });
+    }
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -69,7 +104,7 @@ export async function POST(request: NextRequest) {
         model: "openai/gpt-oss-120b",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
+          { role: "user", content: userPrompt.replace("${IMAGE_ANALYSIS}", imageAnalysis) },
         ],
         temperature: 0.35,
         max_completion_tokens: 700,
