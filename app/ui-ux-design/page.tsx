@@ -4,12 +4,12 @@ import ServiceLanding from "../components/ServiceLanding";
 export const metadata: Metadata = {
   title: "UI/UX Designer Portfolio & Product Design",
   description:
-    "Explore UI/UX design by Rizwan Khan, including user flows, responsive interfaces, product screens and fintech experiences. View selected work and discuss a design project.",
+    "Explore UI/UX and product design by Rizwan Khan, from user flows and responsive interfaces to fintech product screens. View selected work.",
   alternates: { canonical: "/ui-ux-design" },
   openGraph: {
     title: "UI/UX & Product Design | Rizwan Khan",
     description: "User flows, product interfaces and thoughtful responsive digital experiences.",
-    url: "https://creativerizz.in/ui-ux-design",
+    url: "https://www.creativerizz.in/ui-ux-design",
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
