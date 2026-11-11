@@ -8,15 +8,15 @@ import { PinterestProjects, type PinResponse } from "../components/pinterest-pro
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Design Portfolio | UI/UX, Graphic & Print Projects",
+  title: "UI/UX, Graphic & Print Design Portfolio",
   description:
-    "Explore Rizwan Khan's selected design projects, from social media campaigns and visual communication to UI/UX concepts and print-ready design. View the original work on Pinterest.",
+    "Selected UI/UX, graphic and print design projects by Rizwan Khan. Explore campaign visuals, product interfaces and print-ready creative work.",
   alternates: { canonical: "/work" },
   openGraph: {
     title: "Selected Design Work | Rizwan Khan",
     description:
       "A portfolio of social media, UI/UX, graphic and print design projects by Rizwan Khan.",
-    url: "https://creativerizz.in/work",
+    url: "https://www.creativerizz.in/work",
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
@@ -31,7 +31,7 @@ export default async function WorkPage() {
 
   try {
     const response = await getPinterestPins(
-      new NextRequest("https://creativerizz.in/api/pinterest/pins")
+      new NextRequest("https://www.creativerizz.in/api/pinterest/pins")
     );
     if (response.ok) {
       initialData = (await response.json()) as PinResponse;
