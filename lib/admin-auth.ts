@@ -40,7 +40,7 @@ export function isAdminAuthenticated(request: NextRequest) {
   if (!token) return false;
 
   const [timestamp, signature, extra] = token.split(".");
-  if (!timestamp || !signature || extra || !/^\\d{10}$/.test(timestamp)) return false;
+  if (!timestamp || !signature || extra || !/^\d{10}$/.test(timestamp)) return false;
 
   const issuedAt = Number(timestamp);
   const now = Math.floor(Date.now() / 1000);
