@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Check, Eye, EyeOff, LogOut, RefreshCw, Save, Search, RotateCcw } from "lucide-react";
 
 type Category = "Social Media Posts" | "UI/UX Designs" | "Printed Designs";
@@ -36,6 +36,8 @@ export function AdminDashboard() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  // Prevent the initial session check from overwriting a successful login if it resolves late.
+  const loginStarted = useRef(false);
 
   const loadDashboard = useCallback(async () => {
     setLoading(true);
@@ -71,11 +73,14 @@ export function AdminDashboard() {
     fetch("/api/admin/auth", { cache: "no-store" })
       .then((response) => response.json())
       .then((data: { configured: boolean; authenticated: boolean }) => {
+        if (loginStarted.current) return;
         setConfigured(data.configured);
         setAuthenticated(data.authenticated);
         if (data.authenticated) void loadDashboard();
       })
-      .catch(() => setError("Could not check admin session. Refresh the page."));
+      .catch(() => {
+        if (!loginStarted.current) setError("Could not check admin session. Refresh the page.");
+      });
   }, [loadDashboard]);
 
   const categoryPins = useMemo(() => {
@@ -111,6 +116,7 @@ export function AdminDashboard() {
 
   async function login(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    loginStarted.current = true;
     setError("");
     setLoading(true);
     try {
@@ -125,6 +131,7 @@ export function AdminDashboard() {
       setAuthenticated(true);
       await loadDashboard();
     } catch (caught) {
+      loginStarted.current = false;
       setError(caught instanceof Error ? caught.message : "Login failed.");
     } finally {
       setLoading(false);
@@ -194,6 +201,7 @@ export function AdminDashboard() {
 
   async function logout() {
     await fetch("/api/admin/auth", { method: "DELETE" });
+    loginStarted.current = false;
     setAuthenticated(false);
     setPins([]);
     setMetadata({});
@@ -210,7 +218,7 @@ export function AdminDashboard() {
         <section className="cr-admin-login">
           <span className="cr-admin-eyebrow">CREATIVERIZZ / ADMIN</span>
           <h1>Admin setup required</h1>
-          <p>Add <code>ADMIN_PASSWORD</code> to your Vercel environment variables. Use a unique password with at least 16 characters, then redeploy.</p>
+          <p>Add <code>ADMIN_PASSWORD</code> to your Vercel environment variables. Use a unique password with at least 8 characters, then redeploy.</p>
         </section>
       </main>
     );
