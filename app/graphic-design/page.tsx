@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "Campaign creatives, social media graphics and visual communication projects.",
     url: "https://creativerizz.in/graphic-design",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
