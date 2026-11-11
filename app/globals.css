@@ -290,13 +290,13 @@ body{background:#fbfaf7}
 .clarity-star{transition:transform .45s var(--motion-ease),color .3s ease}
 .clarity-note:hover .clarity-star{transform:rotate(45deg);color:#b18b36}
 /* Keep hero copy visible on first paint; delaying this wrapper delays the LCP heading. */
-.portfolio-hero .thought-card{animation:cardRise .75s .25s var(--motion-ease) both}
-.portfolio-hero .sync-card{animation:cardRise .75s .38s var(--motion-ease) both}
-.portfolio-hero .portrait-stage{animation:portraitReveal 1s .12s var(--motion-ease) both}
-.portfolio-hero .panel-focus{animation:cardRise .7s .5s var(--motion-ease) both}
-.portfolio-hero .panel-ideas{animation:cardRise .7s .62s var(--motion-ease) both}
-.portfolio-hero .panel-plan{animation:cardRise .7s .7s var(--motion-ease) both}
-.portfolio-hero .panel-print{animation:cardRise .7s .78s var(--motion-ease) both}
+
+
+
+
+
+
+
 .contact-modal{animation:modalEnter .3s var(--motion-ease) both}
 .contact-modal-close{transition:transform .25s var(--motion-ease),background-color .25s ease,border-color .25s ease}
 .contact-modal-close:hover{transform:rotate(90deg);background:#f1eee8;border-color:#d7d1c7}
