@@ -2,6 +2,7 @@ import Link from "next/link";
 
 type ServicePageProps = {
   eyebrow: string;
+  path: string;
   title: string;
   intro: string;
   services: string[];
@@ -12,6 +13,7 @@ type ServicePageProps = {
 
 export default function ServiceLanding({
   eyebrow,
+  path,
   title,
   intro,
   services,
@@ -31,6 +33,31 @@ export default function ServiceLanding({
           </nav>
         </header>
         <article style={{ background: "#fbfaf7", border: "1px solid #fff", borderRadius: 24, padding: "clamp(28px, 6vw, 76px)", boxShadow: "0 12px 40px #495cbe12" }}>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Service",
+                name: eyebrow,
+                description: intro,
+                serviceType: eyebrow,
+                url: `https://creativerizz.in${path}`,
+                provider: { "@id": "https://creativerizz.in/#person" },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://creativerizz.in/" },
+                  { "@type": "ListItem", position: 2, name: eyebrow, item: `https://creativerizz.in${path}` },
+                ],
+              },
+            ]) }}
+          />
+          <nav aria-label="Breadcrumb" style={{ marginBottom: 28, fontSize: 13, color: "#62637a" }}>
+            <Link href="/">Home</Link><span aria-hidden="true"> / </span><span aria-current="page">{eyebrow}</span>
+          </nav>
           <p style={{ textTransform: "uppercase", letterSpacing: ".16em", fontSize: 12, color: "#62637a", fontWeight: 700 }}>{eyebrow}</p>
           <h1 style={{ fontSize: "clamp(40px, 7vw, 76px)", lineHeight: 1.02, letterSpacing: "-.055em", maxWidth: 850, margin: "20px 0 24px" }}>{title}</h1>
           <p style={{ fontSize: "clamp(17px, 2vw, 21px)", lineHeight: 1.7, maxWidth: 780, color: "#41414a" }}>{intro}</p>
