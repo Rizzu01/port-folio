@@ -33,7 +33,7 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
         })
         .then(setData)
         .catch((error: unknown) => {
-          if (error instanceof Error && error.name !== "AbortError" && !data) {
+          if (error instanceof Error && error.name !== "AbortError" && !initialData) {
             setData({ configured: false, pins: [], message: "Pinterest projects are temporarily unavailable." });
           }
         });
@@ -48,7 +48,7 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
       window.clearInterval(interval);
       window.removeEventListener("focus", refreshPins);
     };
-  }, [initialData, data]);
+  }, [initialData]);
 
   useEffect(() => {
     if (!selectedPin) return;
