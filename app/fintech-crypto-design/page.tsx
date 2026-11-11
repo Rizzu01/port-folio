@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fintech & Crypto Design | Rizwan Khan",
     description: "Crypto campaign creatives, fintech interfaces and digital visual communication.",
-    url: "https://creativerizz.in/fintech-crypto-design",
+    url: "https://www.creativerizz.in/fintech-crypto-design",
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
