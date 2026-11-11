@@ -72,20 +72,44 @@ export async function POST(request: NextRequest) {
   ].join("\n");
 
   try {
+    // Download the Pinterest CDN image first; some CDN URLs reject direct provider fetches.
+    const imageResponse = await fetch(image.href, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; CreativeRizzPortfolioBot/1.0)",
+        "Referer": "https://www.pinterest.com/",
+        "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+      },
+      cache: "no-store",
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!imageResponse.ok) {
+      console.error("Pinterest image download failed:", imageResponse.status, image.hostname);
+      return NextResponse.json({ error: "Could not load this Pinterest image. Please refresh the board and try again." }, { status: 502 });
+    }
+    const contentType = (imageResponse.headers.get("content-type") || "").split(";")[0].trim().toLowerCase();
+    if (!contentType.startsWith("image/") || contentType === "image/svg+xml") {
+      return NextResponse.json({ error: "The selected Pinterest URL did not return a supported image." }, { status: 502 });
+    }
+    const imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
+    if (!imageBuffer.length || imageBuffer.length > 15 * 1024 * 1024) {
+      return NextResponse.json({ error: "The selected image is empty or too large to analyse (15 MB maximum)." }, { status: 413 });
+    }
+    const imageDataUrl = "data:" + contentType + ";base64," + imageBuffer.toString("base64");
+
     const visionResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "meta-llama/llama-4-scout-17b-16e-instruct",
+        model: "qwen/qwen3.8-27b",
         messages: [{ role: "user", content: [
           { type: "text", text: "Examine this portfolio design image carefully. Report only visible details: subject, objects, layout, typography or legible words, colors, visual style, and type of design. Be specific and factual. Do not invent a brand, client, text or context. If you cannot see the image, say IMAGE_NOT_VISIBLE." },
-          { type: "image_url", image_url: { url: image.href } }
+          { type: "image_url", image_url: { url: imageDataUrl } }
         ] }],
         temperature: 0.2,
-        max_completion_tokens: 500
+        max_completion_tokens: 700
       }),
       cache: "no-store",
-      signal: AbortSignal.timeout(25000)
+      signal: AbortSignal.timeout(30000)
     });
     if (!visionResponse.ok) {
       console.error("Groq image analysis failed:", visionResponse.status, await visionResponse.text().catch(() => ""));
