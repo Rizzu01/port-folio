@@ -6,7 +6,7 @@ const SESSION_SECONDS = 8 * 60 * 60;
 
 function getAdminPassword() {
   const password = process.env.ADMIN_PASSWORD;
-  return password && password.length >= 16 ? password : null;
+  return password && password.length >= 8 ? password : null;
 }
 
 function signTimestamp(timestamp: string, password: string) {
@@ -27,7 +27,7 @@ export function verifyAdminPassword(candidate: unknown) {
 
 export function createAdminSessionToken() {
   const password = getAdminPassword();
-  if (!password) throw new Error("ADMIN_PASSWORD must contain at least 16 characters.");
+  if (!password) throw new Error("ADMIN_PASSWORD must contain at least 8 characters.");
   const timestamp = Math.floor(Date.now() / 1000).toString();
   return timestamp + "." + signTimestamp(timestamp, password);
 }
@@ -40,7 +40,7 @@ export function isAdminAuthenticated(request: NextRequest) {
   if (!token) return false;
 
   const [timestamp, signature, extra] = token.split(".");
-  if (!timestamp || !signature || extra || !/^\d{10}$/.test(timestamp)) return false;
+  if (!timestamp || !signature || extra || !/^\\d{10}$/.test(timestamp)) return false;
 
   const issuedAt = Number(timestamp);
   const now = Math.floor(Date.now() / 1000);
