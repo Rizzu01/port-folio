@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUpRight, Check, Eye, EyeOff, LogOut, RefreshCw, Save, Search, RotateCcw } from "lucide-react";
+import { ArrowUpRight, Check, Eye, EyeOff, LogOut, RefreshCw, Save, Search, RotateCcw, Sparkles } from "lucide-react";
 
 type Category = "Social Media Posts" | "UI/UX Designs" | "Printed Designs";
 type Pin = {
@@ -31,6 +31,8 @@ export function AdminDashboard() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [altText, setAltText] = useState("");
+  const [focusKeyword, setFocusKeyword] = useState("");
+  const [generatingSeo, setGeneratingSeo] = useState(false);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -135,6 +137,36 @@ export function AdminDashboard() {
       setError(caught instanceof Error ? caught.message : "Login failed.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function generateSeo() {
+    if (!selectedPin) return;
+    setGeneratingSeo(true);
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch("/api/admin/seo/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: selectedPin.category,
+          title,
+          description,
+          focusKeyword,
+          pinUrl: selectedPin.pinUrl,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Could not generate SEO content.");
+      setTitle(data.title);
+      setDescription(data.description);
+      setAltText(data.altText);
+      setMessage("AI suggestions added. Review and edit them before saving.");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Could not generate SEO content.");
+    } finally {
+      setGeneratingSeo(false);
     }
   }
 
@@ -328,6 +360,24 @@ export function AdminDashboard() {
                 {selectedMetadata && <span className="cr-admin-custom-badge">CUSTOM</span>}
               </div>
               <form className="cr-admin-edit-form" onSubmit={saveMetadata}>
+                <div className="cr-admin-seo-tools">
+                  <div className="cr-admin-seo-copy">
+                    <span className="cr-admin-seo-icon"><Sparkles size={16} /></span>
+                    <div><strong>AI SEO assistant</strong><small>Generate a search-friendly title, description and image alt text.</small></div>
+                  </div>
+                  <div className="cr-admin-seo-controls">
+                    <input
+                      aria-label="Focus keyword (optional)"
+                      value={focusKeyword}
+                      onChange={(event) => setFocusKeyword(event.target.value)}
+                      maxLength={100}
+                      placeholder="Focus keyword (optional)"
+                    />
+                    <button type="button" className="cr-admin-generate" onClick={() => void generateSeo()} disabled={generatingSeo}>
+                      <Sparkles size={15} /> {generatingSeo ? "Generating…" : "Generate with AI"}
+                    </button>
+                  </div>
+                </div>
                 <div className="cr-admin-field">
                   <div><label htmlFor="pin-title">Title</label><span>{title.length}/120</span></div>
                   <input id="pin-title" value={title} onChange={(event) => setTitle(event.target.value)} maxLength={120} required placeholder="Write a clear project title" />
