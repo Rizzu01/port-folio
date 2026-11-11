@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
       if (!CATEGORIES.some((category) => process.env[category.envKey]) && !process.env.PINTEREST_BOARD_ID) throw error;
     }
 
-    const allPins: Array<{ id: string; title: string; description: string; imageUrl: string; pinUrl: string; createdAt: string; category: string }> = [];
+    const allPins: Array<{ id: string; title: string; description: string; imageUrl: string; imageWidth: number; imageHeight: number; pinUrl: string; createdAt: string; category: string }> = [];
     const usedBoardIds = new Set<string>();
 
     for (const category of CATEGORIES) {
@@ -89,6 +89,8 @@ export async function GET(request: NextRequest) {
           title: pin.title?.trim() || pin.description?.trim().split("\n")[0] || "Selected design",
           description: pin.description ?? "",
           imageUrl: image?.url ?? "",
+          imageWidth: image?.width ?? 1200,
+          imageHeight: image?.height ?? 1200,
           pinUrl: `https://www.pinterest.com/pin/${pin.id}/`,
           createdAt: pin.created_at ?? "",
           category: category.label,
