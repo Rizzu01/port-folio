@@ -55,12 +55,8 @@ export function setupPortfolioAnimations(root: HTMLElement) {
       gsap.fromTo($(".portfolio-eyebrow"), { y: 12, opacity: 0 }, {
         y: 0, opacity: 1, duration: 0.65, ease: "power3.out", clearProps: "transform,opacity"
       });
-      gsap.fromTo($(".portfolio-hero h1"), { y: 28, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 1, delay: 0.08, ease: "expo.out", clearProps: "transform,opacity"
-      });
-      gsap.fromTo($(".portfolio-hero h1 em"), { y: 18, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.9, delay: 0.22, ease: "expo.out", clearProps: "transform,opacity"
-      });
+      // Keep the hero heading visible immediately: its emphasized line is the mobile LCP element.
+      // The eyebrow and decorative elements retain their entrance motion.
       // Keep the hero subtitle visible immediately: it is the mobile LCP element.
       // Do not animate its opacity or delay its first paint.
       gsap.fromTo($(".hero-actions > *"), { y: 12, opacity: 0 }, {
