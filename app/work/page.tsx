@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { NextRequest } from "next/server";
 import { ArrowLeft } from "lucide-react";
-import { PinterestProjects } from "../components/pinterest-projects";
+import { GET as getPinterestPins } from "../api/pinterest/pins/route";
+import { PinterestProjects, type PinResponse } from "../components/pinterest-projects";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Design Portfolio | UI/UX, Graphic & Print Projects",
@@ -18,7 +22,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  let initialData: PinResponse = {
+    configured: false,
+    pins: [],
+    message: "Pinterest projects are temporarily unavailable.",
+  };
+
+  try {
+    const response = await getPinterestPins(
+      new NextRequest("https://creativerizz.in/api/pinterest/pins")
+    );
+    if (response.ok) {
+      initialData = (await response.json()) as PinResponse;
+    }
+  } catch (error) {
+    console.error("Server-rendered Pinterest portfolio load failed:", error);
+  }
+
   return (
     <main className="site-shell">
       <div className="reference-site pinterest-all-work-page">
@@ -29,7 +50,7 @@ export default function WorkPage() {
           <span>Explore selected social media, UI/UX and printed design work by Rizwan Khan.</span>
         </header>
         <section className="reference-work pinterest-all-work-section" aria-label="Design portfolio projects">
-          <PinterestProjects fullPage />
+          <PinterestProjects fullPage initialData={initialData} />
         </section>
       </div>
     </main>
