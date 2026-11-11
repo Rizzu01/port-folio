@@ -31,7 +31,6 @@ export function AdminDashboard() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [altText, setAltText] = useState("");
-  const [focusKeyword, setFocusKeyword] = useState("");
   const [generatingSeo, setGeneratingSeo] = useState(false);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -153,7 +152,6 @@ export function AdminDashboard() {
           category: selectedPin.category,
           title,
           description,
-          focusKeyword,
           pinUrl: selectedPin.pinUrl,
         }),
       });
@@ -366,15 +364,8 @@ export function AdminDashboard() {
                     <div><strong>AI SEO assistant</strong><small>Generate a search-friendly title, description and image alt text.</small></div>
                   </div>
                   <div className="cr-admin-seo-controls">
-                    <input
-                      aria-label="Focus keyword (optional)"
-                      value={focusKeyword}
-                      onChange={(event) => setFocusKeyword(event.target.value)}
-                      maxLength={100}
-                      placeholder="Focus keyword (optional)"
-                    />
                     <button type="button" className="cr-admin-generate" onClick={() => void generateSeo()} disabled={generatingSeo}>
-                      <Sparkles size={15} /> {generatingSeo ? "Generating…" : "Generate with AI"}
+                      <Sparkles size={15} /> {generatingSeo ? "Generating SEO…" : "Generate SEO"}
                     </button>
                   </div>
                 </div>
