@@ -110,6 +110,8 @@ export async function GET(request: NextRequest) {
           title: pin.title?.trim() || pin.description?.trim().split("\n")[0] || "Selected design",
           description: pin.description ?? "",
           imageUrl: image?.url ?? "",
+          imageWidth: image?.width ?? 1200,
+          imageHeight: image?.height ?? 1200,
           pinUrl: `https://www.pinterest.com/pin/${pin.id}/`,
           createdAt: pin.created_at ?? "",
           category: "Social Media Posts",
