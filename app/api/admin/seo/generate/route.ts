@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     "Return only a valid JSON object with exactly these string keys: title, description, altText.",
   ].join(" ");
 
-  const userPrompt = [
+  const makeUserPrompt = (imageAnalysis: string) => [
     `Portfolio category: ${category}`,
     `Current project title (may be missing): ${title || "Not provided"}`,
     `Current project description: ${description || "Not provided"}`,
@@ -130,7 +130,7 @@ export async function POST(request: NextRequest) {
         model: "llama-3.3-70b-versatile",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt.replace("${IMAGE_ANALYSIS}", imageAnalysis) },
+          { role: "user", content: makeUserPrompt(imageAnalysis) },
         ],
         temperature: 0.35,
         max_completion_tokens: 700,
@@ -149,7 +149,7 @@ export async function POST(request: NextRequest) {
     const content = payload.choices?.[0]?.message?.content;
     if (typeof content !== "string") throw new Error("AI returned an empty response.");
 
-    const jsonText = content.replace(/^```(?:json)?\\s*/i, "").replace(/\\s*```$/, "").trim();
+    const jsonText = content.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
     const jsonStart = jsonText.indexOf("{");
     const jsonEnd = jsonText.lastIndexOf("}");
     if (jsonStart < 0 || jsonEnd <= jsonStart) throw new Error("AI response did not contain JSON.");
