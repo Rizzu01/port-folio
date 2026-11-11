@@ -2018,25 +2018,47 @@ html[data-theme="dark"] .custom-cursor-enabled .cursor::after{background:#fff!im
 .cr-admin-generate:disabled{opacity:.55;cursor:wait}
 @media(max-width:680px){.cr-admin-seo-controls{flex-direction:column}.cr-admin-generate{width:100%;min-height:40px}}
 
-/* Keep Pinterest work cards stable when project titles are long. */
+/* Keep each Pinterest caption inside its own card column. */
 .pinterest-project .reference-project-caption{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 16px;
+  align-items:start;
+  column-gap:10px;
+  width:100%;
   min-width:0;
 }
 .pinterest-project-caption-copy{
-  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  width:100%;
   min-width:0;
+  max-width:100%;
+  gap:5px;
 }
 .pinterest-project-title{
+  display:-webkit-box!important;
+  width:100%;
+  max-width:100%;
   min-width:0;
   min-height:2.8em;
+  margin:0;
   line-height:1.4;
-  overflow-wrap:anywhere;
-  display:-webkit-box;
+  white-space:normal!important;
+  overflow-wrap:break-word;
+  word-break:normal;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
   line-clamp:2;
   overflow:hidden;
 }
+.pinterest-project-subtitle{
+  display:block;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:break-word;
+}
 .pinterest-project-arrow{
-  flex:0 0 16px;
+  width:16px;
+  min-width:16px;
+  text-align:right;
 }
