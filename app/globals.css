@@ -289,7 +289,7 @@ body{background:#fbfaf7}
 .orbit-stamp:hover .stamp-star{transform:rotate(45deg) scale(1.12);color:#b18b36}
 .clarity-star{transition:transform .45s var(--motion-ease),color .3s ease}
 .clarity-note:hover .clarity-star{transform:rotate(45deg);color:#b18b36}
-.portfolio-hero .hero-copy{animation:heroRise .8s .05s var(--motion-ease) both}
+/* Keep hero copy visible on first paint; delaying this wrapper delays the LCP heading. */
 .portfolio-hero .thought-card{animation:cardRise .75s .25s var(--motion-ease) both}
 .portfolio-hero .sync-card{animation:cardRise .75s .38s var(--motion-ease) both}
 .portfolio-hero .portrait-stage{animation:portraitReveal 1s .12s var(--motion-ease) both}
