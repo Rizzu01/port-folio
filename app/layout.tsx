@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
+
+const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-dm-sans" });
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["500", "600"], style: ["normal", "italic"], display: "swap", variable: "--font-playfair" });
 
 const siteUrl = "https://creativerizz.in";
 const personUrl = `${siteUrl}/#person`;
@@ -107,7 +111,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${dmSans.variable} ${playfair.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
