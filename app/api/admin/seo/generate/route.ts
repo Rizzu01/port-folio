@@ -44,19 +44,21 @@ export async function POST(request: NextRequest) {
   let image: URL;
   try {
     image = new URL(imageUrl);
-    if (image.protocol !== "https:" || image.username || image.password || !/^(?:[a-z0-9-]+\\.)*(?:pinimg\\.com|pinterest\\.com)$/i.test(image.hostname)) throw new Error("Unsupported image host");
+    const host = image.hostname.toLowerCase();
+    const trustedImageHost = host === "pinimg.com" || host.endsWith(".pinimg.com") || host === "pinterest.com" || host.endsWith(".pinterest.com");
+    if (image.protocol !== "https:" || image.username || image.password || !trustedImageHost) throw new Error("Unsupported image host");
   } catch {
     return NextResponse.json({ error: "A valid Pinterest image URL is required." }, { status: 400 });
   }
 
   const systemPrompt = [
-    "You are an expert SEO copywriter for CreativeRizz, a professional graphic and UI/UX design portfolio.",
-    "Create accurate, natural, search-friendly metadata for one portfolio project based primarily on the actual image analysis.",
+    "You are an expert portfolio SEO writer for CreativeRizz, a designer's personal design portfolio.",
+    "Create accurate, natural, search-friendly portfolio metadata that showcases the designer's skills and creative execution, based primarily on the actual image analysis.",
     "Describe the specific visible objects, layout, typography, colors, subject and design style where relevant. Do not guess unreadable text.",
     "Do not keyword-stuff, invent clients, brands, campaign results, tools, deliverables or project details.",
-    "Keep the title descriptive and compelling, ideally 45–65 characters when natural, and never exceed 120 characters.",
-    "Write a useful description around 120–300 characters when the available facts allow it; never exceed 1000 characters.",
-    "Write concise, accessible image alt text that describes the design shown only to the extent supported by the supplied context; never exceed 300 characters.",
+    "Write a portfolio-focused title naming the design discipline or visual concept where supported. Avoid sales headlines and product-marketing titles. Ideally 45–65 characters; max 120.",
+    "Write a portfolio description around 120–300 characters explaining the design work showcased and highlighting visible design skills and decisions. Do not sell the depicted product, promote the company, add calls to action, claim business results, or write product marketing copy. Never exceed 1000 characters.",
+    "Write concise accessible alt text describing the actual visual design and its key visible elements, not promotional copy; max 300 characters.",
     "Return only a valid JSON object with exactly these string keys: title, description, altText.",
   ].join(" ");
 
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
     `Current project description: ${description || "Not provided"}`,
     `Pinterest project URL (reference only): ${pinUrl || "Not provided"}`,
     "Image analysis (primary source): ${IMAGE_ANALYSIS}",
-    "Create improved SEO metadata. Keep the wording specific to this design portfolio item, not generic marketing copy.",
+    "Write for people searching for a designer's portfolio and design skills. The goal is to showcase the creator's visual design ability, not market the product or company shown. Make every field specific to the supplied image; avoid generic filler.",
   ].join("\n");
 
   try {
