@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "Responsive website layouts, landing pages and thoughtful digital experiences.",
     url: "https://creativerizz.in/web-design",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
