@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     "Do not keyword-stuff, invent clients, brands, campaign results, tools, deliverables or project details.",
     "Write a portfolio-focused title naming the design discipline or visual concept where supported. Avoid sales headlines and product-marketing titles. Ideally 45–65 characters; max 120.",
     "Write a portfolio description around 120–300 characters explaining the design work showcased and highlighting visible design skills and decisions. Do not sell the depicted product, promote the company, add calls to action, claim business results, or write product marketing copy. Never exceed 1000 characters.",
-    "Write concise accessible alt text describing the actual visual design and its key visible elements, not promotional copy; max 300 characters.",
+    "Write concise accessible alt text describing only the actual visual design and key visible elements. Aim for 80–125 characters and never exceed 150 characters; no promotional copy or keyword stuffing.",
     "Return only a valid JSON object with exactly these string keys: title, description, altText.",
   ].join(" ");
 
@@ -141,9 +141,11 @@ export async function POST(request: NextRequest) {
           { role: "system", content: systemPrompt },
           { role: "user", content: makeUserPrompt(imageAnalysis) },
         ],
-        temperature: 0.35,
-        max_completion_tokens: 700,
-
+        temperature: 0.2,
+        max_completion_tokens: 1000,
+        reasoning_effort: "low",
+        reasoning_format: "hidden",
+        response_format: { type: "json_object" },
       }),
       cache: "no-store",
       signal: AbortSignal.timeout(30000),
@@ -161,12 +163,12 @@ export async function POST(request: NextRequest) {
     const jsonText = content.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
     const jsonStart = jsonText.indexOf("{");
     const jsonEnd = jsonText.lastIndexOf("}");
-    if (jsonStart < 0 || jsonEnd <= jsonStart) throw new Error("AI response did not contain JSON.");
+    if (jsonStart < 0 || jsonEnd <= jsonStart) { console.error("Groq SEO returned non-JSON content:", content.slice(0, 500), "finish_reason:", payload.choices?.[0]?.finish_reason); throw new Error("AI response did not contain JSON."); }
     const parsed = JSON.parse(jsonText.slice(jsonStart, jsonEnd + 1)) as { title?: unknown; description?: unknown; altText?: unknown };
     const generated = {
       title: clean(parsed.title, 120),
       description: clean(parsed.description, 1000),
-      altText: clean(parsed.altText, 300),
+      altText: clean(parsed.altText, 150),
     };
     if (!generated.title || !generated.description || !generated.altText) {
       throw new Error("AI returned incomplete SEO metadata.");
