@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Brand Identity & Creative Design | Rizwan Khan",
     description: "Visual identity, creative direction and consistent brand applications.",
-    url: "https://creativerizz.in/branding",
+    url: "https://www.creativerizz.in/branding",
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
