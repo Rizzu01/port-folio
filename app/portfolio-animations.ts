@@ -26,7 +26,9 @@ export function setupPortfolioAnimations(root: HTMLElement) {
     // Navbar: intro, gentle scroll-direction hide/show, and active section state.
     const nav = $(".reference-nav")[0];
     if (nav) {
-
+      gsap.fromTo(nav, { y: -14, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.75, ease: "power3.out", clearProps: "transform,opacity"
+      });
 
       // Keep the sticky navbar visible while scrolling in either direction.
       // The previous direction-based ScrollTrigger hid it on downward scroll.
@@ -50,13 +52,20 @@ export function setupPortfolioAnimations(root: HTMLElement) {
     }
 
       // Hero: calm staged reveal. No text is split or rewritten in the DOM.
-
+      gsap.fromTo($(".portfolio-eyebrow"), { y: 12, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.65, ease: "power3.out", clearProps: "transform,opacity"
+      });
       // Keep the hero heading visible immediately: its emphasized line is the mobile LCP element.
       // The eyebrow and decorative elements retain their entrance motion.
       // Keep the hero subtitle visible immediately: it is the mobile LCP element.
       // Do not animate its opacity or delay its first paint.
-
-
+      gsap.fromTo($(".hero-actions > *"), { y: 12, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.65, delay: 0.38, stagger: 0.1,
+        ease: "power3.out", clearProps: "transform,opacity"
+      });
+      gsap.fromTo($(".orbit-stamp, .trust-note, .clarity-note"), { opacity: 0 }, {
+        opacity: 1, duration: 0.8, delay: 0.35, stagger: 0.08, clearProps: "opacity"
+      });
       gsap.to($(".stamp-star, .clarity-star"), {
         rotation: 360, duration: 18, repeat: -1, ease: "none", transformOrigin: "50% 50%"
       });
