@@ -14,39 +14,33 @@ type Pin = {
   createdAt: string;
   category: Category;
 };
-type PinResponse = { configured: boolean; pins: Pin[]; message?: string };
+export type PinResponse = { configured: boolean; pins: Pin[]; message?: string };
 
 const CATEGORIES: Category[] = ["Social Media Posts", "UI/UX Designs", "Printed Designs"];
 
-export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) {
-  const [data, setData] = useState<PinResponse | null>(null);
+export function PinterestProjects({ fullPage = false, initialData }: { fullPage?: boolean; initialData?: PinResponse }) {
+  const [data, setData] = useState<PinResponse | null>(initialData ?? null);
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
   const [activeCategory, setActiveCategory] = useState<Category>("Social Media Posts");
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/api/pinterest/pins", { signal: controller.signal, cache: "no-store" })
-      .then((response) => {
-        if (!response.ok) throw new Error("Pinterest request failed");
-        return response.json() as Promise<PinResponse>;
-      })
-      .then(setData)
-      .catch((error: unknown) => {
-        if (error instanceof Error && error.name !== "AbortError") {
-          setData({ configured: false, pins: [], message: "Pinterest projects are temporarily unavailable." });
-        }
-      });
     const refreshPins = () => {
-      fetch("/api/pinterest/pins", { cache: "no-store" })
+      fetch("/api/pinterest/pins", { signal: controller.signal, cache: "no-store" })
         .then((response) => {
           if (!response.ok) throw new Error("Pinterest request failed");
           return response.json() as Promise<PinResponse>;
         })
         .then(setData)
-        .catch(() => {
-          // Keep the last successfully loaded Pins visible if a background refresh fails.
+        .catch((error: unknown) => {
+          if (error instanceof Error && error.name !== "AbortError" && !data) {
+            setData({ configured: false, pins: [], message: "Pinterest projects are temporarily unavailable." });
+          }
         });
     };
+
+    // Server-rendered data is shown immediately; refresh it in the background.
+    if (!initialData) refreshPins();
     const interval = window.setInterval(refreshPins, 5 * 60 * 1000);
     window.addEventListener("focus", refreshPins);
     return () => {
@@ -54,7 +48,7 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
       window.clearInterval(interval);
       window.removeEventListener("focus", refreshPins);
     };
-  }, []);
+  }, [initialData, data]);
 
   useEffect(() => {
     if (!selectedPin) return;
