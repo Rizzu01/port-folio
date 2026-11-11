@@ -111,7 +111,7 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
               <article className="reference-project pinterest-project pinterest-project-card" key={pin.id}>
                 <button className="pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} aria-label={`Preview ${pin.title}`}>
                   <span className="reference-project-image pinterest-project-image">
-                    <Image src={pin.imageUrl} alt={pin.altText || pin.title} width={pin.imageWidth || 1200} height={pin.imageHeight || 1200} sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw" loading="lazy" />
+                    <Image src={pin.imageUrl} alt={pin.altText || pin.title} width={pin.imageWidth || 1200} height={pin.imageHeight || 1200} sizes="(max-width: 760px) 44vw, (max-width: 1100px) 50vw, 33vw" loading="lazy" />
                   </span>
                   <span className="reference-project-caption">
                     <span className="pinterest-project-caption-copy">
