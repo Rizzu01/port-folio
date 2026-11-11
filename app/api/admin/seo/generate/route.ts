@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     `Current project title (may be missing): ${title || "Not provided"}`,
     `Current project description: ${description || "Not provided"}`,
     `Pinterest project URL (reference only): ${pinUrl || "Not provided"}`,
-    "Image analysis (primary source): ${IMAGE_ANALYSIS}",
+    `Image analysis (primary source): ${imageAnalysis}`,
     "Write for people searching for a designer's portfolio and design skills. The goal is to showcase the creator's visual design ability, not market the product or company shown. Make every field specific to the supplied image; avoid generic filler.",
   ].join("\n");
 
@@ -127,30 +127,14 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "openai/gpt-oss-120b",
+        model: "llama-3.3-70b-versatile",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt.replace("${IMAGE_ANALYSIS}", imageAnalysis) },
         ],
         temperature: 0.35,
         max_completion_tokens: 700,
-        response_format: {
-          type: "json_schema",
-          json_schema: {
-            name: "creative_rizz_seo_metadata",
-            strict: true,
-            schema: {
-              type: "object",
-              properties: {
-                title: { type: "string" },
-                description: { type: "string" },
-                altText: { type: "string" }
-              },
-              required: ["title", "description", "altText"],
-              additionalProperties: false
-            }
-          }
-        },
+
       }),
       cache: "no-store",
       signal: AbortSignal.timeout(30000),
@@ -165,7 +149,11 @@ export async function POST(request: NextRequest) {
     const content = payload.choices?.[0]?.message?.content;
     if (typeof content !== "string") throw new Error("AI returned an empty response.");
 
-    const parsed = JSON.parse(content) as { title?: unknown; description?: unknown; altText?: unknown };
+    const jsonText = content.replace(/^```(?:json)?\\s*/i, "").replace(/\\s*```$/, "").trim();
+    const jsonStart = jsonText.indexOf("{");
+    const jsonEnd = jsonText.lastIndexOf("}");
+    if (jsonStart < 0 || jsonEnd <= jsonStart) throw new Error("AI response did not contain JSON.");
+    const parsed = JSON.parse(jsonText.slice(jsonStart, jsonEnd + 1)) as { title?: unknown; description?: unknown; altText?: unknown };
     const generated = {
       title: clean(parsed.title, 120),
       description: clean(parsed.description, 1000),
