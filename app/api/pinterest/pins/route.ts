@@ -33,7 +33,8 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
     if (bookmark) pageUrl.searchParams.set("bookmark", bookmark);
     const response = await fetch(pageUrl.toString(), {
       headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
-      cache: "no-store",
+      // Pinterest boards change infrequently; cache successful API pages for 5 minutes.
+      next: { revalidate: 300 },
     });
     if (!response.ok) throw new Error(`Pinterest API request failed: ${response.status}`);
     const data = (await response.json()) as PinterestPage<T>;
@@ -68,36 +69,41 @@ export async function GET(request: NextRequest) {
     const allPins: Array<{ id: string; title: string; description: string; imageUrl: string; imageWidth: number; imageHeight: number; pinUrl: string; createdAt: string; category: string }> = [];
     const usedBoardIds = new Set<string>();
 
-    for (const category of CATEGORIES) {
-      const configuredId = process.env[category.envKey];
-      const board = configuredId
-        ? { id: configuredId, name: category.label }
-        : boards.find((candidate) => {
-            const name = normalize(candidate.name);
-            return category.aliases.some((alias) => name === normalize(alias)) ||
-              name === normalize(category.slug.replace(/-/g, " "));
-          });
-      if (!board || usedBoardIds.has(board.id)) continue;
-      usedBoardIds.add(board.id);
+    const categoryPins = await Promise.all(
+      CATEGORIES.map(async (category) => {
+        const configuredId = process.env[category.envKey];
+        const board = configuredId
+          ? { id: configuredId, name: category.label }
+          : boards.find((candidate) => {
+              const name = normalize(candidate.name);
+              return category.aliases.some((alias) => name === normalize(alias)) ||
+                name === normalize(category.slug.replace(/-/g, " "));
+            });
+        if (!board || usedBoardIds.has(board.id)) return [];
+        usedBoardIds.add(board.id);
 
-      const items = await getAllPages<PinterestPin>(new URL(`https://api.pinterest.com/v5/boards/${encodeURIComponent(board.id)}/pins`), token);
-      const pins = items.map((pin) => {
-        const images = pin.media?.images ?? {};
-        const image = images["1200x"] ?? images["600x"] ?? Object.values(images).sort((a, b) => (b.width ?? 0) - (a.width ?? 0))[0];
-        return {
-          id: pin.id,
-          title: pin.title?.trim() || pin.description?.trim().split("\n")[0] || "Selected design",
-          description: pin.description ?? "",
-          imageUrl: image?.url ?? "",
-          imageWidth: image?.width ?? 1200,
-          imageHeight: image?.height ?? 1200,
-          pinUrl: `https://www.pinterest.com/pin/${pin.id}/`,
-          createdAt: pin.created_at ?? "",
-          category: category.label,
-        };
-      }).filter((pin) => pin.imageUrl);
-      allPins.push(...pins);
-    }
+        const items = await getAllPages<PinterestPin>(
+          new URL(`https://api.pinterest.com/v5/boards/${encodeURIComponent(board.id)}/pins`),
+          token,
+        );
+        return items.map((pin) => {
+          const images = pin.media?.images ?? {};
+          const image = images["1200x"] ?? images["600x"] ?? Object.values(images).sort((a, b) => (b.width ?? 0) - (a.width ?? 0))[0];
+          return {
+            id: pin.id,
+            title: pin.title?.trim() || pin.description?.trim().split("\\n")[0] || "Selected design",
+            description: pin.description ?? "",
+            imageUrl: image?.url ?? "",
+            imageWidth: image?.width ?? 1200,
+            imageHeight: image?.height ?? 1200,
+            pinUrl: `https://www.pinterest.com/pin/${pin.id}/`,
+            createdAt: pin.created_at ?? "",
+            category: category.label,
+          };
+        }).filter((pin) => pin.imageUrl);
+      }),
+    );
+    allPins.push(...categoryPins.flat());
 
     // Keep the previous single-board setup usable until all three boards are detected/configured.
     if (!allPins.length && process.env.PINTEREST_BOARD_ID) {
