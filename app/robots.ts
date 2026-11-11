@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/api/"],
       },
     ],
-    sitemap: "https://creativerizz.in/sitemap.xml",
-    host: "https://creativerizz.in",
+    sitemap: "https://www.creativerizz.in/sitemap.xml",
+    host: "https://www.creativerizz.in",
   };
 }
