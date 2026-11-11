@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ArrowUpRight, X } from "lucide-react";
 
 type Category = "Social Media Posts" | "UI/UX Designs" | "Printed Designs";
@@ -10,6 +11,8 @@ type Pin = {
   description: string;
   altText?: string;
   imageUrl: string;
+  imageWidth?: number;
+  imageHeight?: number;
   pinUrl: string;
   createdAt: string;
   category: Category;
@@ -107,7 +110,7 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
               <article className="reference-project pinterest-project pinterest-project-card" key={pin.id}>
                 <button className="pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} aria-label={`Preview ${pin.title}`}>
                   <span className="reference-project-image pinterest-project-image">
-                    <img src={pin.imageUrl} alt={pin.altText || pin.title} loading="lazy" />
+                    <Image src={pin.imageUrl} alt={pin.altText || pin.title} width={pin.imageWidth || 1200} height={pin.imageHeight || 1200} sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw" loading="lazy" />
                   </span>
                   <span className="reference-project-caption">
                     <span className="pinterest-project-caption-copy">
@@ -139,7 +142,7 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
           <section className="pinterest-lightbox" role="dialog" aria-modal="true" aria-label={selectedPin.title}>
             <button className="pinterest-lightbox-close" type="button" onClick={() => setSelectedPin(null)} aria-label="Close image preview"><X size={21} /></button>
             <div className="pinterest-lightbox-artwork">
-              <img src={selectedPin.imageUrl} alt={selectedPin.title} />
+              <Image src={selectedPin.imageUrl} alt={selectedPin.altText || selectedPin.title} width={selectedPin.imageWidth || 1200} height={selectedPin.imageHeight || 1200} sizes="(max-width: 760px) 100vw, 70vw" />
             </div>
             <aside className="pinterest-lightbox-side">
               <span className="pinterest-lightbox-kicker">WORK SHOWCASE</span>
