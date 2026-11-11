@@ -6,7 +6,7 @@ import "./globals.css";
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-dm-sans" });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["500", "600"], style: ["normal", "italic"], display: "swap", variable: "--font-playfair" });
 
-const siteUrl = "https://creativerizz.in";
+const siteUrl = "https://www.creativerizz.in";
 const personUrl = `${siteUrl}/#person`;
 
 export const metadata: Metadata = {
