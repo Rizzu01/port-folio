@@ -153,6 +153,7 @@ export function AdminDashboard() {
           title,
           description,
           pinUrl: selectedPin.pinUrl,
+          imageUrl: selectedPin.imageUrl,
         }),
       });
       const data = await response.json();
