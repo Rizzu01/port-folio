@@ -61,9 +61,8 @@ export function setupPortfolioAnimations(root: HTMLElement) {
       gsap.fromTo($(".portfolio-hero h1 em"), { y: 18, opacity: 0 }, {
         y: 0, opacity: 1, duration: 0.9, delay: 0.22, ease: "expo.out", clearProps: "transform,opacity"
       });
-      gsap.fromTo($(".hero-subtitle"), { y: 16, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.75, delay: 0.3, ease: "power3.out", clearProps: "transform,opacity"
-      });
+      // Keep the hero subtitle visible immediately: it is the mobile LCP element.
+      // Do not animate its opacity or delay its first paint.
       gsap.fromTo($(".hero-actions > *"), { y: 12, opacity: 0 }, {
         y: 0, opacity: 1, duration: 0.65, delay: 0.38, stagger: 0.1,
         ease: "power3.out", clearProps: "transform,opacity"
