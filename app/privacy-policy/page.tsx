@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for CreativeRizz, the design portfolio of Rizwan Khan.",
+  description: "Read how CreativeRizz handles contact details, website usage information and privacy requests.",
   alternates: { canonical: "/privacy-policy" },
 };
 
@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
         <p className="privacy-kicker">CREATIVERIZZ · WEBSITE POLICY</p>
         <h1>Privacy Policy</h1>
         <p className="privacy-updated">Last updated: October 26, 2026</p>
-        <p>This Privacy Policy explains how Rizwan Khan (“I”, “me”, or “my”), operating the CreativeRizz portfolio website at <a href="https://creativerizz.in">creativerizz.in</a> (“Website”), handles information when you visit the Website or contact me about design services.</p>
+        <p>This Privacy Policy explains how Rizwan Khan (“I”, “me”, or “my”), operating the CreativeRizz portfolio website at <a href="https://www.creativerizz.in">creativerizz.in</a> (“Website”), handles information when you visit the Website or contact me about design services.</p>
 
         <h2>1. Information you provide</h2>
         <p>If you use the contact form, you may provide your name, email address, phone number, and the purpose of your enquiry. Please do not submit sensitive personal information through the form.</p>
