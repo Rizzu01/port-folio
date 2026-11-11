@@ -8,7 +8,6 @@ type Pin = {
   id: string;
   title: string;
   description: string;
-  altText: string;
   imageUrl: string;
   pinUrl: string;
   createdAt: string;
@@ -113,13 +112,12 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
               <article className="reference-project pinterest-project pinterest-project-card" key={pin.id}>
                 <button className="pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} aria-label={`Preview ${pin.title}`}>
                   <span className="reference-project-image pinterest-project-image">
-                    <img src={pin.imageUrl} alt={pin.altText || pin.title} loading="lazy" />
+                    <img src={pin.imageUrl} alt={pin.title} loading="lazy" />
                   </span>
                   <span className="reference-project-caption">
                     <span className="pinterest-project-caption-copy">
                       <span className="pinterest-project-title">{pin.title}</span>
                       <span className="pinterest-project-subtitle">{pin.category} · Pinterest</span>
-                      {pin.description && <span className="pinterest-project-description">{pin.description}</span>}
                     </span>
                     <span className="pinterest-project-arrow" aria-hidden="true">↗</span>
                   </span>
@@ -146,7 +144,7 @@ export function PinterestProjects({ fullPage = false }: { fullPage?: boolean }) 
           <section className="pinterest-lightbox" role="dialog" aria-modal="true" aria-label={selectedPin.title}>
             <button className="pinterest-lightbox-close" type="button" onClick={() => setSelectedPin(null)} aria-label="Close image preview"><X size={21} /></button>
             <div className="pinterest-lightbox-artwork">
-              <img src={selectedPin.imageUrl} alt={selectedPin.altText || selectedPin.title} />
+              <img src={selectedPin.imageUrl} alt={selectedPin.title} />
             </div>
             <aside className="pinterest-lightbox-side">
               <span className="pinterest-lightbox-kicker">WORK SHOWCASE</span>
