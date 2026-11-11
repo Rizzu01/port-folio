@@ -85,6 +85,20 @@ export default function ServiceLanding({
             <h2 id="keywords-title" style={{ fontSize: 23 }}>Areas of focus</h2>
             <p style={{ lineHeight: 1.8, color: "#55545c" }}>{keywords.join(" · ")}</p>
           </section>
+          <nav aria-label="Explore other design services" style={{ borderTop: "1px solid #e7e4dc", paddingTop: 28, marginTop: 34 }}>
+            <h2 style={{ fontSize: 20, letterSpacing: "-.025em" }}>Explore other design services</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 16, fontSize: 14 }}>
+              <Link href="/ui-ux-design">UI/UX design</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/graphic-design">Graphic design</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/web-design">Web design</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/branding">Branding</Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/fintech-crypto-design">Fintech &amp; crypto design</Link>
+            </div>
+          </nav>
           <footer style={{ borderTop: "1px solid #e7e4dc", marginTop: 38, paddingTop: 24, display: "flex", justifyContent: "space-between", gap: 18, flexWrap: "wrap" }}>
             <p style={{ margin: 0, color: "#55545c" }}>Rizwan Khan · Designer for digital and visual experiences</p>
             <Link href="/#contact" style={{ fontWeight: 700 }}>Get in touch ↗</Link>
