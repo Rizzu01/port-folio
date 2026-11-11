@@ -4,14 +4,14 @@ import { ArrowLeft } from "lucide-react";
 import { PinterestProjects } from "../components/pinterest-projects";
 
 export const metadata: Metadata = {
-  title: "Selected Design Work | UI/UX, Graphic & Print Design",
+  title: "Design Portfolio | UI/UX, Graphic & Print Projects",
   description:
-    "Browse selected design work by Rizwan Khan, including social media campaigns, UI/UX concepts and printed design projects. Explore the portfolio and view original Pins.",
+    "Explore Rizwan Khan's selected design projects, from social media campaigns and visual communication to UI/UX concepts and print-ready design. View the original work on Pinterest.",
   alternates: { canonical: "/work" },
   openGraph: {
     title: "Selected Design Work | Rizwan Khan",
     description:
-      "Social media, UI/UX and print design projects from Rizwan Khan's portfolio.",
+      "A portfolio of social media, UI/UX, graphic and print design projects by Rizwan Khan.",
     url: "https://creativerizz.in/work",
     type: "website",
   },
