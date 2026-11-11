@@ -96,21 +96,30 @@ export async function POST(request: NextRequest) {
     }
     const imageDataUrl = "data:" + contentType + ";base64," + imageBuffer.toString("base64");
 
-    const visionResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "qwen/qwen3.8-27b",
-        messages: [{ role: "user", content: [
-          { type: "text", text: "Examine this portfolio design image carefully. Report only visible details: subject, objects, layout, typography or legible words, colors, visual style, and type of design. Be specific and factual. Do not invent a brand, client, text or context. If you cannot see the image, say IMAGE_NOT_VISIBLE." },
-          { type: "image_url", image_url: { url: imageDataUrl } }
-        ] }],
-        temperature: 0.2,
-        max_completion_tokens: 700
-      }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(30000)
+    const visionRequestBody = JSON.stringify({
+      model: "qwen/qwen3.8-27b",
+      messages: [{ role: "user", content: [
+        { type: "text", text: "Examine this portfolio design image carefully. Report only visible details: subject, objects, layout, typography or legible words, colors, visual style, and type of design. Be specific and factual. Do not invent a brand, client, text or context. If you cannot see the image, say IMAGE_NOT_VISIBLE." },
+        { type: "image_url", image_url: { url: imageDataUrl } }
+      ] }],
+      temperature: 0.2,
+      max_completion_tokens: 350
     });
+    let visionResponse: Response | null = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      visionResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
+        body: visionRequestBody,
+        cache: "no-store",
+        signal: AbortSignal.timeout(30000)
+      });
+      if (visionResponse.status !== 429 || attempt === 1) break;
+      const retryAfter = Number(visionResponse.headers.get("retry-after") || "6");
+      const delayMs = Math.min(Math.max(retryAfter * 1000, 5500), 10000);
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+    if (!visionResponse) throw new Error("Vision request did not complete.");
     if (!visionResponse.ok) {
       console.error("Groq image analysis failed:", visionResponse.status, await visionResponse.text().catch(() => ""));
       return NextResponse.json({ error: "AI could not analyse this Pinterest image. Please try again." }, { status: 502 });
@@ -127,7 +136,7 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "openai/gpt-oss-120b",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: makeUserPrompt(imageAnalysis) },
