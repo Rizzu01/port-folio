@@ -7,7 +7,6 @@ type SeoRequest = {
   category?: unknown;
   title?: unknown;
   description?: unknown;
-  focusKeyword?: unknown;
   pinUrl?: unknown;
 };
 
@@ -35,7 +34,6 @@ export async function POST(request: NextRequest) {
   const category = clean(body.category, 60);
   const title = clean(body.title, 120);
   const description = clean(body.description, 1000);
-  const focusKeyword = clean(body.focusKeyword, 100);
   const pinUrl = clean(body.pinUrl, 300);
 
   if (!category || !title) {
@@ -49,7 +47,6 @@ export async function POST(request: NextRequest) {
     "Keep the title descriptive and compelling, ideally 45–65 characters when natural, and never exceed 120 characters.",
     "Write a useful description around 120–300 characters when the available facts allow it; never exceed 1000 characters.",
     "Write concise, accessible image alt text that describes the design shown only to the extent supported by the supplied context; never exceed 300 characters.",
-    "Use the focus keyword naturally when provided. Do not force it if it does not fit.",
     "Return only a valid JSON object with exactly these string keys: title, description, altText.",
   ].join(" ");
 
@@ -57,7 +54,6 @@ export async function POST(request: NextRequest) {
     `Portfolio category: ${category}`,
     `Current project title: ${title}`,
     `Current project description: ${description || "Not provided"}`,
-    `Focus keyword: ${focusKeyword || "Choose a relevant phrase based only on the supplied information"}`,
     `Pinterest project URL: ${pinUrl || "Not provided"}`,
     "Create improved SEO metadata. Keep the wording specific to this design portfolio item, not generic marketing copy.",
   ].join("\n");
@@ -77,7 +73,23 @@ export async function POST(request: NextRequest) {
         ],
         temperature: 0.35,
         max_completion_tokens: 700,
-        response_format: { type: "json_object" },
+        response_format: {
+          type: "json_schema",
+          json_schema: {
+            name: "creative_rizz_seo_metadata",
+            strict: true,
+            schema: {
+              type: "object",
+              properties: {
+                title: { type: "string" },
+                description: { type: "string" },
+                altText: { type: "string" }
+              },
+              required: ["title", "description", "altText"],
+              additionalProperties: false
+            }
+          }
+        },
       }),
       cache: "no-store",
       signal: AbortSignal.timeout(30000),
