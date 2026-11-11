@@ -14,6 +14,7 @@ export const metadata: Metadata = {
       "A portfolio of social media, UI/UX, graphic and print design projects by Rizwan Khan.",
     url: "https://creativerizz.in/work",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
