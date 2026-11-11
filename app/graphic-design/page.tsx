@@ -4,12 +4,12 @@ import ServiceLanding from "../components/ServiceLanding";
 export const metadata: Metadata = {
   title: "Graphic Designer Portfolio & Visual Design",
   description:
-    "Explore Rizwan Khan's graphic design portfolio, featuring social media creatives, campaign visuals, digital marketing assets, typography and visual communication.",
+    "Explore graphic design by Rizwan Khan, including social media creatives, campaign visuals, marketing assets and visual communication.",
   alternates: { canonical: "/graphic-design" },
   openGraph: {
     title: "Graphic & Visual Design | Rizwan Khan",
     description: "Campaign creatives, social media graphics and visual communication projects.",
-    url: "https://creativerizz.in/graphic-design",
+    url: "https://www.creativerizz.in/graphic-design",
     type: "website",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
