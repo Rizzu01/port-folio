@@ -2017,3 +2017,26 @@ html[data-theme="dark"] .custom-cursor-enabled .cursor::after{background:#fff!im
 .cr-admin-generate{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:0 0 auto;padding:10px 12px;border:1px solid #b28b28;border-radius:8px;background:#b28b28;color:#fff;font:inherit;font-size:11px;font-weight:750;cursor:pointer}
 .cr-admin-generate:disabled{opacity:.55;cursor:wait}
 @media(max-width:680px){.cr-admin-seo-controls{flex-direction:column}.cr-admin-generate{width:100%;min-height:40px}}
+
+/* Keep Pinterest work cards stable when project titles are long. */
+.pinterest-project .reference-project-caption{
+  min-width:0;
+}
+.pinterest-project-caption-copy{
+  flex:1 1 auto;
+  min-width:0;
+}
+.pinterest-project-title{
+  min-width:0;
+  min-height:2.8em;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  line-clamp:2;
+  overflow:hidden;
+}
+.pinterest-project-arrow{
+  flex:0 0 16px;
+}
