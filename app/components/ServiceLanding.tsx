@@ -42,15 +42,15 @@ export default function ServiceLanding({
                 name: eyebrow,
                 description: intro,
                 serviceType: eyebrow,
-                url: `https://creativerizz.in${path}`,
-                provider: { "@id": "https://creativerizz.in/#person" },
+                url: `https://www.creativerizz.in${path}`,
+                provider: { "@id": "https://www.creativerizz.in/#person" },
               },
               {
                 "@context": "https://schema.org",
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://creativerizz.in/" },
-                  { "@type": "ListItem", position: 2, name: eyebrow, item: `https://creativerizz.in${path}` },
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://www.creativerizz.in/" },
+                  { "@type": "ListItem", position: 2, name: eyebrow, item: `https://www.creativerizz.in${path}` },
                 ],
               },
             ]) }}
