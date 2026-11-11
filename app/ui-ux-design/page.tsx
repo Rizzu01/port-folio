@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: "User flows, product interfaces and thoughtful responsive digital experiences.",
     url: "https://creativerizz.in/ui-ux-design",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
 };
 
