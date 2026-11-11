@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X, Linkedin, Sun, Moon } from "lucide-react";
-import { setupPortfolioAnimations } from "./portfolio-animations";
 import { PinterestProjects, type PinResponse } from "./components/pinterest-projects";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
@@ -65,8 +64,25 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
   }, []);
   useEffect(() => {
     const root = pageRef.current;
-    if (!root) return;
-    return setupPortfolioAnimations(root);
+    // Keep GSAP/ScrollTrigger off touch devices: the mobile first viewport
+    // does not need pointer-driven motion or scroll measurement work.
+    if (
+      !root ||
+      !window.matchMedia("(pointer: fine)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
+
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
+
+    import("./portfolio-animations").then(({ setupPortfolioAnimations }) => {
+      if (!cancelled) cleanup = setupPortfolioAnimations(root);
+    });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
   }, []);
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", purpose: "" });
@@ -120,7 +136,7 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
 
   <div className="reference-site">
     <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
-      <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src={darkTheme ? "/Logo-dark.svg" : "/Logo.svg"} alt="Rizwan Khan logo"/></a>
+      <a className="reference-logo" href="#home" aria-label="Rizwan Khan — Home"><img src={darkTheme ? "/Logo-dark.svg" : "/Logo.svg"} alt="Rizwan Khan logo" width={150} height={42} decoding="async"/></a>
       <nav className="reference-desktop-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
       <button className="reference-theme-toggle" type="button" onClick={toggleTheme} aria-label={darkTheme ? "Switch to light theme" : "Switch to dark theme"} title={darkTheme ? "Switch to light theme" : "Switch to dark theme"}>{darkTheme ? <Sun size={17} /> : <Moon size={17} />}</button>
       <a className="reference-talk" href="/CV/Rizwan-Khan-CV.pdf" download="Rizwan-Khan-CV.pdf">Download CV <ArrowUpRight size={13}/></a>
