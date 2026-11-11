@@ -42,8 +42,9 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
         });
     };
 
-    // Server-rendered data is shown immediately; refresh it in the background.
-    if (!initialData) refreshPins();
+    // Refresh empty initial data after hydration so third-party Pinterest latency
+    // never delays the homepage's first server render or LCP.
+    if (!initialData || initialData.pins.length === 0) refreshPins();
     const interval = window.setInterval(refreshPins, 5 * 60 * 1000);
     window.addEventListener("focus", refreshPins);
     return () => {
