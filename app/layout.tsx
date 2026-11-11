@@ -12,11 +12,11 @@ const personUrl = `${siteUrl}/#person`;
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Rizwan Khan | UI/UX, Graphic & Web Designer",
+    default: "UI/UX, Graphic & Web Designer in India | Rizwan Khan",
     template: "%s | Rizwan Khan",
   },
   description:
-    "Explore the portfolio of Rizwan Khan, a UI/UX, graphic and web designer in India. View selected digital products, visual identities, campaign designs and responsive websites.",
+    "Rizwan Khan is a UI/UX, graphic and web designer in India. Explore product interfaces, brand visuals, campaign design and responsive websites, or get in touch about a project.",
   applicationName: "CreativeRizz",
   creator: "Rizwan Khan",
   publisher: "Rizwan Khan",
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     "freelance UI/UX designer",
   ],
   openGraph: {
-    title: "Rizwan Khan | UI/UX, Graphic & Web Designer",
+    title: "UI/UX, Graphic & Web Designer in India | Rizwan Khan",
     description:
-      "Selected UI/UX, graphic design, branding and web design work by Rizwan Khan. Explore the portfolio and get in touch about a project.",
+      "Explore UI/UX, graphic design, branding and web design by Rizwan Khan, India. View selected projects and discuss your next design project.",
     url: siteUrl,
     siteName: "CreativeRizz",
     locale: "en_IN",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rizwan Khan | UI/UX, Graphic & Web Designer",
     description:
-      "Selected UI/UX, graphic design, branding and web design work by Rizwan Khan.",
+      "UI/UX, graphic and web design portfolio by Rizwan Khan in India. Explore selected work and get in touch.",
     images: ["/twitter-image"],
   },
   robots: {
