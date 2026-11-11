@@ -154,10 +154,10 @@ export default function Home() {
     <section className="reference-services" id="services">
       <div className="reference-section-heading"><span className="reference-ghost-title">SERVICES</span><p>/ WHAT I DO</p></div>
       <div className="reference-service-list">
-        <a href="#contact"><span className="reference-service-index">01</span><span className="reference-service-name">Visual Design</span><span className="reference-service-detail">Campaigns, social media, marketing assets</span><ArrowUpRight size={17}/></a>
-        <a href="#contact"><span className="reference-service-index">02</span><span className="reference-service-name">UI/UX Design</span><span className="reference-service-detail">Research-led, intuitive digital products</span><ArrowUpRight size={17}/></a>
-        <a href="#contact"><span className="reference-service-index">03</span><span className="reference-service-name">Web Design &amp; Development</span><span className="reference-service-detail">Responsive websites and landing pages</span><ArrowUpRight size={17}/></a>
-        <a href="#contact"><span className="reference-service-index">04</span><span className="reference-service-name">Branding</span><span className="reference-service-detail">Identity systems and visual direction</span><ArrowUpRight size={17}/></a>
+        <a href="/graphic-design"><span className="reference-service-index">01</span><span className="reference-service-name">Visual Design</span><span className="reference-service-detail">Campaigns, social media, marketing assets</span><ArrowUpRight size={17}/></a>
+        <a href="/ui-ux-design"><span className="reference-service-index">02</span><span className="reference-service-name">UI/UX Design</span><span className="reference-service-detail">Research-led, intuitive digital products</span><ArrowUpRight size={17}/></a>
+        <a href="/web-design"><span className="reference-service-index">03</span><span className="reference-service-name">Web Design &amp; Development</span><span className="reference-service-detail">Responsive websites and landing pages</span><ArrowUpRight size={17}/></a>
+        <a href="/branding"><span className="reference-service-index">04</span><span className="reference-service-name">Branding</span><span className="reference-service-detail">Identity systems and visual direction</span><ArrowUpRight size={17}/></a>
       </div>
     </section>
     <section className="reference-experience" id="experience">
