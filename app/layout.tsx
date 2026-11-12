@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Rizwan Khan",
   },
   description:
-    "Rizwan Khan is a UI/UX, graphic and web designer in India. Explore product interfaces, brand visuals, campaign design and responsive websites, or get in touch about a project.",
+    "Explore the UI/UX, graphic and web design portfolio of Rizwan Khan, an India-based designer creating digital products, brand visuals and websites.",
   applicationName: "CreativeRizz",
   creator: "Rizwan Khan",
   publisher: "Rizwan Khan",
