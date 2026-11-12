@@ -65,44 +65,113 @@ export const metadata: Metadata = {
   },
 };
 
-const structuredData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": personUrl,
-    name: "Rizwan Khan",
-    url: siteUrl,
-    image: `${siteUrl}/portrait.png`,
-    jobTitle: "UI/UX, Graphic & Web Designer",
-    description:
-      "Designer working across UI/UX, graphic design, visual communication, branding and web design.",
-    knowsAbout: [
-      "User experience design",
-      "User interface design",
-      "Graphic design",
-      "Visual communication",
-      "Brand identity design",
-      "Web design",
-      "Responsive web design",
-      "Fintech design",
-    ],
-    sameAs: [
-      "https://www.linkedin.com/in/rizwan-khan-44771826b/",
-      "https://www.behance.net/creativeriz01",
-      "https://in.pinterest.com/Creative___Rizz/",
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${siteUrl}/#website`,
-    name: "CreativeRizz",
-    alternateName: "Rizwan Khan Design Portfolio",
-    url: siteUrl,
-    inLanguage: "en-IN",
-    author: { "@id": personUrl },
-  },
-];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personUrl,
+      name: "Rizwan Khan",
+      url: siteUrl,
+      image: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/portrait.png`,
+      },
+      jobTitle: "UI/UX, Graphic & Web Designer",
+      description:
+        "Rizwan Khan is a UI/UX and graphic designer with over four years of experience in digital products, brand identity, campaign design and responsive websites.",
+      knowsAbout: [
+        "User experience design",
+        "User interface design",
+        "Graphic design",
+        "Visual communication",
+        "Brand identity design",
+        "Web design",
+        "Responsive web design",
+        "Fintech design",
+      ],
+      sameAs: [
+        "https://www.linkedin.com/in/rizwan-khan-44771826b/",
+        "https://www.behance.net/creativeriz01",
+        "https://in.pinterest.com/Creative___Rizz/",
+      ],
+    },
+    {
+      "@type": "Brand",
+      "@id": `${siteUrl}/#brand`,
+      name: "CreativeRizz",
+      url: siteUrl,
+      logo: `${siteUrl}/Logo.svg`,
+      description:
+        "CreativeRizz is the design portfolio and creative brand of designer Rizwan Khan.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "CreativeRizz",
+      alternateName: "Rizwan Khan Design Portfolio",
+      url: siteUrl,
+      inLanguage: "en-IN",
+      author: { "@id": personUrl },
+      publisher: { "@id": personUrl },
+      about: { "@id": personUrl },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: "Rizwan Khan – UI/UX & Graphic Designer | CreativeRizz",
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": personUrl },
+      mainEntity: { "@id": personUrl },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#ui-ux-design`,
+      name: "UI/UX Design",
+      serviceType: "User interface and user experience design",
+      description:
+        "Research-led interface design and intuitive digital product experiences.",
+      provider: { "@id": personUrl },
+      brand: { "@id": `${siteUrl}/#brand` },
+      areaServed: ["India", "Worldwide"],
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#graphic-design`,
+      name: "Graphic Design",
+      serviceType: "Graphic and visual communication design",
+      description:
+        "Brand visuals, campaign creatives, social media graphics and marketing design.",
+      provider: { "@id": personUrl },
+      brand: { "@id": `${siteUrl}/#brand` },
+      areaServed: ["India", "Worldwide"],
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#web-design`,
+      name: "Web Design",
+      serviceType: "Responsive website and landing page design",
+      description:
+        "Responsive website experiences and landing pages for businesses and teams.",
+      provider: { "@id": personUrl },
+      brand: { "@id": `${siteUrl}/#brand` },
+      areaServed: ["India", "Worldwide"],
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#brand-identity`,
+      name: "Brand Identity Design",
+      serviceType: "Brand identity and visual direction",
+      description:
+        "Distinctive visual identity systems and consistent brand communication.",
+      provider: { "@id": personUrl },
+      brand: { "@id": `${siteUrl}/#brand` },
+      areaServed: ["India", "Worldwide"],
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
