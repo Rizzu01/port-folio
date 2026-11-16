@@ -18,6 +18,16 @@ export const metadata: Metadata = {
   description:
     "Explore CreativeRizz, the portfolio of Rizwan Khan, a UI/UX and graphic designer in Jaipur, India, specializing in digital products, branding and web design.",
   applicationName: "CreativeRizz",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon/favicon.ico",
+    apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/favicon/site.webmanifest",
   creator: "Rizwan Khan",
   publisher: "Rizwan Khan",
   category: "Design",
