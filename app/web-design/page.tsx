@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ServiceLanding from "../components/ServiceLanding";
 
 export const metadata: Metadata = {
-  title: "Responsive Web Design Portfolio | Rizwan Khan",
+  title: "Web Designer in Jaipur | Responsive Website Design",
   description:
-    "Explore responsive web design by Rizwan Khan, including website layouts, landing pages, interface systems and frontend-focused digital experiences.",
+    "Explore web design by Rizwan Khan in Jaipur, India: responsive websites, landing page design, interface layouts and frontend-focused digital experiences.",
   alternates: { canonical: "/web-design" },
   openGraph: {
     title: "Web Design & Responsive Websites | Rizwan Khan",
@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ServiceLanding path="/web-design" eyebrow="Web Design" title="Responsive websites with thoughtful visual systems." intro="A good website balances brand expression, clear information and a smooth experience across screen sizes. My work spans web design, interface design and frontend implementation, with a focus on bringing the visual idea and the actual experience together." services={["Responsive page layouts", "Landing page visual design", "Website information hierarchy", "Typography and spacing systems", "UI details and interaction states", "Design-to-development collaboration"]} process={[{title:"Set the direction",detail:"Define the audience, purpose, content priorities and visual character of the website."},{title:"Design the experience",detail:"Create a clear layout with responsive behavior, readable typography and consistent components."},{title:"Review across screens",detail:"Check hierarchy and usability at desktop and mobile sizes and refine details before handoff or release."}]} workNote="My portfolio includes UI/UX and web design work. Visit the selected projects on the homepage to see the visual examples available, and ask about project scope, deliverables and implementation needs." keywords={["Website UI Design","Responsive Web Design","Landing Page Design","Frontend Design"]} />;
+  return <ServiceLanding path="/web-design" eyebrow="Web Design" title="Responsive web design for websites and landing pages." intro="I’m Rizwan Khan, a web designer in Jaipur, India. I design responsive websites, landing pages and clear interfaces that work across desktop and mobile. My work brings together visual direction, page hierarchy and frontend implementation." services={["Responsive page layouts", "Landing page visual design", "Website information hierarchy", "Typography and spacing systems", "UI details and interaction states", "Design-to-development collaboration"]} process={[{title:"Set the direction",detail:"Define the audience, purpose, content priorities and visual character of the website."},{title:"Design the experience",detail:"Create a clear layout with responsive behavior, readable typography and consistent components."},{title:"Review across screens",detail:"Check hierarchy and usability at desktop and mobile sizes and refine details before handoff or release."}]} workNote="My portfolio includes UI/UX and web design work. Visit the selected projects on the homepage to see the visual examples available, and ask about project scope, deliverables and implementation needs." keywords={["Web Designer in Jaipur","Responsive Website Design","Landing Page Designer","Frontend Web Design"]} />;
 }
