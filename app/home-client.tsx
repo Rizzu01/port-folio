@@ -108,6 +108,7 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
       const target = event.target;
       cursor.classList.toggle("cursor-hover", target instanceof Element && Boolean(target.closest("a, button, input, select, textarea, [role=button]")));
       cursor.classList.toggle("cursor-view", target instanceof Element && Boolean(target.closest(".pinterest-project-trigger")));
+      cursor.classList.toggle("cursor-on-dark", target instanceof Element && Boolean(target.closest(".reference-experience")));
     };
     const down = () => cursor.classList.add("cursor-pressed");
     const up = () => cursor.classList.remove("cursor-pressed");
