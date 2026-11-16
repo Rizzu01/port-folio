@@ -30,25 +30,8 @@ export function setupPortfolioAnimations(root: HTMLElement) {
         y: 0, opacity: 1, duration: 0.75, ease: "power3.out", clearProps: "transform,opacity"
       });
 
-      // Keep the sticky navbar visible while scrolling in either direction.
-      // The previous direction-based ScrollTrigger hid it on downward scroll.
-      const sections = ["home", "about", "work", "services", "experience", "contact"]
-        .map((id) => root.querySelector<HTMLElement>(`#${id}`))
-        .filter((section): section is HTMLElement => Boolean(section));
-      sections.forEach((section) => {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 45%",
-          end: "bottom 45%",
-          onToggle: (self) => {
-            if (!self.isActive) return;
-            nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
-              if (link.getAttribute("href") === `#${section.id}`) link.setAttribute("aria-current", "location");
-              else link.removeAttribute("aria-current");
-            });
-          },
-        });
-      });
+      // The active nav link is maintained by HomeClient's viewport-based
+      // scroll tracking, which also works on touch devices and reduced motion.
     }
 
       // Hero: premium staggered line motion without hiding SEO/LCP text.
