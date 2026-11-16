@@ -47,6 +47,53 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
     };
   }, []);
 
+  // Single source of truth for active navigation across desktop and mobile.
+  // Read actual section positions on every frame rather than relying on
+  // overlapping ScrollTrigger activation ranges (which can mark the wrong link).
+  useEffect(() => {
+    const ids = ["home", "about", "work", "services", "experience", "contact"];
+    const sections = ids.map((id) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.reference-nav a[href^="#"]'));
+    if (!sections.length || !links.length) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const nav = document.querySelector<HTMLElement>(".reference-nav");
+      const navBottom = nav ? nav.getBoundingClientRect().bottom : 0;
+      // The section at roughly the upper third of the usable viewport is
+      // the section visitors are actually reading.
+      const marker = Math.max(navBottom + 24, window.innerHeight * 0.32);
+      let active = sections[0].id;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= marker) active = section.id;
+        else break;
+      }
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (atBottom) active = sections[sections.length - 1].id;
+      for (const link of links) {
+        if (link.getAttribute("href") === `#${active}`) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("load", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("load", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
   const pageRef = useRef<HTMLElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
