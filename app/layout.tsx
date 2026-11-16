@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Rizwan Khan",
   },
   description:
-    "Explore the UI/UX, graphic and web design portfolio of Rizwan Khan, an India-based designer creating digital products, brand visuals and websites.",
+    "Explore CreativeRizz, the portfolio of Rizwan Khan, a UI/UX and graphic designer in Jaipur, India, specializing in digital products, branding and web design.",
   applicationName: "CreativeRizz",
   creator: "Rizwan Khan",
   publisher: "Rizwan Khan",
@@ -25,7 +25,12 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   keywords: [
+    "CreativeRizz",
     "Rizwan Khan designer",
+    "UI UX designer Jaipur",
+    "graphic designer Jaipur",
+    "freelance graphic designer India",
+    "freelance UI UX designer India",
     "UI/UX designer portfolio",
     "UI/UX designer India",
     "graphic designer portfolio",
@@ -88,6 +93,8 @@ const structuredData = {
         "Brand identity design",
         "Web design",
         "Responsive web design",
+        "UI/UX design in Jaipur",
+        "Graphic design in Jaipur",
         "Fintech design",
       ],
       sameAs: [
@@ -103,7 +110,7 @@ const structuredData = {
       url: siteUrl,
       logo: `${siteUrl}/Logo.svg`,
       description:
-        "CreativeRizz is the design portfolio and creative brand of designer Rizwan Khan.",
+        "CreativeRizz is the design portfolio and creative brand of Jaipur-based UI/UX and graphic designer Rizwan Khan.",
     },
     {
       "@type": "WebSite",
