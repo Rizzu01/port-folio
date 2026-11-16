@@ -8,7 +8,7 @@ import { PinterestProjects, type PinResponse } from "../components/pinterest-pro
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "UI/UX, Graphic & Print Design Portfolio",
+  title: "Design Portfolio | UI/UX, Graphic & Print Projects",
   description:
     "Selected UI/UX, graphic and print design projects by Rizwan Khan. Explore campaign visuals, product interfaces and print-ready creative work.",
   alternates: { canonical: "/work" },
