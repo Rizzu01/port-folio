@@ -2081,3 +2081,53 @@ html[data-theme="dark"] .custom-cursor-enabled .cursor::after{background:#fff!im
   .reference-experience-top{flex-wrap:wrap}
   .reference-experience-years{white-space:normal}
 }
+
+
+/* Contact modal dark mode: the modal is rendered outside .reference-site. */
+html[data-theme="dark"] .contact-modal-backdrop{
+  background:rgba(0,0,0,.72);
+}
+html[data-theme="dark"] .contact-modal{
+  background:#20211f;
+  color:#f1f0eb;
+  border-color:#41423c;
+  box-shadow:0 28px 90px rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+html[data-theme="dark"] .contact-modal-kicker{color:#c5bca9}
+html[data-theme="dark"] .contact-modal h2{color:#f1f0eb}
+html[data-theme="dark"] .contact-modal>p{color:#b5b6ad}
+html[data-theme="dark"] .contact-form label{color:#e4e4dc}
+html[data-theme="dark"] .contact-form input,
+html[data-theme="dark"] .contact-form select{
+  background:#2b2c29;
+  color:#f1f0eb;
+  border-color:#4b4d46;
+  color-scheme:dark;
+}
+html[data-theme="dark"] .contact-form input::placeholder{color:#a5a79e;opacity:1}
+html[data-theme="dark"] .contact-form select:invalid{color:#a5a79e}
+html[data-theme="dark"] .contact-form select option{background:#2b2c29;color:#f1f0eb}
+html[data-theme="dark"] .contact-form input:focus,
+html[data-theme="dark"] .contact-form select:focus{
+  border-color:#b5a47c;
+  box-shadow:0 0 0 3px rgba(181,164,124,.2);
+}
+html[data-theme="dark"] .contact-modal-close{
+  background:#30312e;
+  color:#f1f0eb;
+  border-color:#50514a;
+}
+html[data-theme="dark"] .contact-modal-close:hover{background:#3b3c37;border-color:#77796e}
+html[data-theme="dark"] .contact-form .contact-submit,
+html[data-theme="dark"] .contact-feedback .contact-submit{
+  background:#f1f0eb;
+  color:#151615;
+}
+html[data-theme="dark"] .contact-feedback h3{color:#f1f0eb}
+html[data-theme="dark"] .contact-feedback p{color:#b5b6ad}
+html[data-theme="dark"] .contact-error{background:#462925;color:#ffd0c8}
+html[data-theme="dark"] .contact-form input:focus-visible,
+html[data-theme="dark"] .contact-form select:focus-visible,
+html[data-theme="dark"] .contact-modal-close:focus-visible,
+html[data-theme="dark"] .contact-submit:focus-visible{outline-color:#c5b18b}
