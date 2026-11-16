@@ -25,6 +25,28 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
     document.documentElement.dataset.theme = nextTheme;
     window.localStorage.setItem("creativerizz-theme", nextTheme);
   }
+  useEffect(() => {
+    const progress = document.querySelector<HTMLElement>(".scroll-progress-bar");
+    if (!progress) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+    };
+    const schedule = () => {
+      if (!raf) raf = window.requestAnimationFrame(update);
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
   const pageRef = useRef<HTMLElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -38,6 +60,7 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
       cursor.classList.add("cursor-visible");
       const target = event.target;
       cursor.classList.toggle("cursor-hover", target instanceof Element && Boolean(target.closest("a, button, input, select, textarea, [role=button]")));
+      cursor.classList.toggle("cursor-view", target instanceof Element && Boolean(target.closest(".pinterest-project-trigger")));
     };
     const down = () => cursor.classList.add("cursor-pressed");
     const up = () => cursor.classList.remove("cursor-pressed");
@@ -132,7 +155,7 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
     }
   }
 
-  return <main ref={pageRef} className="site-shell"><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>
+  return <main ref={pageRef} className="site-shell"><div className="scroll-progress" aria-hidden="true"><span className="scroll-progress-bar" /></div><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>
 
   <div className="reference-site">
     <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
@@ -144,7 +167,7 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
       <div className="reference-mobile-menu"><a href="#home" onClick={() => setMobileNavOpen(false)}>Home</a><a href="#work" onClick={() => setMobileNavOpen(false)}>Work</a><a href="#services" onClick={() => setMobileNavOpen(false)}>Services</a><a href="#experience" onClick={() => setMobileNavOpen(false)}>Experience</a><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a><button className="reference-theme-toggle mobile-theme-toggle" type="button" onClick={toggleTheme} aria-label={darkTheme ? "Switch to light theme" : "Switch to dark theme"}>{darkTheme ? <Sun size={17} /> : <Moon size={17} />} {darkTheme ? "Light theme" : "Dark theme"}</button><a href="/CV/Rizwan-Khan-CV.pdf" download="Rizwan-Khan-CV.pdf" onClick={() => setMobileNavOpen(false)}>Download CV ↗</a></div>
     </header>
     <section className="hero portfolio-hero" id="home">
-      <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1>UI/UX &amp; Graphic<br/><em>Designer.</em></h1><p className="hero-subtitle">I’m Rizwan Khan, a UI/UX and graphic designer in Jaipur, India, with 4+ years of experience. Through CreativeRizz, I create mobile app interfaces, responsive websites, social media creatives and distinctive brand visuals for clients in India and worldwide.</p><div className="hero-actions"><a className="button button-dark" href="#work">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}><Mail size={15}/> Get in touch</button></div><div className="hero-socials" aria-label="Social profiles"><a href="https://in.pinterest.com/Creative___Rizz/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest"><img src="/Pinterest.svg" alt="" /></a><a href="https://www.behance.net/creativeriz01" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance"><img src="/behance-round-color-icon.svg" alt="" /></a><a href="https://www.linkedin.com/in/rizwan-khan-44771826b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><img src="/linkedin-svgrepo-com.svg" alt="" /></a></div></div>
+      <div className="hero-copy"><div className="portfolio-eyebrow"><span className="availability-dot"/> DESIGNER · VISUAL THINKER · CREATIVE PROBLEM SOLVER</div><h1><span className="motion-hero-line">UI/UX &amp; Graphic</span><br/><span className="motion-hero-line"><em>Designer.</em></span></h1><p className="hero-subtitle">I’m Rizwan Khan, a UI/UX and graphic designer in Jaipur, India, with 4+ years of experience. Through CreativeRizz, I create mobile app interfaces, responsive websites, social media creatives and distinctive brand visuals for clients in India and worldwide.</p><div className="hero-actions"><a className="button button-dark" href="#work">Explore my work <ArrowRight size={16}/></a><button className="button button-light" type="button" onClick={() => { setSubmitStatus("idle"); setContactOpen(true); }}><Mail size={15}/> Get in touch</button></div><div className="hero-socials" aria-label="Social profiles"><a href="https://in.pinterest.com/Creative___Rizz/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest"><img src="/Pinterest.svg" alt="" /></a><a href="https://www.behance.net/creativeriz01" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance"><img src="/behance-round-color-icon.svg" alt="" /></a><a href="https://www.linkedin.com/in/rizwan-khan-44771826b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><img src="/linkedin-svgrepo-com.svg" alt="" /></a></div></div>
       <div className="orbit-stamp"><span className="stamp-top">DESIGN WITH INTENT</span><span className="stamp-star">✳</span><span className="stamp-bottom">STAY CURIOUS</span></div>
       <div className="float-card thought-card"><span className="mini-icon"><Palette size={17}/></span><strong>Visual stories<br/>that connect.</strong><p>Branding, graphics<br/>and digital craft.</p></div>
       <div className="float-card sync-card"><div className="avatar-stack"><span>U</span><span>I</span><span>✳</span></div><strong>Thoughtful by design.</strong><p>Purposeful details.<br/>Clear experiences.</p></div>

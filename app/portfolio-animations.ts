@@ -51,6 +51,48 @@ export function setupPortfolioAnimations(root: HTMLElement) {
       });
     }
 
+      // Hero: premium staggered line motion without hiding SEO/LCP text.
+      const heroLines = Array.from($(".motion-hero-line"));
+      if (heroLines.length) {
+        gsap.fromTo(heroLines, { y: 24, rotationX: 5, transformPerspective: 800 }, {
+          y: 0, rotationX: 0, duration: 1.05, stagger: 0.13,
+          ease: "power3.out", clearProps: "transform"
+        });
+      }
+
+      // Decorative cards arrive in sequence; portrait is immediately visible for LCP.
+      gsap.fromTo($(".portfolio-hero .floating-panel, .portfolio-hero .float-card"), {
+        opacity: 0, scale: 0.93
+      }, {
+        opacity: 1, scale: 1, duration: 0.85, delay: 0.28, stagger: 0.075,
+        ease: "back.out(1.25)", clearProps: "opacity,transform"
+      });
+
+      // Subtle pointer-driven depth: operate on descendants, never on the portrait-stage
+      // positioning transform (which centers the portrait in CSS).
+      mm.add("(min-width: 901px) and (hover: hover) and (pointer: fine)", () => {
+        const hero = $(".portfolio-hero")[0];
+        const portrait = $(".portfolio-hero .portrait-mask")[0];
+        const halo = $(".portfolio-hero .portrait-halo")[0];
+        if (!hero || !portrait) return;
+        const movePortrait = gsap.quickTo(portrait, "x", { duration: 0.85, ease: "power3.out" });
+        const moveHalo = halo ? gsap.quickTo(halo, "x", { duration: 1.1, ease: "power3.out" }) : null;
+        const onMove = (event: PointerEvent) => {
+          const rect = hero.getBoundingClientRect();
+          const normalized = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - .5) * 2));
+          movePortrait(normalized * 10);
+          moveHalo?.(normalized * 18);
+        };
+        const onLeave = () => { movePortrait(0); moveHalo?.(0); };
+        hero.addEventListener("pointermove", onMove, { passive: true });
+        hero.addEventListener("pointerleave", onLeave);
+        return () => {
+          hero.removeEventListener("pointermove", onMove);
+          hero.removeEventListener("pointerleave", onLeave);
+          gsap.set([portrait, halo].filter(Boolean), { clearProps: "x" });
+        };
+      });
+
       // Hero: calm staged reveal. No text is split or rewritten in the DOM.
       gsap.fromTo($(".portfolio-eyebrow"), { y: 12, opacity: 0 }, {
         y: 0, opacity: 1, duration: 0.65, ease: "power3.out", clearProps: "transform,opacity"

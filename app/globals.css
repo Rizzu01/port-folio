@@ -2266,3 +2266,114 @@ html[data-theme="dark"] .contact-submit:focus-visible{
   .reference-site .pinterest-project-arrow,
   .reference-site .reference-about-link svg{transition:none}
 }
+
+
+/* Premium motion roadmap — progressive, transform-only polish.
+   Existing monochrome layout and #FF9100 accent remain unchanged. */
+.scroll-progress{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:150;
+  pointer-events:none;overflow:hidden;background:transparent;
+}
+.scroll-progress-bar{
+  display:block;width:100%;height:100%;background:#FF9100;
+  transform:scaleX(0);transform-origin:left center;will-change:transform;
+  box-shadow:0 0 12px rgba(255,145,0,.28);
+}
+.motion-hero-line{
+  display:inline-block;max-width:100%;vertical-align:baseline;
+  transform-origin:50% 100%;
+}
+.reference-nav .reference-desktop-links a{
+  position:relative;text-decoration:none;
+}
+.reference-nav .reference-desktop-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-9px;height:2px;
+  background:#FF9100;transform:scaleX(0);transform-origin:left;
+  transition:transform .32s cubic-bezier(.2,.75,.25,1);
+}
+.reference-nav .reference-desktop-links a:hover::after,
+.reference-nav .reference-desktop-links a[aria-current="location"]::after,
+.reference-nav .reference-desktop-links a:focus-visible::after{
+  transform:scaleX(1);
+}
+.reference-site .reference-service-list>a{
+  position:relative;isolation:isolate;
+}
+.reference-site .reference-service-list>a::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:rgba(255,145,0,.045);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .4s cubic-bezier(.2,.75,.25,1);
+}
+.reference-site .reference-service-list>a:hover::before,
+.reference-site .reference-service-list>a:focus-visible::before{
+  transform:scaleX(1);
+}
+.reference-site .reference-service-list>a>svg,
+.reference-site .reference-about-link svg,
+.reference-site .reference-pill-button svg,
+.reference-site .hero-actions .button svg{
+  transition:transform .3s cubic-bezier(.2,.75,.25,1),color .2s ease;
+}
+.reference-site .reference-service-list>a:hover>svg,
+.reference-site .reference-about-link:hover svg,
+.reference-site .reference-pill-button:hover svg,
+.reference-site .hero-actions .button:hover svg{
+  transform:translate(3px,-3px);
+}
+.pinterest-project-grid .pinterest-project-card{
+  animation:crWorkRise .65s cubic-bezier(.2,.75,.25,1) both;
+}
+.pinterest-project-grid .pinterest-project-card:nth-child(2){animation-delay:.065s}
+.pinterest-project-grid .pinterest-project-card:nth-child(3){animation-delay:.13s}
+.pinterest-project-grid .pinterest-project-card:nth-child(4){animation-delay:.195s}
+.pinterest-project-grid .pinterest-project-card:nth-child(5){animation-delay:.26s}
+.pinterest-project-grid .pinterest-project-card:nth-child(6){animation-delay:.325s}
+@keyframes crWorkRise{
+  from{opacity:0;translate:0 15px}
+  to{opacity:1;translate:0 0}
+}
+/* Desktop pointer feedback is attached to actual Pinterest projects only. */
+@media (hover:hover) and (pointer:fine){
+  .custom-cursor.cursor-view,
+  html[data-theme="dark"] .custom-cursor.cursor-view{
+    --cursor-scale:1;
+    width:66px;height:66px;
+    background:#FF9100!important;
+    border-color:#FF9100!important;
+    color:#171717!important;
+    transition:width .2s ease,height .2s ease,background-color .2s ease,border-color .2s ease,opacity .16s ease;
+  }
+  .custom-cursor.cursor-view::after{
+    content:"VIEW";position:absolute;inset:0;display:grid;place-items:center;
+    color:#171717;font-size:10px;font-weight:800;letter-spacing:.8px;
+  }
+  .custom-cursor.cursor-view span{opacity:0}
+}
+.contact-modal-backdrop{
+  animation:crBackdropIn .25s ease-out both;
+}
+@keyframes crBackdropIn{from{opacity:0}to{opacity:1}}
+.contact-modal{
+  transform-origin:center center;
+}
+html[data-theme="dark"] .reference-service-list>a:hover .reference-service-name{
+  color:#FF9100;
+}
+@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){
+  .pinterest-project-grid .pinterest-project-card{
+    animation:none!important;
+  }
+  .reference-site .reference-service-list>a::before,
+  .reference-nav .reference-desktop-links a::after{
+    transition:none!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .motion-hero-line{transform:none!important}
+  .contact-modal-backdrop{animation:none!important}
+  .reference-site .reference-service-list>a>svg,
+  .reference-site .reference-about-link svg,
+  .reference-site .reference-pill-button svg,
+  .reference-site .hero-actions .button svg{transition:none!important}
+}
