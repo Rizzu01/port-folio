@@ -2377,3 +2377,19 @@ html[data-theme="dark"] .reference-service-list>a:hover .reference-service-name{
   .reference-site .reference-pill-button svg,
   .reference-site .hero-actions .button svg{transition:none!important}
 }
+
+
+/* Desktop hero: separate CTA buttons from the portrait without changing the mobile composition. */
+@media (min-width:761px){
+  .reference-site>.portfolio-hero{
+    min-height:820px;
+  }
+  .reference-site>.portfolio-hero .hero-actions{
+    margin-bottom:30px;
+  }
+}
+@media (min-width:1100px){
+  .reference-site>.portfolio-hero{
+    min-height:860px;
+  }
+}
