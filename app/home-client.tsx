@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, Mail, Menu, Palette, PanelsTopLeft, Printer, Sparkles, X, Linkedin, Sun, Moon } from "lucide-react";
 import { PinterestProjects, type PinResponse } from "./components/pinterest-projects";
+import ClickWaterSplash from "./components/click-water-splash";
 
 // Generate the Web3Forms Access Key for creativerizz.in@gmail.com, then paste it here. Access keys are intended for client-side use.
 const WEB3FORMS_ACCESS_KEY = "b7401cb5-7c06-4ff0-863e-cf86c6d2eb11";
@@ -203,7 +204,7 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
     }
   }
 
-  return <main ref={pageRef} className="site-shell"><div className="scroll-progress" aria-hidden="true"><span className="scroll-progress-bar" /></div><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>
+  return <main ref={pageRef} className="site-shell"><ClickWaterSplash/><div className="scroll-progress" aria-hidden="true"><span className="scroll-progress-bar" /></div><div className="custom-cursor" ref={cursorRef} aria-hidden="true"><span /></div>
 
   <div className="reference-site">
     <header className={`reference-nav${mobileNavOpen ? " reference-nav-open" : ""}`}>
