@@ -32,7 +32,7 @@ export function setupPortfolioAnimations(root: HTMLElement) {
 
       // Keep the sticky navbar visible while scrolling in either direction.
       // The previous direction-based ScrollTrigger hid it on downward scroll.
-      const sections = ["home", "work", "services", "experience", "contact"]
+      const sections = ["home", "about", "work", "services", "experience", "contact"]
         .map((id) => root.querySelector<HTMLElement>(`#${id}`))
         .filter((section): section is HTMLElement => Boolean(section));
       sections.forEach((section) => {
