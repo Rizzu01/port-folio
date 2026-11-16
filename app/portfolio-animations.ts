@@ -65,7 +65,7 @@ export function setupPortfolioAnimations(root: HTMLElement) {
         opacity: 0, scale: 0.93
       }, {
         opacity: 1, scale: 1, duration: 0.85, delay: 0.28, stagger: 0.075,
-        ease: "back.out(1.25)", clearProps: "opacity,scale"
+        ease: "back.out(1.25)", clearProps: "opacity,transform"
       });
 
       // Subtle pointer-driven depth: operate on descendants, never on the portrait-stage
