@@ -106,7 +106,7 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
       </div>
       <div id="work-category-panel" role="tabpanel" aria-labelledby={`work-tab-${CATEGORIES.indexOf(activeCategory)}`}>
         {filteredPins.length > 0 ? (
-          <div className="reference-project-grid reference-project-grid-real pinterest-project-grid" aria-label={`${activeCategory} projects`}>
+          <div key={`${activeCategory}-${pinsToShow.length}`} className="reference-project-grid reference-project-grid-real pinterest-project-grid" aria-label={`${activeCategory} projects`}>
             {pinsToShow.map((pin) => (
               <article className="reference-project pinterest-project pinterest-project-card" key={pin.id}>
                 <button className="pinterest-project-trigger" type="button" onClick={() => setSelectedPin(pin)} aria-label={`Preview ${pin.title}`}>
