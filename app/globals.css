@@ -2397,3 +2397,20 @@ html[data-theme="dark"] .reference-service-list>a:hover .reference-service-name{
 /* Keep About Me heading visible below the sticky navigation on anchor scroll. */
 .reference-about#about{scroll-margin-top:96px}
 @media(max-width:760px){.reference-about#about{scroll-margin-top:78px}}
+
+
+/* Adapt the desktop cursor to the dark Experience section in either site theme. */
+@media (hover:hover) and (pointer:fine){
+  .custom-cursor.cursor-on-dark:not(.cursor-view){
+    border-color:rgba(255,255,255,.88)!important;
+    background:rgba(255,255,255,.12)!important;
+    color:#fff!important;
+  }
+  .custom-cursor.cursor-on-dark:not(.cursor-view) span{
+    background:#fff!important;
+  }
+  .custom-cursor.cursor-on-dark.cursor-hover:not(.cursor-view){
+    background:rgba(255,255,255,.22)!important;
+    border-color:#fff!important;
+  }
+}
