@@ -25,6 +25,28 @@ export default function HomeClient({ initialPinterestData }: { initialPinterestD
     document.documentElement.dataset.theme = nextTheme;
     window.localStorage.setItem("creativerizz-theme", nextTheme);
   }
+  useEffect(() => {
+    const progress = document.querySelector<HTMLElement>(".scroll-progress-bar");
+    if (!progress) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+    };
+    const schedule = () => {
+      if (!raf) raf = window.requestAnimationFrame(update);
+    };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
   const pageRef = useRef<HTMLElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
