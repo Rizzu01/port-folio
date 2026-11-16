@@ -2393,3 +2393,7 @@ html[data-theme="dark"] .reference-service-list>a:hover .reference-service-name{
     min-height:860px;
   }
 }
+
+/* Keep About Me heading visible below the sticky navigation on anchor scroll. */
+.reference-about#about{scroll-margin-top:96px}
+@media(max-width:760px){.reference-about#about{scroll-margin-top:78px}}
