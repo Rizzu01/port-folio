@@ -2414,3 +2414,22 @@ html[data-theme="dark"] .reference-service-list>a:hover .reference-service-name{
     border-color:#fff!important;
   }
 }
+
+
+/* Click water splash: full-viewport visual-only overlay.
+   Sits above dialogs but below the custom cursor; never blocks controls. */
+.click-water-splash{
+  position:fixed;
+  inset:0;
+  z-index:2147483646;
+  display:block;
+  width:100vw;
+  height:100dvh;
+  pointer-events:none!important;
+  user-select:none;
+  touch-action:none;
+  contain:strict;
+}
+@media(prefers-reduced-motion:reduce){
+  .click-water-splash{display:none}
+}
