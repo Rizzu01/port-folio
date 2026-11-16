@@ -32,7 +32,6 @@ export default function ClickWaterSplash() {
     let width = 0;
     let height = 0;
     let ratio = 1;
-    let lastPointerEvent = 0;
 
     const resize = () => {
       ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -98,7 +97,6 @@ export default function ClickWaterSplash() {
 
     const onPointerDown = (event: PointerEvent) => {
       if (reducedMotion.matches || !event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
-      lastPointerEvent = performance.now();
 
       const target = event.target;
       // Don't add decorative particles on inputs: focus and caret clarity matter.
@@ -125,21 +123,13 @@ export default function ClickWaterSplash() {
       if (!frame) frame = window.requestAnimationFrame(draw);
     };
 
-    // Avoid older synthetic pointer duplication on some browsers.
-    const onMouseDown = (event: MouseEvent) => {
-      if (performance.now() - lastPointerEvent < 450) return;
-      onPointerDown(event as unknown as PointerEvent);
-    };
-
     resize();
     window.addEventListener("resize", resize, { passive: true });
     window.addEventListener("pointerdown", onPointerDown, { passive: true });
-    window.addEventListener("mousedown", onMouseDown, { passive: true });
 
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("mousedown", onMouseDown);
       if (frame) window.cancelAnimationFrame(frame);
       splashes.length = 0;
     };
