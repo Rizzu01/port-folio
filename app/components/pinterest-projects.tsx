@@ -22,7 +22,7 @@ export type PinResponse = { configured: boolean; pins: Pin[]; message?: string }
 const CATEGORIES: Category[] = ["Social Media Posts", "UI/UX Designs", "Printed Designs"];
 
 export function PinterestProjects({ fullPage = false, initialData }: { fullPage?: boolean; initialData?: PinResponse }) {
-  const [data, setData] = useState<PinResponse | null>(initialData ?? null);
+  const [data, setData] = useState<PinResponse | null>(initialData?.pins.length ? initialData : null);
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
   const [activeCategory, setActiveCategory] = useState<Category>("Social Media Posts");
 
@@ -36,8 +36,8 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
         })
         .then(setData)
         .catch((error: unknown) => {
-          if (error instanceof Error && error.name !== "AbortError" && !initialData) {
-            setData({ configured: false, pins: [], message: "Pinterest projects are temporarily unavailable." });
+          if (!(error instanceof Error && error.name === "AbortError")) {
+            setData({ configured: false, pins: [], message: "Pinterest projects could not be loaded right now. Please try again later or view the work on Pinterest." });
           }
         });
     };
