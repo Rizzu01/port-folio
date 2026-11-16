@@ -2061,3 +2061,23 @@ html[data-theme="dark"] .custom-cursor-enabled .cursor::after{background:#fff!im
   min-width:16px;
   text-align:right;
 }
+
+
+/* Responsive safeguards: narrow laptop navigation and small-phone portfolio cards. */
+@media (min-width:761px) and (max-width:900px){
+  .reference-nav{gap:12px;padding-left:22px;padding-right:22px}
+  .reference-logo{width:clamp(105px,13vw,120px)}
+  .reference-desktop-links{gap:clamp(10px,1.6vw,16px);min-width:0}
+  .reference-desktop-links a{font-size:9px;white-space:nowrap}
+  .reference-nav .reference-theme-toggle{width:34px;height:34px;flex-shrink:0}
+  .reference-talk{padding:9px 11px;white-space:nowrap;flex-shrink:0}
+}
+@media (max-width:380px){
+  .pinterest-project-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+  .pinterest-project-image{min-height:190px;max-height:none}
+  .pinterest-project .pinterest-project-image img{max-height:none}
+  .pinterest-category-filters{gap:6px}
+  .pinterest-category-filter{padding:9px 11px}
+  .reference-experience-top{flex-wrap:wrap}
+  .reference-experience-years{white-space:normal}
+}
