@@ -24,7 +24,7 @@ const CATEGORIES: Category[] = [
 
 const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
-async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
+async function getAllPages<T>(url: URL, token: string, fresh = false): Promise<T[]> {
   const items: T[] = [];
   let bookmark: string | null = null;
   for (let page = 0; page < 10; page += 1) {
@@ -33,8 +33,8 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
     if (bookmark) pageUrl.searchParams.set("bookmark", bookmark);
     const response = await fetch(pageUrl.toString(), {
       headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
-      // Pinterest boards change infrequently; cache successful API pages for 5 minutes.
-      next: { revalidate: 300 },
+      // Short shared cache for automatic refresh; manual refresh bypasses it.
+      ...(fresh ? { cache: "no-store" as const } : { next: { revalidate: 20 } }),
     });
     if (!response.ok) throw new Error(`Pinterest API request failed: ${response.status}`);
     const data = (await response.json()) as PinterestPage<T>;
@@ -46,6 +46,7 @@ async function getAllPages<T>(url: URL, token: string): Promise<T[]> {
 }
 
 export async function GET(request: NextRequest) {
+  const fresh = request.nextUrl.searchParams.get("fresh") === "1";
   let token: string | null;
   try {
     token = await getPinterestAccessToken();
@@ -60,7 +61,7 @@ export async function GET(request: NextRequest) {
   try {
     let boards: PinterestBoard[] = [];
     try {
-      boards = await getAllPages<PinterestBoard>(new URL("https://api.pinterest.com/v5/user_account/boards"), token);
+      boards = await getAllPages<PinterestBoard>(new URL("https://api.pinterest.com/v5/user_account/boards"), token, fresh);
     } catch (error) {
       // Explicit board IDs can still work if Pinterest's board-list endpoint is unavailable.
       if (!CATEGORIES.some((category) => process.env[category.envKey]) && !process.env.PINTEREST_BOARD_ID) throw error;
@@ -85,6 +86,7 @@ export async function GET(request: NextRequest) {
         const items = await getAllPages<PinterestPin>(
           new URL(`https://api.pinterest.com/v5/boards/${encodeURIComponent(board.id)}/pins`),
           token,
+          fresh,
         );
         return items.map((pin) => {
           const images = pin.media?.images ?? {};
@@ -107,7 +109,7 @@ export async function GET(request: NextRequest) {
 
     // Keep the previous single-board setup usable until all three boards are detected/configured.
     if (!allPins.length && process.env.PINTEREST_BOARD_ID) {
-      const legacyPins = await getAllPages<PinterestPin>(new URL(`https://api.pinterest.com/v5/boards/${encodeURIComponent(process.env.PINTEREST_BOARD_ID)}/pins`), token);
+      const legacyPins = await getAllPages<PinterestPin>(new URL(`https://api.pinterest.com/v5/boards/${encodeURIComponent(process.env.PINTEREST_BOARD_ID)}/pins`), token, fresh);
       allPins.push(...legacyPins.map((pin) => {
         const images = pin.media?.images ?? {};
         const image = images["1200x"] ?? images["600x"] ?? Object.values(images).sort((a, b) => (b.width ?? 0) - (a.width ?? 0))[0];
@@ -124,6 +126,9 @@ export async function GET(request: NextRequest) {
         };
       }).filter((pin) => pin.imageUrl));
     }
+
+    // Always show newly published / saved Pins before older entries.
+    allPins.sort((a, b) => (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0));
 
     let responsePins = allPins;
     if (new URL(request.url).searchParams.get("raw") !== "1") {
