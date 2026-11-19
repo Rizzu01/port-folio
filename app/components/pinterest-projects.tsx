@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, RefreshCw, X } from "lucide-react";
 
 type Category = "Social Media Posts" | "UI/UX Designs" | "Printed Designs";
 type Pin = {
@@ -26,31 +26,65 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
   const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
   const [activeCategory, setActiveCategory] = useState<Category>("Social Media Posts");
 
+  const [refreshing, setRefreshing] = useState(false);
+  const refreshRef = useRef<(force?: boolean) => void>(() => {});
+
   useEffect(() => {
-    const controller = new AbortController();
-    const refreshPins = () => {
-      fetch("/api/pinterest/pins", { signal: controller.signal, cache: "no-store" })
-        .then((response) => {
-          if (!response.ok) throw new Error("Pinterest request failed");
-          return response.json() as Promise<PinResponse>;
-        })
-        .then(setData)
-        .catch((error: unknown) => {
-          if (!(error instanceof Error && error.name === "AbortError")) {
-            setData({ configured: false, pins: [], message: "Pinterest projects could not be loaded right now. Please try again later or view the work on Pinterest." });
-          }
-        });
+    let disposed = false;
+    let activeController: AbortController | null = null;
+
+    const refreshPins = async (force = false) => {
+      // Prevent overlapping automatic requests. A manual refresh can replace one.
+      if (activeController && !force) return;
+      activeController?.abort();
+      const controller = new AbortController();
+      activeController = controller;
+      if (force) setRefreshing(true);
+
+      try {
+        const url = force ? "/api/pinterest/pins?fresh=1" : "/api/pinterest/pins";
+        const response = await fetch(url, { signal: controller.signal, cache: "no-store" });
+        if (!response.ok) throw new Error("Pinterest request failed");
+        const result = (await response.json()) as PinResponse;
+        if (!disposed && !controller.signal.aborted) setData(result);
+      } catch (error) {
+        if (!disposed && !controller.signal.aborted) {
+          // Keep successfully loaded portfolio items visible during transient API errors.
+          setData((previous) => previous?.pins.length ? previous : {
+            configured: false,
+            pins: [],
+            message: "Pinterest projects could not be loaded right now. Please try again or view the work on Pinterest.",
+          });
+        }
+      } finally {
+        if (activeController === controller) {
+          activeController = null;
+          if (!disposed) setRefreshing(false);
+        }
+      }
     };
 
-    // Refresh empty initial data after hydration so third-party Pinterest latency
-    // never delays the homepage's first server render or LCP.
-    if (!initialData || initialData.pins.length === 0) refreshPins();
-    const interval = window.setInterval(refreshPins, 5 * 60 * 1000);
-    window.addEventListener("focus", refreshPins);
+    refreshRef.current = refreshPins;
+    // Show SSR data immediately and check for new Pins after hydration.
+    refreshPins();
+
+    // Only poll while the page is visible. This lowers API usage on background tabs.
+    const interval = window.setInterval(() => {
+      if (document.visibilityState === "visible") refreshPins();
+    }, 30 * 1000);
+    const onResume = () => {
+      if (document.visibilityState === "visible") refreshPins();
+    };
+    window.addEventListener("focus", onResume);
+    document.addEventListener("visibilitychange", onResume);
+
     return () => {
-      controller.abort();
+      disposed = true;
+      activeController?.abort();
+      refreshRef.current = () => {};
       window.clearInterval(interval);
-      window.removeEventListener("focus", refreshPins);
+      window.removeEventListener("focus", onResume);
+      document.removeEventListener("visibilitychange", onResume);
     };
   }, [initialData]);
 
@@ -88,7 +122,8 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
 
   return (
     <>
-      <div className="pinterest-category-filters" role="tablist" aria-label="Work categories">
+      <div className="pinterest-filters-toolbar">
+        <div className="pinterest-category-filters" role="tablist" aria-label="Work categories">
         {CATEGORIES.map((category) => (
           <button
             key={category}
@@ -103,6 +138,13 @@ export function PinterestProjects({ fullPage = false, initialData }: { fullPage?
             {category}
           </button>
         ))}
+        </div>
+        <button className="pinterest-refresh-button" type="button"
+          onClick={() => refreshRef.current(true)}
+          disabled={refreshing} aria-label="Refresh work from Pinterest">
+          <RefreshCw size={14} className={refreshing ? "is-refreshing" : ""} />
+          {refreshing ? "Refreshing..." : "Refresh work"}
+        </button>
       </div>
       <div id="work-category-panel" role="tabpanel" aria-labelledby={`work-tab-${CATEGORIES.indexOf(activeCategory)}`}>
         {filteredPins.length > 0 ? (
