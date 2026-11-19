@@ -127,8 +127,8 @@ export async function GET(request: NextRequest) {
       }).filter((pin) => pin.imageUrl));
     }
 
-    // Always show newly published / saved Pins before older entries.
-    allPins.sort((a, b) => (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0));
+    // Preserve Pinterest's board order: a newly saved older Pin must not be
+    // pushed behind newer original publish dates in the homepage preview.
 
     let responsePins = allPins;
     if (new URL(request.url).searchParams.get("raw") !== "1") {
