@@ -2433,3 +2433,50 @@ html[data-theme="dark"] .reference-service-list>a:hover .reference-service-name{
 @media(prefers-reduced-motion:reduce){
   .click-water-splash{display:none}
 }
+
+
+/* Fast Pinterest sync: keep manual refresh discreet beside category tabs. */
+.pinterest-filters-toolbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+.pinterest-filters-toolbar .pinterest-category-filters{
+  margin-bottom:0;
+  flex:1 1 auto;
+}
+.pinterest-refresh-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:36px;
+  padding:8px 12px;
+  border:1px solid rgba(255,145,0,.5);
+  border-radius:999px;
+  background:transparent;
+  color:inherit;
+  font-size:11px;
+  font-weight:600;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:border-color .2s ease,background-color .2s ease;
+}
+.pinterest-refresh-button:hover:not(:disabled){
+  border-color:#FF9100;
+  background:rgba(255,145,0,.09);
+}
+.pinterest-refresh-button:disabled{opacity:.6;cursor:wait}
+.pinterest-refresh-button svg{color:#FF9100}
+.pinterest-refresh-button .is-refreshing{animation:crRefreshSpin .9s linear infinite}
+@keyframes crRefreshSpin{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+  .pinterest-filters-toolbar{gap:10px;margin-bottom:20px}
+  .pinterest-refresh-button{min-height:34px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pinterest-refresh-button,.pinterest-refresh-button .is-refreshing{transition:none;animation:none}
+}
